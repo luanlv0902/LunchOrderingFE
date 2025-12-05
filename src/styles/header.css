@@ -1,0 +1,45 @@
+.header {
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #bdc3c7;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LOGO */
+.logo img {
+    height: 42px;
+    object-fit: contain;
+}
+
+/* MENU */
+.nav {
+    display: flex;
+    gap: 40px;
+}
+
+.nav-item {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    color: #111;
+    transition: color 0.3s ease;
+}
+
+/* Hover */
+.nav-item:hover {
+    color: #e53935;
+}
+
+/* Active menu */
+.nav-item.active {
+    color: #e53935;
+}
