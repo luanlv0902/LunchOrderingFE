@@ -186,3 +186,75 @@ body{
 }
 
 /*CART*/
+
+/*FOOTER*/
+.footer {
+    background-color: #1f1f1f;
+    color: #ffffff;
+    margin-top: 60px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.footer-col h3,
+.footer-col h4 {
+    margin-bottom: 12px;
+    color: #ff3b3b;
+}
+
+.footer-col p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #dddddd;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col li {
+    margin: 8px 0;
+    font-size: 14px;
+    cursor: pointer;
+    color: #dddddd;
+    transition: color 0.3s;
+}
+
+.footer-col li:hover {
+    color: #ff3b3b;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 12px;
+    font-size: 13px;
+    background-color: #111;
+    color: #aaa;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+.footer-col a {
+    text-decoration: none;
+    color: #dddddd;
+    transition: color 0.3s;
+}
+
+.footer-col a:hover {
+    color: #ff3b3b;
+}
