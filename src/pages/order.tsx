@@ -1,5 +1,8 @@
 import React from "react";
 import "../styles/styles.css"
+import Category from "../components/item-category";
+import ItemOrder from "../components/item-order";
+
 function Order(){
     return (
         <>
@@ -18,42 +21,35 @@ function Order(){
 
                     <div className={"category-order"}>
                         <div className={"title-category"}>FOOD MENU</div>
-
-                        <div className={"list-item-order"}>
-                            <div className="category-item">
-                                <img className={"img-category"} src="https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ac922bdc46c2b04a4dea9.png&w=3840&q=75" alt="food"/>
-                                <div className={"title-food"}>Cơm chiên trứng</div>
-                            </div>
-                            <div className="category-item">
-                                <img className={"img-category"} src="https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ac922bdc46c2b04a4dea9.png&w=3840&q=75" alt="food"/>
-                                <div className={"title-food"}>Cơm chiên trứng</div>
-                            </div>
-                            <div className="category-item">
-                                <img className={"img-category"} src="https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ac922bdc46c2b04a4dea9.png&w=3840&q=75" alt="food"/>
-                                <div className={"title-food"}>Cơm chiên trứng</div>
-                            </div>
-                            <div className="category-item">
-                                <img className={"img-category"} src="https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ac922bdc46c2b04a4dea9.png&w=3840&q=75" alt="food"/>
-                                <div className={"title-food"}>Cơm chiên trứng</div>
-                            </div>
-                            <div className="category-item">
-                                <img className={"img-category"} src="https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ac922bdc46c2b04a4dea9.png&w=3840&q=75" alt="food"/>
-                                <div className={"title-food"}>Cơm chiên trứng</div>
-                            </div>
-                            <div className="category-item">
-                                <img className={"img-category"} src="https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ac922bdc46c2b04a4dea9.png&w=3840&q=75" alt="food"/>
-                                <div className={"title-food"}>Cơm chiên trứng</div>
-                            </div>
-                            <div className="category-item">
-                                <img className={"img-category"} src="https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ac922bdc46c2b04a4dea9.png&w=3840&q=75" alt="food"/>
-                                <div className={"title-food"}>Cơm chiên trứng</div>
-                            </div>
+                        <div className={"list-item-category"}>
+                            <Category/> <Category/> <Category/> <Category/>
+                            <Category/>
+                            <Category/>
+                        </div>
+                        <hr/>
+                        <div className={"title-category"}>MÓN CƠM</div>
+                        <div className={"list-item-order" }>
+                        <ItemOrder/><ItemOrder/><ItemOrder/><ItemOrder/><ItemOrder/>
                         </div>
 
                     </div>
-                </div>
-                <div className={"container-order-2"}>
 
+                </div>
+
+                <div className={"container-order-2"}>
+                    <div className={"title-detail-order"}>Chi tiết đơn hàng</div>
+                    <div className={"title-address"}>Chọn địa chỉ</div>
+                    <div>
+                        <div className={"title-infor"}>Số lượng món</div>
+                        <div className={"title-infor"}>1</div>
+                        <div className={"title-infor"}>Thành tiền</div>
+                        <div className={"title-infor"}>25000đ</div>
+                        <hr/>
+                        <div className={"title-infor"}>Tổng đơn hàng</div>
+                        <div className={"title-infor"}>25000đ</div>
+                        <button className={"select-food"}>Thanh toán</button>
+
+                    </div>
                 </div>
             </div>
         </>
