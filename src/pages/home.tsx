@@ -8,58 +8,57 @@ function Home() {
         <>
             <div className="container_content">
                 <div className="background_cha">
-                <div className="background_top">
-                    <img
-                        className="main-img"
-                        src="/background.png"
-                        alt=""
-                    />
-                    <img
-                        className="torn-edge1"
-                        src="/torn_edge.png"
-                        alt=""
-                    />
-                    <img
-                        className="torn-edge"
-                        src="/torn_edge.png"
-                        alt=""
-                    />
-                </div>
-                <div className="background_top">
-                    <img
-                        className="main-img"
-                        src="https://i.pinimg.com/736x/8e/76/40/8e76407dec91414241df5e343a8718c3.jpg"
-                        alt=""
-                    />
-                    <img
-                        className="torn-edge1"
-                        src="/torn_edge.png"
-                        alt=""
-                    />
-                    <img
-                        className="torn-edge"
-                        src="/torn_edge.png"
-                        alt=""
-                    />
-                </div>
-                <div className="background_top">
-                    <img
-                        className="main-img"
-                        src="/BANNER.jpg"
-                        alt=""
-                    />
-                    <img
-                        className="torn-edge1"
-                        src="/torn_edge.png"
-                        alt=""
-                    />
-                    <img
-                        className="torn-edge"
-                        src="/torn_edge.png"
-                        alt=""
-                    />
-                </div>
-
+                    <div className="background_top">
+                        <img
+                            className="main-img"
+                            src="/background.png"
+                            alt=""
+                        />
+                        <img
+                            className="torn-edge1"
+                            src="/torn_edge.png"
+                            alt=""
+                        />
+                        <img
+                            className="torn-edge"
+                            src="/torn_edge.png"
+                            alt=""
+                        />
+                    </div>
+                    <div className="background_top">
+                        <img
+                            className="main-img"
+                            src="https://i.pinimg.com/736x/8e/76/40/8e76407dec91414241df5e343a8718c3.jpg"
+                            alt=""
+                        />
+                        <img
+                            className="torn-edge1"
+                            src="/torn_edge.png"
+                            alt=""
+                        />
+                        <img
+                            className="torn-edge"
+                            src="/torn_edge.png"
+                            alt=""
+                        />
+                    </div>
+                    <div className="background_top">
+                        <img
+                            className="main-img"
+                            src="/BANNER.jpg"
+                            alt=""
+                        />
+                        <img
+                            className="torn-edge1"
+                            src="/torn_edge.png"
+                            alt=""
+                        />
+                        <img
+                            className="torn-edge"
+                            src="/torn_edge.png"
+                            alt=""
+                        />
+                    </div>
                 </div>
                 <section className="hero">
                     <div className="hero-inner">
@@ -98,7 +97,91 @@ function Home() {
                         </div>
                     </div>
                 </section>
+                <div className="img-break">
+                    <img
+                        className="img-top3"
+                        src="/torn_edge.png"
+                        alt=""
+                    />
+                    <img
+                        className="img-top2"
+                        src="/torn_edge.png"
+                        alt=""
+                    />
+                    <img src="/img_break.png" alt=""/>
+                    <img
+                        className="img-top1"
+                        src="/torn_edge.png"
+                        alt=""
+                    />
+                    <img
+                        className="img-top"
+                        src="/torn_edge.png"
+                        alt=""
+                    />
+                </div>
+                <section className="highlight-menu">
+                    <div className="title-wrapper">
+                        <span className="title-left">Món ngon</span>
+                        <span className="title-right">NỔI BẬT</span>
+                    </div>
+                    <div className="highlight-grid">
+                        {[
+                            {
+                                name: "Bánh khọt nước dừa",
+                                price: "145.000đ",
+                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
+                            },
+                            {
+                                name: "Bánh xèo",
+                                price: "145.000đ",
+                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
+                            },
+                            {
+                                name: "Bánh hỏi heo quay",
+                                price: "189.000đ",
+                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
+                            },
+                            {
+                                name: "Thịt kho tiêu",
+                                price: "150.000đ",
+                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
+                            },
+                            {
+                                name: "Mắm kho miền Tây",
+                                price: "150.000đ",
+                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
+                            },
+                            {
+                                name: "Canh chua cá hú",
+                                price: "150.000đ",
+                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
+                            },
+                            {
+                                name: "Lẩu mắm miền Tây",
+                                price: "490.000đ",
+                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
+                            },
+                            {
+                                name: "Lẩu mắm miền Tây",
+                                price: "490.000đ",
+                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
+                            },
+                        ].map((item, index) => (
+                            <div className="highlight-item" key={index}>
+                                <img src={item.img} alt={item.name} className="hi-img"/>
+                                <h3>{item.name}</h3>
+                                <p className="hi-price">{item.price}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <a href="menu">
+                        <button className="cta1">Xem menu</button>
+                    </a>
+                </section>
+
             </div>
+
             <div className="split_container">
                 <img
                     className="torn-edge1"
