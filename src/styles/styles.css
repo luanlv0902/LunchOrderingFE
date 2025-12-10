@@ -19,6 +19,23 @@ body{
     text-align: center;
 
 }
+.filter-menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    gap: 10px;
+}
+.title-menu{
+    margin-right: 20px;
+}
+.filter-menu-search{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
 .menu{
     width: 80%;
     margin: auto;
@@ -31,7 +48,7 @@ body{
     /*width: 200px;*/
 
     color: gray;
-
+    transition: transform 0.3s ease;
 
 }
 .menu-item.active {
@@ -39,7 +56,7 @@ body{
     font-weight: bold;
 }
 .menu-item:hover{
-    scale: 1.1;
+    transform: scale(1.08);
     color: saddlebrown;
     cursor: pointer;
 }
@@ -56,38 +73,59 @@ body{
 
 }
 .item-menu{
-    width: 100%;
+    padding-top: 10px;
+    width: 300px;
     /*height: 100px;*/
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 15px;
+    gap: 10px;
+    background-color: white;
+    border-radius: 10px;
+    padding-bottom: 10px;
 
 
+}
+.item-menu:hover{
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 .imgItem-menu{
-    width: 300px;
-    height: 300px;
-    border-radius: 20px;
-
-    object-fit: contain;
+    width: 200px;
+    height: 200px;
+    /*border-radius: 20px;*/
+    transition: transform 0.3s ease;
+    object-fit: cover;
+    border-radius: 10px;
 }
 .imgItem-menu:hover{
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transform: scale(1.08);
 }
 .title-item-menu{
     font-weight: bold;
     font-size: 18px;
 }
+.add-cart{
+    width: 150px;
+    font-size: 16px;
+    background-color: #268726;
+    border: none;
+    color: white;
+}
+.add-cart:hover{
+   opacity: 0.8;
+    cursor: pointer;
+}
 .price-menu{
+
     font: bold 20px "Roboto", sans-serif;
     color: white;
     width: 150px;
     height: 30px;
     background-color: saddlebrown;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     text-align: center;
     align-content: center;
 }
@@ -113,30 +151,33 @@ body{
 .filter-order{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
+    align-items: center;
+    text-align: center;
+    /*width: 100%;*/
     padding-top: 10px;
     gap: 10px;
 
 }
 .title-sort{
-    font-size: 20px;
-    margin-left: 30px;
+    font-size: 15px;
+    align-items: center;
+    text-align: center;
+    /*margin-left: 30px;*/
 }
 .search-order{
-    width: 40%;
+    /*width: 40%;*/
     height: 40px;
     font-size: 20px;
     border-radius: 5px;
     border: none;
 }
 .sort-order{
-    width: 300px;
+    /*width: 300px;*/
     height: 40px;
     font-size: 20px;
     border-radius: 5px;
     border: none;
-    margin-left: 20px;
+    /*margin-left: 20px;*/
 }
 
 .category-order{
