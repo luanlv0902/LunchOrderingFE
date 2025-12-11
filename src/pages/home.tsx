@@ -1,11 +1,13 @@
 import React  from "react";
 import "../styles/styles.css"
+import IconScroll from "../components/icon-scroll";
 const LEFT_IMAGE = "https://i.pinimg.com/736x/b6/b8/5f/b6b85f9b4ab78fabebcc5b55596c68ee.jpg";
 const RIGHT_ILLUSTRATION = "https://i.pinimg.com/1200x/12/f0/fd/12f0fdad9c6f80d6f0a8f549bd66ded6.jpg";
 function Home() {
 
     return(
         <>
+            <IconScroll/>
             <div className="container_content">
                 <div className="background_cha">
                     <div className="background_top">

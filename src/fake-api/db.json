@@ -1,12 +1,12 @@
 {
   "categories": [
+    { "nameCategory": "Món nổi bật" },
     { "nameCategory": "Món cơm" },
     { "nameCategory": "Món chay" },
-    { "nameCategory": "Món cá" },
+    { "nameCategory": "Món bún" },
     { "nameCategory": "Món thịt" },
-    { "nameCategory": "Món rau" },
     { "nameCategory": "Món canh" },
-    { "nameCategory": "Món đặc biệt" },
+    { "nameCategory": "Nước uống" },
     { "nameCategory": "Món tráng miệng" }
   ],
   "products": [
@@ -57,7 +57,45 @@
       "img": "https://congthucgiadinh.com/storage/19/01J2DPSWQCHGTKEQ4RR3YG4VP9.jpg",
       "nameCategory": "Món cơm",
       "price": "40000"
+    },
+
+
+    {
+      "name": "Bún bò",
+      "img": "https://congthucgiadinh.com/storage/19/01J2DPSWQCHGTKEQ4RR3YG4VP9.jpg",
+      "nameCategory": "Món bún",
+      "price": "28000"
+    },
+
+    {
+      "name": "Đậu hủ kho nước tương",
+      "img": "https://nuocmamtin.com/wp-content/uploads/2021/09/15-2.jpg",
+      "nameCategory": "Món chay",
+      "price": "25000"
+    },
+
+    {
+      "name": "Tôm khô nấu với bầu",
+      "img": "https://haisanphucgia.com/wp-content/uploads/2018/06/tom-kho-nau-canh-gi-ngon-1.jpg",
+      "nameCategory": "Món canh",
+      "price": "20000"
+    },
+
+    {
+      "name": "Nước cam",
+      "img": "https://png.pngtree.com/png-clipart/20250614/original/pngtree-fresh-orange-juice-in-a-plastic-cup-png-image_21191516.png",
+      "nameCategory": "Nước uống",
+      "price": "25000"
+    },
+
+    {
+      "name": "Bánh flan",
+      "img": "https://cdn.zsoft.solutions/poseidon-web/app/media/Kham-pha-am-thuc/11.2023/251123-cach-lam-banh-flan-buffet-poseidon-02-jpg.jpg",
+      "nameCategory": "Món tráng miệng",
+      "price": "15000"
     }
+
+
 
   ]
 }
