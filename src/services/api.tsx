@@ -8,5 +8,9 @@ export const api ={
     getProducts: async (): Promise<any> => {
         const response = await fetch(`${baseUrl}/products`)
         return response.json();
+    },
+    getProductByCategory: async (category: string): Promise<any> => {
+        const response = await fetch(`${baseUrl}/products?nameCategory=${category}`)
+        return response.json();
     }
 }
