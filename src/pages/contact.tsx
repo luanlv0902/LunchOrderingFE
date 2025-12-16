@@ -33,7 +33,7 @@ function Contact() {
                         <div>
                         <div className="contact-title">Hotline</div>
                             <div className="contact-text">
-                                0971649429 - 0383107754
+                                0971649429
                             </div>
                         </div>
                     </div>

@@ -8,6 +8,8 @@ import Order from "./pages/order";
 import Contact from "./pages/contact";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import IconScroll from "./components/icon-scroll";
+import ProductDetail from "./components/productDetail";
 
 function App() {
     return (
@@ -19,7 +21,9 @@ function App() {
                 <Route path="/menu" element={<Menu />} />
                 <Route path="/order" element={<Order />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/product:idProduct" element={<ProductDetail />} />
             </Routes>
+            <IconScroll/>
             <Footer />
         </div>
     );

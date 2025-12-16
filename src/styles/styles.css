@@ -140,6 +140,105 @@ body{
     text-align: center;
     align-content: center;
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    list-style: none;
+    padding: 20px 0;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+
+.pagination > li {
+    margin: 0;
+}
+
+.pagination > li > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 12px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #444;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.pagination > li > a:hover {
+    background-color: #f5f5f5;
+    border-color: #c0c0c0;
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pagination > li.active > a {
+    background-color: #4fa5ff;
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+}
+
+
+.pagination > li.disabled > a {
+    color: white;
+    background-color: #bfbfbf;
+    /*border-color: #eee;*/
+    cursor: not-allowed;
+    pointer-events: none;
+    transform: none;
+    box-shadow: none;
+}
+
+.pagination > li.break > a {
+    background: transparent;
+    border: none;
+    color: #888;
+    cursor: default;
+    font-weight: normal;
+    box-shadow: none;
+    transform: none;
+}
+
+.pagination > li.break > a:hover {
+    background: transparent;
+    transform: none;
+    box-shadow: none;
+}
+
+@media (max-width: 600px) {
+    .pagination {
+        gap: 8px;
+        padding: 15px 0;
+    }
+
+    .pagination > li > a {
+        min-width: 40px;
+        height: 40px;
+        font-size: 15px;
+        padding: 0 10px;
+        border-radius: 8px;
+    }
+
+
+    .pagination > li:not(.previous):not(.next):not(.active):not(.break) {
+        display: none;
+    }
+
+
+}
 /*MENU*/
 /*IconScroll*/
 .scroll{
@@ -492,7 +591,136 @@ hr{
 
 /*Component 2*/
     /*CART*/
+/*ProductDetail*/
+.productDetail{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
 
+}
+.pd1{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.productDetailImg{
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    border-radius: 20px;
+}
+.detail{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+.nameP{
+    font-size: 40px;
+    font-weight: bold;
+    color: saddlebrown;
+}
+.detailInfor{
+    font-size: 15px;
+    font-weight: bold;
+
+}
+.rateAvg{
+
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    align-items: center;
+}
+.rateAvg > i{
+    color: #268726;
+}
+.priceAndCart{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    width: 100%;
+
+
+}
+.price-detail{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    background-color: saddlebrown;
+    color: white;
+
+}
+.add-cart-detail{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #268726;
+    color: white;
+    height: 40px;
+}
+.add-cart-detail:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+.pd2 {
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    overflow-y: auto;
+    background-color: white;
+    /*padding: 16px;*/
+    padding-left: 16px;
+    padding-top: 10px;
+    border-radius: 12px;
+}
+
+.commentBlock{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+}
+.comment-detail{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 400px;
+    padding: 5px;
+    color: #2c2c2c;
+    background-color: #cacaca;
+
+}
+.comment-detail i{
+    color:#268726;
+}
+.avatarComment{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: bold;
+}
+.commentImg{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/*ProductDetail*/
 /*HEADER*/
 .header {
     width: 100%;
@@ -1180,7 +1408,8 @@ hr{
     flex: 1;
     height: 60px;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: 15px;
     padding: 20px;
     border: 1px solid #eee;

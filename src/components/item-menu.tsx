@@ -1,6 +1,7 @@
 import React from "react";
 import { Product } from "../types/object";
 import "../styles/styles.css";
+import {NavLink} from "react-router-dom";
 
 interface ItemMenuProps {
     product: Product;
@@ -9,11 +10,13 @@ interface ItemMenuProps {
 function ItemMenu({ product }: ItemMenuProps) {
     return (
         <div className={"item-menu"}>
-            <img
-                className={"imgItem-menu"}
-                src={product.img}
-                alt={product.name}
-            />
+           <NavLink to={`/product?${product.id}`}>
+               <img
+                   className={"imgItem-menu"}
+                   src={product.img}
+                   alt={product.name}
+               />
+           </NavLink>
             <div className={"title-item-menu"}>{product.name}</div>
             <div className={"flex-row"}>
                 <div className={"price-menu"}>

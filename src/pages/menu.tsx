@@ -1,22 +1,29 @@
 import React  from "react";
 import {useState,useEffect} from "react";
 import "../styles/styles.css"
-import {NavLink, useSearchParams} from "react-router-dom";
-import {Category} from "../types/object";
+// import { useSearchParams} from "react-router-dom";
+import {Category, Product} from "../types/object";
 import {api} from "../services/api";
 import ItemMenu from "../components/item-menu";
 import IconScroll from "../components/icon-scroll";
-import {changeProducts} from "../redux/ProductSlice";
-import {RootState} from "../redux/Store";
-import {useSelector,useDispatch} from "react-redux";
+// import {changeProducts} from "../redux/ProductSlice";
+// import {RootState} from "../redux/Store";
+// import {useSelector,useDispatch} from "react-redux";
+import ReactPaginate from 'react-paginate';
 
 function Menu(){
     const [active, setActive] = useState("Món đặc biệt");
     const [categories, setCategories] = useState<Category[]>([]);
-    const [searchParams] = useSearchParams();
-    const currentCategory = searchParams.get('category');
-    const dispatch = useDispatch();
-    const products = useSelector( (state: RootState) => state.changeProduct.products)
+    const [products, setProducts] = useState<Product[]>([]);
+    const [pageCount, setPageCount] = useState(1);
+    const [startIndex, setStartIndex] = useState(0);
+    const [categoryId, setCategoryId] = useState(0);
+    const [activePage, setActivePage] = useState(true);
+    const limit=8
+    // const [searchParams] = useSearchParams();
+    // const currentCategory = searchParams.get('category');
+    // const dispatch = useDispatch();
+    // const products = useSelector( (state: RootState) => state.changeProduct.products)
     const fetchCategories = async () => {
         try {
             const categories = await api.getCategories();
@@ -25,21 +32,38 @@ function Menu(){
             console.log("Error getting categories from API");
         }
     }
-    async function changeProductByCategory(nameCategory: string){
-        const products = await api.getProductByCategory(nameCategory);
-        dispatch(changeProducts(products));
+    async function changeProductByCategory(categoryId: number,page: number){
+        const res = await api.getProductByCategory(categoryId,page);
+        const totalPage = await api.getTotalPage(categoryId);
+        // dispatch(changeProducts(products));
+        setCategoryId(categoryId);
+        setProducts(res);
+        setPageCount(Math.ceil(totalPage.length/limit));
+        console.log(res);
+        console.log(page);
+
+
+
     }
     async function getProducts(){
         const products = await api.getProducts();
-        dispatch(changeProducts(products));
+        // dispatch(changeProducts(products));
+        setProducts(products);
+    }
+     function handlePageClick(event: { selected: number }){
+         const newStartIndex = event.selected * limit;
+         setStartIndex(newStartIndex);
+         changeProductByCategory(categoryId, newStartIndex);
+         console.log("New Start Index:", newStartIndex);
     }
     useEffect(() => {
         fetchCategories();
         getProducts();
     },[])
+
     return (
         <>
-            <IconScroll/>
+            {/*<IconScroll/>*/}
             <div className={"container-menu"}>
                 <div className={"header-menu"}>
                    <div className={"filter-menu"}>
@@ -61,8 +85,9 @@ function Menu(){
                             {categories.map(category => (
                                     <div className={`menu-item ${active===category.nameCategory? "active" : ""}`} key={category.id}>
                                         <h3 className={"title-item"} onClick={() =>{
-                                            changeProductByCategory(category.nameCategory);
-                                            setActive(category.nameCategory)
+                                            changeProductByCategory(category.id,startIndex);
+                                            setActive(category.nameCategory);
+                                            setStartIndex(0);
                                         }
                                         }
                                             >{category.nameCategory}
@@ -81,7 +106,31 @@ function Menu(){
             </div>
 
 
+            <ReactPaginate
+                containerClassName="pagination"
 
+                pageClassName=""
+                pageLinkClassName=""
+
+                previousClassName="previous"
+                previousLinkClassName=""
+
+                nextClassName="next"
+                nextLinkClassName=""
+
+                breakClassName="break"
+                breakLinkClassName=""
+
+                activeClassName="active"
+                disabledClassName="disabled"
+                previousLabel="<"
+                nextLabel=">"
+                breakLabel="..."
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                renderOnZeroPageCount={null}
+            />
         </>
     )
 }

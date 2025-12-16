@@ -9,8 +9,17 @@ export const api ={
         const response = await fetch(`${baseUrl}/products`)
         return response.json();
     },
-    getProductByCategory: async (category: string): Promise<any> => {
-        const response = await fetch(`${baseUrl}/products?nameCategory=${category}`)
+    getProductByCategory: async (categoryId: number,start:number): Promise<any> => {
+        const response = await fetch(`${baseUrl}/products?categoryId=${categoryId}&_start=${start}&_end=${start+8}`)
+       return response.json();
+    },
+
+    getTotalPage: async (categoryId: number): Promise<any> => {
+        const response = await fetch(`${baseUrl}/products?categoryId=${categoryId}`)
+        return response.json();
+    },
+    getDetailProductById: async (): Promise<any> => {
+        const response = await fetch(`${baseUrl}/products?_embed=detailProducts`)
         return response.json();
     }
 }

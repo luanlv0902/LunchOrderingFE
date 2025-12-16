@@ -1,101 +1,205 @@
 {
   "categories": [
-    { "nameCategory": "Món nổi bật" },
-    { "nameCategory": "Món cơm" },
-    { "nameCategory": "Món chay" },
-    { "nameCategory": "Món bún" },
-    { "nameCategory": "Món thịt" },
-    { "nameCategory": "Món canh" },
-    { "nameCategory": "Nước uống" },
-    { "nameCategory": "Món tráng miệng" }
+    {
+      "id": 1,
+      "nameCategory": "Món nổi bật"
+    },
+    {
+      "id": 2,
+      "nameCategory": "Món cơm"
+    },
+    {
+      "id": 3,
+      "nameCategory": "Món chay"
+    },
+    {
+      "id": 4,
+      "nameCategory": "Món bún"
+    },
+    {
+      "id": 5,
+      "nameCategory": "Món thịt"
+    },
+    {
+      "id": 6,
+      "nameCategory": "Món canh"
+    },
+    {
+      "id": 7,
+      "nameCategory": "Nước uống"
+    },
+    {
+      "id": 8,
+      "nameCategory": "Món tráng miệng"
+    }
   ],
   "products": [
     {
+      "id": 1,
       "name": "Cơm chiên trứng",
       "img": "https://cdnv2.tgdd.vn/bhx-static/bhx/News/Images/2024/11/18/1572245/hinh-bai-tin-bhx_202411181401164171.jpg",
-      "nameCategory": "Món cơm",
-      "price": "25000"
+      "categoryId": 2,
+
+      "price": 25000
     },
     {
+      "id": 2,
       "name": "Cơm trộn",
       "img": "https://cdn.shopify.com/s/files/1/0617/2497/files/cach-lam-com-tron-han-quoc.jpg?v=1681719774",
-      "nameCategory": "Món cơm",
-      "price": "30000"
+      "categoryId": 2,
+      "price": 30000
     },
     {
+      "id": 3,
       "name": "Cơm tấm",
       "img": "https://www.seriouseats.com/thmb/dYd_1lCRQwb2kdq_yyMgAUN0kbU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20230309-SEA-VietnameseBrokenRice-VyTran-hedenote-38b68317c3f64ffba5b664e1c22ae1a1.JPG",
-      "nameCategory": "Món cơm",
-      "price": "35000"
+      "categoryId": 2,
+      "price": 35000
     },
     {
+      "id": 4,
       "name": "Cơm gà",
       "img": "https://icdn.dantri.com.vn/thumb_w/960/2017/com-ngon-viet-nam-2-1487129112313.jpg",
-      "nameCategory": "Món cơm",
-      "price": "28000"
+      "categoryId": 2,
+      "price": 28000
     },
     {
+      "id": 5,
       "name": "Cơm hến",
       "img": "https://photo.znews.vn/w1920/Uploaded/kbd_bcvi/2020_10_02/ch.jpg",
-      "nameCategory": "Món cơm",
-      "price": "35000"
+      "categoryId": 2,
+      "price": 35000
     },
     {
-      "name": "Cơm chiên bò xào rau củ",
-      "img": "data:image/jpeg;base64,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",
-      "nameCategory": "Món cơm",
-      "price": "40000"
+      "id": 6,
+      "name": "Cơm chiên  xào rau củ",
+      "img": "https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/kien-thuc/cach-lam-com-chien-rau-cu-chay/cach-lam-com-chien-rau-cu-chay-5.jpg",
+      "categoryId": 2,
+      "price": 40000
     },
     {
+      "id": 7,
       "name": "Cơm chiên bò lúc lắc",
       "img": "https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/com_chien_bo_luc_lac_thumb_c464dabbe4.JPG",
-      "nameCategory": "Món cơm",
-      "price": "35000"
+      "categoryId": 2,
+      "price": 35000
     },
     {
-      "name": "Cơm chiên dương châu",
+      "id": 8,
+      "name": "Cơm chiên dương  22222",
       "img": "https://congthucgiadinh.com/storage/19/01J2DPSWQCHGTKEQ4RR3YG4VP9.jpg",
-      "nameCategory": "Món cơm",
-      "price": "40000"
+      "categoryId": 2,
+      "price": 40000
     },
-
-
     {
+      "id": 9,
       "name": "Bún bò",
-      "img": "https://congthucgiadinh.com/storage/19/01J2DPSWQCHGTKEQ4RR3YG4VP9.jpg",
-      "nameCategory": "Món bún",
-      "price": "28000"
+      "img": "https://example.com/bun-bo.jpg",
+      "categoryId": 4,
+      "price": 28000
     },
-
     {
+      "id": 10,
       "name": "Đậu hủ kho nước tương",
       "img": "https://nuocmamtin.com/wp-content/uploads/2021/09/15-2.jpg",
-      "nameCategory": "Món chay",
-      "price": "25000"
+      "categoryId": 3,
+      "price": 25000
     },
-
     {
+      "id": 11,
       "name": "Tôm khô nấu với bầu",
       "img": "https://haisanphucgia.com/wp-content/uploads/2018/06/tom-kho-nau-canh-gi-ngon-1.jpg",
-      "nameCategory": "Món canh",
-      "price": "20000"
+      "categoryId": 6,
+      "price": 20000
     },
-
     {
+      "id": 12,
       "name": "Nước cam",
       "img": "https://png.pngtree.com/png-clipart/20250614/original/pngtree-fresh-orange-juice-in-a-plastic-cup-png-image_21191516.png",
-      "nameCategory": "Nước uống",
-      "price": "25000"
+      "categoryId": 7,
+      "price": 25000
+    },
+    {
+      "id": 13,
+      "name": "Bánh flan",
+      "img": "https://monngonmoingay.com/wp-content/uploads/2024/08/cach-lam-banh-flan-bang-noi-chien-khong-dau-1-1.jpg",
+      "categoryId": 8,
+      "price": 15000
     },
 
+
     {
-      "name": "Bánh flan",
-      "img": "https://cdn.zsoft.solutions/poseidon-web/app/media/Kham-pha-am-thuc/11.2023/251123-cach-lam-banh-flan-buffet-poseidon-02-jpg.jpg",
-      "nameCategory": "Món tráng miệng",
-      "price": "15000"
+      "id": 14,
+      "name": "Cơm chiên trứng",
+      "img": "https://cdnv2.tgdd.vn/bhx-static/bhx/News/Images/2024/11/18/1572245/hinh-bai-tin-bhx_202411181401164171.jpg",
+      "categoryId": 2,
+      "price": 25000
+    },
+    {
+      "id": 15,
+      "name": "Cơm trộn",
+      "img": "https://cdn.shopify.com/s/files/1/0617/2497/files/cach-lam-com-tron-han-quoc.jpg?v=1681719774",
+      "categoryId": 2,
+      "price": 30000
+    },
+    {
+      "id": 16,
+      "name": "Cơm tấm",
+      "img": "https://www.seriouseats.com/thmb/dYd_1lCRQwb2kdq_yyMgAUN0kbU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20230309-SEA-VietnameseBrokenRice-VyTran-hedenote-38b68317c3f64ffba5b664e1c22ae1a1.JPG",
+      "categoryId": 2,
+      "price": 35000
+    },
+    {
+      "id": 17,
+      "name": "Cơm gà",
+      "img": "https://icdn.dantri.com.vn/thumb_w/960/2017/com-ngon-viet-nam-2-1487129112313.jpg",
+      "categoryId": 2,
+      "price": 28000
+    },
+    {
+      "id": 18,
+      "name": "Cơm hến",
+      "img": "https://photo.znews.vn/w1920/Uploaded/kbd_bcvi/2020_10_02/ch.jpg",
+      "categoryId": 2,
+      "price": 35000
+    },
+    {
+      "id": 19,
+      "name": "Cơm chiên bò xào rau củ",
+      "img": "https://example.com/com-chien-bo-xao.jpg",
+      "categoryId": 2,
+      "price": 40000
+    },
+    {
+      "id": 20,
+      "name": "Cơm chiên bò lúc lắc",
+      "img": "https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/com_chien_bo_luc_lac_thumb_c464dabbe4.JPG",
+      "categoryId": 2,
+      "price": 35000
+    },
+    {
+      "id": 21,
+      "name": "Cơm chiên dương châu",
+      "img": "https://congthucgiadinh.com/storage/19/01J2DPSWQCHGTKEQ4RR3YG4VP9.jpg",
+      "categoryId": 2,
+      "price": 40000
     }
+    ],
+
+    "detailProducts":[
+      {
+        "id": 1,
+        "productId": 1,
+        "ingredients": "Cơm, trứng, hành lá",
+        "calories": 400,
+        "protein": 100,
+        "fat": 200,
+        "carbs": 100,
+        "quantity": 10
+      }
+    ]
 
 
 
-  ]
+
 }
