@@ -21,7 +21,7 @@ export interface Product {
 export interface Category {
     id: string;
     nameCategory: string;
-}
+
 }
 export interface User {
     id: number;
