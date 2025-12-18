@@ -1,3 +1,5 @@
+import {User} from "../types/object";
+
 const baseUrl = "http://localhost:3001";
 
 export const api ={
@@ -21,5 +23,54 @@ export const api ={
     getProductAndDetailById: async (productId: string): Promise<any> => {
         const response = await fetch(`${baseUrl}/products/${productId}?_embed=detailProducts`)
         return response.json();
+    },
+
+
+    login: async (
+        username: string,
+        password: string
+    ): Promise<Omit<User, "password">> => {
+        const response = await fetch(
+            `${baseUrl}/users?username=${username}&password=${password}`
+        );
+
+        const users: User[] = await response.json();
+
+        if (users.length === 0) {
+            throw new Error("Sai tài khoản hoặc mật khẩu");
+        }
+        const { password: _, ...userWithoutPassword } = users[0];
+        return userWithoutPassword;
+    },
+
+    register: async (
+        username: string,
+        password: string,
+        phone: string
+    ): Promise<Omit<User, "password">> => {
+
+        const checkRes = await fetch(
+            `${baseUrl}/users?username=${username}`
+        );
+        const existed = await checkRes.json();
+
+        if (existed.length > 0) {
+            throw new Error("Tài khoản đã tồn tại");
+        }
+        const res = await fetch(`${baseUrl}/users`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                username,
+                password,
+                phone,
+                fullName: username,
+                role: "USER"
+            })
+        });
+
+        const newUser: User = await res.json();
+        const { password: _, ...userWithoutPassword } = newUser;
+        return userWithoutPassword;
     }
 }

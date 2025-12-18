@@ -193,5 +193,29 @@
       "carbs": 100,
       "quantity": 10
     }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "123456",
+      "fullName": "Admin",
+      "role": "ADMIN"
+    },
+    {
+      "id": "2",
+      "username": "user",
+      "password": "123",
+      "fullName": "",
+      "role": "USER"
+    },
+    {
+      "id": "d066",
+      "username": "phuoclocgg123",
+      "password": "123",
+      "phone": "0813556473",
+      "fullName": "phuoclocgg123",
+      "role": "USER"
+    }
   ]
 }
