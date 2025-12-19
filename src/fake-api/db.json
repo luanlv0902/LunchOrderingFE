@@ -180,7 +180,71 @@
       "img": "https://congthucgiadinh.com/storage/19/01J2DPSWQCHGTKEQ4RR3YG4VP9.jpg",
       "categoryId": "2",
       "price": 40000
+    },
+    {
+      "id": "22",
+      "name": "Soda chanh",
+      "img": "https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ab012bdc46c3e30d85e1b.png&w=3840&q=75",
+      "categoryId": "7",
+      "price": 20000
+    },
+    {
+      "id": "23",
+      "name": "Sinh tố xoài",
+      "img": "https://dayphache.edu.vn/wp-content/uploads/2016/02/cach-lam-sinh-to-xoai-sua-dac.jpg",
+      "categoryId": "7",
+      "price": 25000
+    },
+    {
+      "id": "24",
+      "name": "Đá chanh",
+      "img": "https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ab013bdc46d390039cccd.png&w=3840&q=75",
+      "categoryId": "7",
+      "price": 25000
+    },
+    {
+      "id": "25",
+      "name": "Nước ép cóc",
+      "img": "https://cdn-together.hellohealthgroup.com/2025/06/1750407762_68551a5262cf73.03218056",
+      "categoryId": "7",
+      "price": 25000
+    },
+    {
+      "id": "26",
+      "name": "Nước mơ",
+      "img": "https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ab013bdc46c3e30d85e1c.png&w=3840&q=75",
+      "categoryId": "7",
+      "price": 25000
+    },
+    {
+      "id": "27",
+      "name": "Nước dâu tằm",
+      "img": "https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ab016bdc46e2ed06c83b1.png&w=3840&q=75",
+      "categoryId": "7",
+      "price": 35000
+    },
+    {
+      "id": "28",
+      "name": "Nha đam hạt chia",
+      "img": "https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ab017bdc46e2ed06c83b5.png&w=3840&q=75",
+      "categoryId": "7",
+      "price": 30000
+    },
+    {
+      "id": "29",
+      "name": "Nước ép lựu",
+      "img": "https://congnghenhat.com/wp-content/uploads/2024/09/nuoc-ep-luu.jpg",
+      "categoryId": "7",
+      "price": 25000
+    },
+    {
+      "id": "30",
+      "name": "Soda chanh sả gừng",
+      "img": "https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F68ef0a94bdc46c1b2c9adbd2.png&w=3840&q=75",
+      "categoryId": "7",
+      "price": 25000
     }
+
   ],
   "detailProducts": [
     {

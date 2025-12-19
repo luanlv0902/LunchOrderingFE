@@ -2,6 +2,7 @@ import React from "react";
 import { Product } from "../types/object";
 import "../styles/styles.css";
 import {NavLink} from "react-router-dom";
+import {formatPrice} from "./formatPrice";
 
 interface ItemMenuProps {
     product: Product;
@@ -20,7 +21,7 @@ function ItemMenu({ product }: ItemMenuProps) {
             <div className={"title-item-menu"}>{product.name}</div>
             <div className={"flex-row"}>
                 <div className={"price-menu"}>
-                    {product.price}đ
+                    {formatPrice(product?.price??0)}
                 </div>
                 <button className={"add-cart"}>Thêm vào giỏ</button>
             </div>

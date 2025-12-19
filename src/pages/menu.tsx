@@ -10,6 +10,7 @@ import IconScroll from "../components/icon-scroll";
 // import {RootState} from "../redux/Store";
 // import {useSelector,useDispatch} from "react-redux";
 import ReactPaginate from 'react-paginate';
+import Paginate from "../components/paginate";
 
 function Menu(){
     const [active, setActive] = useState("Món đặc biệt");
@@ -105,32 +106,32 @@ function Menu(){
                 </div>
             </div>
 
+            <Paginate pageCount={pageCount} onPageChange={handlePageClick}/>
+            {/*<ReactPaginate*/}
+            {/*    containerClassName="pagination"*/}
 
-            <ReactPaginate
-                containerClassName="pagination"
+            {/*    pageClassName=""*/}
+            {/*    pageLinkClassName=""*/}
 
-                pageClassName=""
-                pageLinkClassName=""
+            {/*    previousClassName="previous"*/}
+            {/*    previousLinkClassName=""*/}
 
-                previousClassName="previous"
-                previousLinkClassName=""
+            {/*    nextClassName="next"*/}
+            {/*    nextLinkClassName=""*/}
 
-                nextClassName="next"
-                nextLinkClassName=""
+            {/*    breakClassName="break"*/}
+            {/*    breakLinkClassName=""*/}
 
-                breakClassName="break"
-                breakLinkClassName=""
-
-                activeClassName="active"
-                disabledClassName="disabled"
-                previousLabel="<"
-                nextLabel=">"
-                breakLabel="..."
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                renderOnZeroPageCount={null}
-            />
+            {/*    activeClassName="active"*/}
+            {/*    disabledClassName="disabled"*/}
+            {/*    previousLabel="<"*/}
+            {/*    nextLabel=">"*/}
+            {/*    breakLabel="..."*/}
+            {/*    onPageChange={handlePageClick}*/}
+            {/*    pageRangeDisplayed={5}*/}
+            {/*    pageCount={pageCount}*/}
+            {/*    renderOnZeroPageCount={null}*/}
+            {/*/>*/}
         </>
     )
 }
