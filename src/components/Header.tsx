@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import "../styles/styles.css";
+import {api} from "../services/api";
 
 const Header = () => {
     const [user, setUser] = useState<{ username: string } | null>(null);
+    const [keyword, setKeyword] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -23,6 +25,12 @@ const Header = () => {
         navigate("/login");
     };
 
+    // search
+    const handleSearch = () => {
+        if (!keyword.trim()) return;
+        navigate(`/menu?search=${keyword}`);
+    };
+
     return (
         <header className="header">
             <div className="header-container">
@@ -33,6 +41,28 @@ const Header = () => {
                         alt="Anzi Logo"
                     />
                 </div>
+
+                {/*Search-box*/}
+                <div className="search-box">
+                    <i
+                        className="fa-solid fa-magnifying-glass search-icon"
+                        onClick={handleSearch}
+                    ></i>
+
+                    <input
+                        type="text"
+                        value={keyword}
+                        onChange={(e) => setKeyword(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                                handleSearch();
+                            }
+                        }}
+                        placeholder="Nhập tên món ăn..."
+                    />
+                </div>
+
+
 
                 {/* MENU */}
                 <nav className="nav">

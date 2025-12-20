@@ -884,6 +884,39 @@ hr{
     font-weight: 700;
 }
 
+/*Search-box*/
+.search-box {
+    position: relative;
+    width: 250px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 12px 10px 40px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-box input:focus {
+    border-color: #e53935;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search-icon:hover {
+    color: #e53935;
+}
+
 /*FOOTER*/
 .footer {
     background-color: #1f1f1f;
