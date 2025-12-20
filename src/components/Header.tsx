@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import "../styles/styles.css";
+import {api} from "../services/api";
 
 const Header = () => {
     const [user, setUser] = useState<{ username: string } | null>(null);
@@ -24,9 +25,10 @@ const Header = () => {
         navigate("/login");
     };
 
+    // search
     const handleSearch = () => {
         if (!keyword.trim()) return;
-        navigate(`/menu?search=${keyword}`);   // chuyển sang trang menu kèm keyword
+        navigate(`/menu?search=${keyword}`);
     };
 
     return (

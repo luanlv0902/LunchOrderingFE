@@ -884,14 +884,15 @@ hr{
     font-weight: 700;
 }
 
+/*Search-box*/
 .search-box {
     position: relative;
-    width: 250px; /* tùy chỉnh */
+    width: 250px;
 }
 
 .search-box input {
     width: 100%;
-    padding: 10px 12px 10px 40px; /* chừa chỗ bên trái cho icon */
+    padding: 10px 12px 10px 40px;
     border: 1px solid #ccc;
     border-radius: 8px;
     outline: none;
