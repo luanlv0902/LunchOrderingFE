@@ -28,8 +28,9 @@ const Header = () => {
     // search
     const handleSearch = () => {
         if (!keyword.trim()) return;
-        navigate(`/menu?search=${keyword}`);
+        navigate(`/menu?search=${encodeURIComponent(keyword.trim())}`);
     };
+
 
     return (
         <header className="header">
@@ -61,7 +62,6 @@ const Header = () => {
                         placeholder="Nhập tên món ăn..."
                     />
                 </div>
-
 
 
                 {/* MENU */}

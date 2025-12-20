@@ -26,9 +26,9 @@ export const api ={
     },
 
     // api search
-    searchProducts: async (keyword: string): Promise<any> => {
+    searchProducts: async (keyword: string) => {
         const res = await fetch(
-            `${baseUrl}/products?name_like=${encodeURIComponent(keyword)}`
+            `${baseUrl}/products?name=${encodeURIComponent(keyword)}`
         );
         return res.json();
     },
