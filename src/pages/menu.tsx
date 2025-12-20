@@ -69,7 +69,6 @@ function Menu() {
         setPageCount(1);
     }
 
-    // load categories
     useEffect(() => {
         fetchCategories();
     }, []);
