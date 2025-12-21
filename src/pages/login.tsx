@@ -11,13 +11,14 @@ function Login() {
     const [error, setError] = useState("");
 
     const handleLogin = async (e?: React.FormEvent) => {
-        // Ngăn chặn form reload trang
         e?.preventDefault();
 
         setError("");
         try {
             const user = await api.login(username, password);
             localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("userId", String(user.id));
+            // localStorage.setItem("userId", user.id);
             navigate("/home");
         } catch (err) {
             setError("Sai tài khoản hoặc mật khẩu");

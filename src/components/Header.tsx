@@ -20,9 +20,15 @@ const Header = () => {
 
 
     const handleLogout = () => {
+        const ok = window.confirm("Bạn có chắc muốn đăng xuất không?");
+        if (!ok) return;
+
+        // Xóa dữ liệu đăng nhập
         localStorage.removeItem("user");
-        setUser(null);
-        navigate("/login");
+        localStorage.removeItem("userId");
+
+        // Điều hướng
+        navigate("/login"); // hoặc "/home"
     };
 
     // search
@@ -106,7 +112,7 @@ const Header = () => {
                     {user ? (
                         <>
                             <NavLink
-                                to="/profile"
+                                to="/account"
                                 className={({ isActive }) =>
                                     isActive ? "nav-item active" : "nav-item"
                                 }

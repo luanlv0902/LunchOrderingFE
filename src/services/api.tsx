@@ -79,5 +79,20 @@ export const api ={
         const newUser: User = await res.json();
         const { password: _, ...userWithoutPassword } = newUser;
         return userWithoutPassword;
-    }
+    },
+
+    // ===== PROFILE =====
+    getUserById: async (id: string) => {
+        const res = await fetch(`${baseUrl}/users/${id}`);
+        return res.json();
+    },
+
+    updateProfile: async (id: string, data: any) => {
+        const res = await fetch(`${baseUrl}/users/${id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
+        return res.json();
+    },
 }

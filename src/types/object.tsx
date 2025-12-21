@@ -29,5 +29,8 @@ export interface User {
     password: string;
     fullName: string;
     role: "USER" | "ADMIN";
+    phone: string;
+    birthday: string;
+    gender: "Nam" | "Nữ" | "Khác";
+    avatar: string;
 }
-
