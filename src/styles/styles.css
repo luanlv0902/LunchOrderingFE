@@ -126,7 +126,7 @@ body{
     color: white;
 }
 .add-cart:hover{
-   opacity: 0.8;
+    opacity: 0.8;
     cursor: pointer;
 }
 .price-menu{
@@ -590,7 +590,7 @@ hr{
 }
 
 /*Component 2*/
-    /*CART*/
+/*CART*/
 /*ProductDetail*/
 .productDetail{
     display: flex;
@@ -2004,8 +2004,8 @@ hr{
 }
 .error-text {
     width: 100%;
-    background-color: #fdecea;   /* nền đỏ nhạt */
-    color: #d93025;              /* chữ đỏ */
+    background-color: #fdecea;
+    color: #d93025;
     padding: 10px 14px;
     margin: 10px 0;
     border-radius: 6px;
@@ -2034,4 +2034,527 @@ hr{
     border-radius: 6px;
     margin-top: 10px;
     font-size: 14px;
+}
+
+
+/*------------------------Profile-----------------------*/
+/* ================= ACCOUNT LAYOUT ================= */
+.account-container{
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    gap: 100px;
+    margin-top: 30px;
+}
+
+/* ================= MENU LEFT ================= */
+.account_menu{
+    width: 250px;
+    height: 500px;
+    border: 2px solid #d3d1d1;
+    border-radius: 30px;
+    background-color: #f5f5f5;
+    margin-left: 200px;
+    padding-bottom: 20px;
+}
+
+/* Avatar */
+.img_avartar{
+    width: 100px;
+    height: 100px;
+    margin: 15px auto 10px;
+}
+.img_avartar img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Hello name */
+.sayhi_name{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+.sayhi_name p{
+    font-style: italic;
+}
+.info_name{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* ================= MENU LIST ================= */
+.info_account_menu{
+    margin-top: 20px;
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-row{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
+    position: relative;
+    overflow: hidden;
+    transition:
+            transform 0.2s ease,
+            background 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+.menu-row i{
+    width: 22px;
+    text-align: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.menu-row span{
+    flex: 1;
+    text-align: left;
+}
+
+.menu-row:hover{
+    background: #ececec;
+    transform: scale(1.04);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.menu-active{
+    background: #fcebed;
+    color: #d0011b;
+    font-weight: 600;
+}
+
+.submenu{
+    list-style: none;
+    margin: 4px 0;
+    padding: 0;
+    display: none;
+    text-align: left;
+}
+
+.submenu li{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    margin-left: 30px;
+    font-size: 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #555;
+    position: relative;
+    overflow: hidden;
+    transition:
+            transform 0.2s ease,
+            background 0.2s ease;
+}
+
+.submenu a{
+    display: block;
+    width: 100%;
+    margin-left: 8px;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 500;
+}
+
+
+.submenu li:hover{
+    background: #f2f2f2;
+    color: #d0011b;
+    transform: scale(1.03);
+}
+
+
+.submenu li.active,
+.submenu a.submenu-active{
+    color: #d0011b;
+    font-weight: 600;
+}
+
+.submenu li.active{
+    background: #fdecee;
+}
+
+.infor_user.active .submenu{
+    display: block;
+}
+
+.infor_user.active > .menu-row{
+    color: #d0011b;
+    font-weight: 600;
+}
+
+.menu-active,
+.submenu a.submenu-active{
+    position: relative;
+}
+
+.menu-active::before,
+.submenu a.submenu-active::before{
+    content: "";
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    width: 4px;
+    height: 70%;
+    background: #d0011b;
+    border-radius: 4px;
+    transform: translateY(-50%);
+}
+
+
+/* ================= CONTENT RIGHT ================= */
+.account_content{
+    width: 700px;
+    height: auto;
+    margin-left: 50px;
+    /*background: #f5f5f5;*/
+    /*border-radius: 20px;*/
+    /*padding-bottom: 30px;*/
+}
+
+/* Title */
+.account_content h2{
+    margin: 20px 40px 0;
+    text-align: left;
+
+}
+
+/* Text + update */
+.text_security{
+    display: flex;
+    align-items: center;
+    margin: 5px 40px 20px;
+    gap: 30px;
+}
+
+.update_info {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    margin-left: 170px;
+}
+
+.update_info span {
+    transition: all 0.25s ease;
+}
+
+.update_info i {
+    transition: all 0.25s ease;
+}
+
+/* ===== HOVER ===== */
+.update_info:hover span {
+    font-weight: 600;
+    color: #d0011b;
+    transform: scale(1.1);
+}
+
+.update_info:hover i {
+    color: #e11d48;
+    transform: scale(1.15);
+}
+
+
+/* ================= PROFILE INFO ================= */
+.infor_account_all{
+    display: flex;
+    gap: 40px;
+    background: #f7f7f7;
+    padding: 30px 40px;
+    border-radius: 20px;
+    margin: 0 40px;
+}
+
+.infor_content{
+    width: 700px;
+    height: 430px;
+    background: #f5f5f5;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.infor_account_left{
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.img_account_avatar{
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: #ddd;
+    overflow: hidden;
+}
+.img_account_avatar img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.upload-btn {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 14px;
+    background: #d5d0d0;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.upload-btn:hover {
+    background: #9c9a9a;
+}
+.infor_account_left button:hover{
+    background: #eee;
+}
+
+.infor_account_right{
+    flex: 1;
+    display: grid;
+    line-height: 0.5px;
+    margin-left: 20px;
+}
+.infor_account_right div{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.infor_account_right p{
+    font-style: italic;
+}
+.infor_account_right span{
+    font-weight: bold;
+}
+
+.update_form {
+    width: 350px;
+    height: 300px;
+    margin-top: 20px;
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 8px;
+    position: relative;
+    bottom: 400px;
+    left: 300px;
+}
+
+.update_form div {
+    margin-bottom: 12px;
+}
+
+.update_form input,
+.update_form select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 15px;
+}
+
+.form_btn {
+    display: flex;
+    gap: 10px;
+
+}
+.form_btn button[type="submit"] {
+    background: #d0011b;
+    color: #fff;
+    padding: 5px;
+    border-radius: 10px;
+    width: 50px;
+    border: none;
+    cursor: pointer;
+
+}
+.form_btn button[type="button"] {
+    background: #9c9a9a;
+    color: #fff;
+    padding: 5px;
+    border-radius: 10px;
+    width: 50px;
+    border: none;
+}
+.update_form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.update_form input,
+.update_form select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    background: #fff;
+}
+
+.update_form input:focus,
+.update_form select:focus {
+    border: 1.5px solid #d0011b;
+    box-shadow: 0 0 5px rgba(208, 1, 27, 0.2);
+}
+.form_btn button {
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+
+.form_btn button[type="submit"] {
+    background: #d0011b;
+    color: #fff;
+    width: 60px;
+}
+
+.form_btn button[type="submit"]:hover {
+    background: #b8001a;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(208, 1, 27, 0.3);
+}
+
+
+.form_btn button[type="button"] {
+    background: #9c9a9a;
+    color: #fff;
+    width: 60px;
+}
+
+.form_btn button[type="button"]:hover {
+    background: #7f7d7d;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.success-toast {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background: #22c55e;
+    color: #fff;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    animation: slideIn 0.4s ease, fadeOut 0.4s ease 2.6s forwards;
+    z-index: 9999;
+}
+
+.success-toast i {
+    font-size: 18px;
+}
+
+/* Animation */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+
+/* ================= CHANGE PASSWORD ================= */
+.change-password-wrapper{
+    background: #f5f5f5;
+    border-radius: 20px;
+    padding: 32px 40px;
+    max-width: 700px;
+    margin: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.change-password-title{
+    position: relative;
+    right: 40px;
+    bottom: 20px;
+}
+
+/* FORM */
+.change-password-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    align-items: center;
+    gap: 20px;
+}
+
+.form-row label{
+    font-weight: 500;
+    color: #333;
+}
+
+.form-row input{
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+    outline: none;
+    font-size: 14px;
+}
+
+.form-row input:focus{
+    border-color: #d0011b;
+}
+
+/* BUTTON */
+.btn-submit-password{
+    margin: 10px auto 0;
+    padding: 10px 26px;
+    background: #d0011b;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-submit-password:hover{
+    background: #b80017;
+    transform: scale(1.05);
 }

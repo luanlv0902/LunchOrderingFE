@@ -13,6 +13,11 @@ import Footer from "./components/Footer";
 import IconScroll from "./components/icon-scroll";
 import ProductDetail from "./components/productDetail";
 
+import AccountLayout from "./pages/account/AccountLayout";
+import Profile from "./pages/account/profile";
+// import Address from "./pages/account/address";
+import ChangePassword from "./pages/account/change-password";
+
 function App() {
     const location = useLocation();
     const hideLayoutRoutes = ["/login", "/register"];
@@ -30,6 +35,14 @@ function App() {
                 <Route path="/product/:idProduct" element={<ProductDetail />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+
+                {/* ===== ACCOUNT ROUTES ===== */}
+                <Route path="/account" element={<AccountLayout />}>
+                    <Route index element={<Profile />} />
+                    <Route path="profile" element={<Profile />} />
+                    {/* <Route path="address" element={<Address />} /> */}
+                    <Route path="change-password" element={<ChangePassword />} />
+                </Route>
             </Routes>
             <IconScroll/>
             <Footer />

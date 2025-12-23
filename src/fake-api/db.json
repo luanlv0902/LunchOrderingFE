@@ -244,7 +244,6 @@
       "categoryId": "7",
       "price": 25000
     }
-
   ],
   "detailProducts": [
     {
@@ -270,16 +269,23 @@
       "id": "2",
       "username": "user",
       "password": "123",
-      "fullName": "",
-      "role": "USER"
+      "fullName": "Võ Phước Lộc",
+      "role": "USER",
+      "phone": "0123456789",
+      "birthday": "2025-12-05",
+      "gender": "Khác",
+      "avatar": ""
     },
     {
       "id": "d066",
       "username": "phuoclocgg123",
       "password": "123",
-      "phone": "0813556473",
-      "fullName": "phuoclocgg123",
-      "role": "USER"
+      "phone": "0346058843",
+      "fullName": "PhuocLoc",
+      "role": "USER",
+      "birthday": "2004-07-10",
+      "gender": "Khác",
+      "avatar": ""
     }
   ]
 }
