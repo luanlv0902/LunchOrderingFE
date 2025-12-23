@@ -15,6 +15,10 @@ export const api ={
         const response = await fetch(`${baseUrl}/products?categoryId=${categoryId}&_start=${start}&_end=${start+8}`)
        return response.json();
     },
+    getProductRecommend: async (categoryId: string): Promise<any> => {
+        const response = await fetch(`${baseUrl}/products?categoryId=${categoryId}`)
+        return response.json();
+    },
 
     getTotalPage: async (categoryId: string): Promise<any> => {
         const response = await fetch(`${baseUrl}/products?categoryId=${categoryId}`)

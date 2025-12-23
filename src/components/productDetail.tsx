@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Home from "../pages/home";
 import Footer from "./Footer";
 import IconScroll from "./icon-scroll";
@@ -8,6 +8,7 @@ import {api} from "../services/api";
 import {formatPrice} from "./formatPrice";
 import ReactPaginate from "react-paginate";
 import Paginate from "./paginate";
+import ScrollContainer from "react-indiana-drag-scroll";
 
 function ProductDetail() {
     const [product, setProduct] = useState<Product>();
@@ -16,15 +17,43 @@ function ProductDetail() {
     const [pageCountProducts, setPageCountProducts] = useState<number>(0);
     const [productRecommend, setProductRecommend] = useState<Product[]>();
     const [startIndex, setStartIndex] = useState(0);
+    const [hoverIndex, setHoverIndex] = useState(0);
+    const [rating, setRating] = useState<number>(0);
     const limit = 7;
     const categoryId="7";
+    const scrollRef = useRef<HTMLDivElement>(null);
+
+    function hoverStart(){
+        setHoverIndex(prevState => prevState+1);
+    }
+    function handleClickStart(value: number) {
+        setRating(value);
+    }
+    const scrollLeft = () => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollBy({
+                left: -240,
+                behavior: 'smooth'
+            });
+        }
+    };
+
+    const scrollRight = () => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollBy({
+                left: 240,
+                behavior: 'smooth'
+            });
+        }
+    };
+
 
     async function fetchProductRecommend(categoryId: string,page: number) {
-        const res = await api.getProductByCategory(categoryId, page);
+        const res = await api.getProductRecommend(categoryId);
         const totalPage = await api.getTotalPage(categoryId);
         setProductRecommend(res);
-        setPageCountProducts(Math.ceil(totalPage.length / limit));
-        console.log("Product",res);
+        // setPageCountProducts(Math.ceil(totalPage.length / limit));
+        // console.log("Product",res);
 
     }
 
@@ -50,6 +79,9 @@ function ProductDetail() {
         fetchProducts();
         fetchProductRecommend(categoryId,pageCountProducts);
     },[])
+
+
+
     return (
         <>
             {/*<Home/>*/}
@@ -80,146 +112,169 @@ function ProductDetail() {
                         </div>
 
                     </div>
-                </div>
-                <h3>Đánh giá</h3>
-                <div className={"pd2"}>
-                    <div className={"pd2_1"}>
-                        <div className={"commentBlock"}>
-                            <div className={"comment-detail"}>
-                                <div className={"avatarComment"}>
-                                    <img
-                                        src="https://s3-api.fpt.vn/fptvn-storage/2025-10-31/1761877304_top-30-mod-minecraft-hay-moi-nhat-2025.jpg"
-                                        alt="avatar" className="commentImg"/>
-                                    <div className={"nameUser"}>Nguyễn Thiện</div>
+
+                    <div className={"pd2"}>
+                        <div className={"pd2_1"}>
+                           <div className={"rate-title"}>Đánh giá</div>
+                            <div className={"commentBlock"}>
+                                <div className={"comment-detail"}>
+                                    <div className={"avatarComment"}>
+                                        <img
+                                            src="https://s3-api.fpt.vn/fptvn-storage/2025-10-31/1761877304_top-30-mod-minecraft-hay-moi-nhat-2025.jpg"
+                                            alt="avatar" className="commentImg"/>
+                                        <div className={"nameUser"}>Nguyễn Thiện</div>
+                                    </div>
+                                    <div className={"flex-row"}>
+                                        <div className={"dateComment"}>12/12/2025</div>
+                                        <i className="fa-solid fa-ellipsis-vertical"></i>
+                                    </div>
+
                                 </div>
-                                <div className={"flex-row"}>
+
+                                <div className={"comment-detail"}>
+
+                                    <div className={"comment"}>Ngon ơi là ngon!</div>
+                                    <div><i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className={"commentBlock"}>
+                                <div className={"comment-detail"}>
+                                    <div className={"avatarComment"}>
+                                        <img src="https://s3-api.fpt.vn/fptvn-storage/2025-10-31/1761877304_top-30-mod-minecraft-hay-moi-nhat-2025.jpg" alt="avatar" className="commentImg"/>
+                                        <div className={"nameUser"}>Nguyễn Thiện</div>
+                                    </div>
                                     <div className={"dateComment"}>12/12/2025</div>
-                                    <i className="fa-solid fa-ellipsis-vertical"></i>
-                                </div>
 
+                                </div>
+                                <div className={"comment-detail"}>
+                                    <div className={"comment"}>Ngon ơi là ngon!</div>
+                                    <div><i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className={"commentBlock"}>
+                                <div className={"comment-detail"}>
+                                    <div className={"avatarComment"}>
+                                        <img src="https://s3-api.fpt.vn/fptvn-storage/2025-10-31/1761877304_top-30-mod-minecraft-hay-moi-nhat-2025.jpg" alt="avatar" className="commentImg"/>
+                                        <div className={"nameUser"}>Nguyễn Thiện</div>
+                                    </div>
+                                    <div className={"dateComment"}>12/12/2025</div>
+
+                                </div>
+                                <div className={"comment-detail"}>
+                                    <div className={"comment"}>Ngon ơi là ngon!</div>
+                                    <div><i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className={"commentBlock"}>
+                                <div className={"comment-detail"}>
+                                    <div className={"avatarComment"}>
+                                        <img src="https://s3-api.fpt.vn/fptvn-storage/2025-10-31/1761877304_top-30-mod-minecraft-hay-moi-nhat-2025.jpg" alt="avatar" className="commentImg"/>
+                                        <div className={"nameUser"}>Nguyễn Thiện</div>
+                                    </div>
+                                    <div className={"dateComment"}>12/12/2025</div>
+
+                                </div>
+                                <div className={"comment-detail"}>
+                                    <div className={"comment"}>Ngon ơi là ngon!</div>
+                                    <div><i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                        <i className="fa-solid fa-star"></i>
+                                    </div>
+
+                                </div>
                             </div>
 
-                            <div className={"comment-detail"}>
-
-                                <div className={"comment"}>Ngon ơi là ngon!</div>
-                                <div><i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div className={"commentBlock"}>
-                            <div className={"comment-detail"}>
-                                <div className={"avatarComment"}>
-                                    <img src="https://s3-api.fpt.vn/fptvn-storage/2025-10-31/1761877304_top-30-mod-minecraft-hay-moi-nhat-2025.jpg" alt="avatar" className="commentImg"/>
-                                    <div className={"nameUser"}>Nguyễn Thiện</div>
-                                </div>
-                                <div className={"dateComment"}>12/12/2025</div>
-
-                            </div>
-                            <div className={"comment-detail"}>
-                                <div className={"comment"}>Ngon ơi là ngon!</div>
-                                <div><i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div className={"commentBlock"}>
-                            <div className={"comment-detail"}>
-                                <div className={"avatarComment"}>
-                                    <img src="https://s3-api.fpt.vn/fptvn-storage/2025-10-31/1761877304_top-30-mod-minecraft-hay-moi-nhat-2025.jpg" alt="avatar" className="commentImg"/>
-                                    <div className={"nameUser"}>Nguyễn Thiện</div>
-                                </div>
-                                <div className={"dateComment"}>12/12/2025</div>
-
-                            </div>
-                            <div className={"comment-detail"}>
-                                <div className={"comment"}>Ngon ơi là ngon!</div>
-                                <div><i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div className={"commentBlock"}>
-                            <div className={"comment-detail"}>
-                                <div className={"avatarComment"}>
-                                    <img src="https://s3-api.fpt.vn/fptvn-storage/2025-10-31/1761877304_top-30-mod-minecraft-hay-moi-nhat-2025.jpg" alt="avatar" className="commentImg"/>
-                                    <div className={"nameUser"}>Nguyễn Thiện</div>
-                                </div>
-                                <div className={"dateComment"}>12/12/2025</div>
-
-                            </div>
-                            <div className={"comment-detail"}>
-                                <div className={"comment"}>Ngon ơi là ngon!</div>
-                                <div><i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div className={"commentBlock"}>
-                            <div className={"comment-detail"}>
-                                <div className={"avatarComment"}>
-                                    <img src="https://s3-api.fpt.vn/fptvn-storage/2025-10-31/1761877304_top-30-mod-minecraft-hay-moi-nhat-2025.jpg" alt="avatar" className="commentImg"/>
-                                    <div className={"nameUser"}>Nguyễn Thiện</div>
-                                </div>
-                                <div className={"dateComment"}>12/12/2025</div>
-
-                            </div>
-                            <div className={"comment-detail"}>
-                                <div className={"comment"}>Ngon ơi là ngon!</div>
-                                <div><i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                    <i className="fa-solid fa-star"></i>
-                                </div>
-
-                            </div>
+                            <Paginate pageCount={20} onPageChange={handleCommentPage}/>
                         </div>
 
+                        <div className={"input-comment-block"}>
+                            <input type="text" placeholder={"Bình luận"} className={"input-comment"}/>
+                            <div className={"stars"}>
+                                {Array.from({ length: 5 }).map((_, index) => {
+                                    const starValue = index + 1;
+                                    const isActive = starValue <= (hoverIndex || rating);
 
+                                    return (
+                                        <i
+                                            key={starValue}
+                                            className={`fa-star ${
+                                                isActive ? "fa-solid active" : "fa-regular"
+                                            }`}
+                                            onMouseEnter={() => setHoverIndex(starValue)}
+                                            onMouseLeave={() => setHoverIndex(0)}
+                                            onClick={() => handleClickStart(starValue)}
+                                        />
+                                    );
+                                })}
+                            </div>
+                            <i className="fa-solid fa-paper-plane send"></i>
+                        </div>
                     </div>
-                    <Paginate pageCount={5} onPageChange={handleCommentPage}/>
-                    <div className={"input-comment-block"}>
-                        <input type="text" placeholder={"Bình luận"} className={"input-comment"}/>
-                        <div className={"stars"}>
-                            <i className="fa-regular fa-star"></i>
-                            <i className="fa-regular fa-star"></i>
-                            <i className="fa-regular fa-star"></i>
-                            <i className="fa-regular fa-star"></i>
-                            <i className="fa-regular fa-star"></i>
-                        </div>
-                        <i className="fa-solid fa-paper-plane send"></i>
-                    </div>
+
                 </div>
+
                 <h1>Gợi ý</h1>
-                <div className={"pd3"}>
+                {/*<div className={"pd3"}>*/}
 
-                    {productRecommend?.map((item: Product, index: number) => {
-                        return (
-                            <div className={"item-recommend"} key={item.id}>
-                                <img src={item.img} alt="img-recommend" className="img-recommend"/>
-                                <div>{item.name}</div>
-                                <div className={"price-recommend"}>{formatPrice(item.price)}</div>
-                                <div className={"add-cart-recommend"}>Thêm vào giỏ</div>
-                            </div>
-                        )
-                    })}
+                {/*    {productRecommend?.map((item: Product, index: number) => {*/}
+                {/*        return (*/}
+                {/*            <div className={"item-recommend"} key={item.id}>*/}
+                {/*                <img src={item.img} alt="img-recommend" className="img-recommend"/>*/}
+                {/*                <div>{item.name}</div>*/}
+                {/*                <div className={"price-recommend"}>{formatPrice(item.price)}</div>*/}
+                {/*                <div className={"add-cart-recommend"}>Thêm vào giỏ</div>*/}
+                {/*            </div>*/}
+                {/*        )*/}
+                {/*    })}*/}
 
 
 
+                {/*</div>*/}
+                <div className={"recommend"}>
+                    <button className="arrow-btn arrow-left btn-left" onClick={scrollLeft}>
+                        <i className="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <ScrollContainer
+                        innerRef={scrollRef}
+                        className="pd3"
+                        horizontal={true}
+                        vertical={false}
+                        hideScrollbars={true}
+                        activationDistance={10}
+                    >
+                        {productRecommend?.map((item: Product, index: number) => {
+                            return (
+                                <div className={"item-recommend"} key={item.id}>
+                                    <img src={item.img} alt="img-recommend" className="img-recommend"/>
+                                    <div>{item.name}</div>
+                                    <div className={"price-recommend"}>{formatPrice(item.price)}</div>
+                                    <div className={"add-cart-recommend"}>Thêm vào giỏ</div>
+                                </div>
+                            )
+                        })}
+                    </ScrollContainer>
+                    <button className="arrow-btn arrow-right btn-right" onClick={scrollRight}>
+                        <i className="fa-solid fa-chevron-right"></i>
+                    </button>
                 </div>
-                <Paginate pageCount={pageCountProducts} onPageChange={handlePageProductClick}/>
+
+                {/*<Paginate pageCount={pageCountProducts} onPageChange={handlePageProductClick}/>*/}
             </div>
         </>
     )

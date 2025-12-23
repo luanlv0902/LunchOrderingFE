@@ -9,7 +9,6 @@ import IconScroll from "../components/icon-scroll";
 // import {changeProducts} from "../redux/ProductSlice";
 // import {RootState} from "../redux/Store";
 // import {useSelector,useDispatch} from "react-redux";
-import ReactPaginate from 'react-paginate';
 import Paginate from "../components/paginate";
 import {useSearchParams} from "react-router-dom";
 
@@ -126,6 +125,7 @@ function Menu() {
                         <ItemMenu key={product.id} product={product}/>
                     ))}
                 </div>
+
             </div>
 
             <Paginate pageCount={pageCount} onPageChange={handlePageClick}/>
