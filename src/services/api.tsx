@@ -1,4 +1,4 @@
-import {User} from "../types/object";
+import {Comment, User} from "../types/object";
 
 const baseUrl = "http://localhost:3001";
 
@@ -26,6 +26,34 @@ export const api ={
     },
     getProductAndDetailById: async (productId: string): Promise<any> => {
         const response = await fetch(`${baseUrl}/products/${productId}?_embed=detailProducts`)
+        return response.json();
+    },
+    getCommentByProductId: async (detailProductId: string,startIndex:number): Promise<any> => {
+        const response = await fetch(`${baseUrl}/comments?detailProductId=${detailProductId}&_sort=dateComment&_order=desc&_start=${startIndex}&_end=${startIndex+4}&_expand=user`)
+        return response.json();
+    },
+    getTotalCommentsByProductId: async (detailProductId: string): Promise<any> => {
+        const response = await fetch(`${baseUrl}/comments?detailProductId=${detailProductId}`)
+        return response.json();
+    },
+    deleteCommentById: async (commentId: string): Promise<any> => {
+        const response = await fetch(`${baseUrl}/comments/${commentId}`,{
+            method: "DELETE"
+        });
+        return response.json();
+    },
+    postComment: async (userId:string,detailProductId:string,rateStar:number,comment:string,dateComment:string): Promise<any> => {
+        const response = await fetch(`${baseUrl}/comments`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                userId,
+                detailProductId,
+                rateStar,
+                comment,
+                dateComment,
+            })
+        })
         return response.json();
     },
 
