@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import Home from "../pages/home";
 import Footer from "./Footer";
 import IconScroll from "./icon-scroll";
-import {DetailProduct, Product} from "../types/object";
+import {DetailProduct, Product, Comment, User} from "../types/object";
 import {useParams, useSearchParams} from "react-router-dom";
 import {api} from "../services/api";
 import {formatPrice} from "./formatPrice";
@@ -11,21 +11,48 @@ import Paginate from "./paginate";
 import ScrollContainer from "react-indiana-drag-scroll";
 
 function ProductDetail() {
+    const userId = localStorage.getItem("userId");
     const [product, setProduct] = useState<Product>();
+    const [comments, setComments] = useState<Comment[]>([]);
+    const [pageComment, setPageComment] = useState<number>(0);
+    const [startIndex, setStartIndex] = useState(0);
     const [detail, setDetail] = useState<DetailProduct>();
     const {idProduct} = useParams();
     const [pageCountProducts, setPageCountProducts] = useState<number>(0);
     const [productRecommend, setProductRecommend] = useState<Product[]>();
-    const [startIndex, setStartIndex] = useState(0);
+
     const [hoverIndex, setHoverIndex] = useState(0);
     const [rating, setRating] = useState<number>(0);
-    const limit = 7;
+    const [content, setContent] = useState("");
     const categoryId="7";
     const scrollRef = useRef<HTMLDivElement>(null);
+    const [showDelete, setShowDelete] = useState(false);
 
-    function hoverStart(){
-        setHoverIndex(prevState => prevState+1);
+    async function postComment(userId:string,detailId:string,rateStart:number,content:string) {
+        console.log("userId ", userId);
+        console.log("detailId", detailId);
+        console.log("rateStart", rateStart);
+        console.log("comment", content);
+        if(rateStart===0||content===""||!userId){
+            return;
+        }
+        const dateComment = new Date().toISOString().split("T")[0];
+        const newComment = await api.postComment(userId,detailId,rateStart,content,dateComment);
+        getComments(detailId, startIndex);
+
+
+        // setComments(prev => [newComment, ...prev]);
+        setContent("");
+        setRating(0)
     }
+
+    async function deleteComment(idComment: string) {
+            const comment= await api.deleteCommentById(idComment);
+            if (comment) {
+                setComments(prevState => prevState.filter((item) => item.id !== idComment));
+            }
+    }
+
     function handleClickStart(value: number) {
         setRating(value);
     }
@@ -46,7 +73,15 @@ function ProductDetail() {
             });
         }
     };
-
+    async function getComments(detailId:string,page:number) {
+        const res= await api.getCommentByProductId(detailId,page);
+        setComments(res);
+        // setUser(res.users[0]);
+        // console.log(res.users[0]);
+        const totalComments= await api.getTotalCommentsByProductId(detailId);
+        setPageComment(Math.ceil(totalComments.length / 4));
+        // console.log("Total ",totalComments);
+    }
 
     async function fetchProductRecommend(categoryId: string,page: number) {
         const res = await api.getProductRecommend(categoryId);
@@ -57,10 +92,13 @@ function ProductDetail() {
 
     }
 
-    function handlePageProductClick(event: { selected: number }) {
-        const newStartIndex = event.selected * limit;
+    function handlePageCommentClick(event: { selected: number }) {
+        const newStartIndex = event.selected * 4;
         setStartIndex(newStartIndex);
-        fetchProductRecommend(categoryId,newStartIndex);
+        if(idProduct){
+            getComments(idProduct,newStartIndex);
+        }
+
     }
 
     async function fetchProducts() {
@@ -72,12 +110,13 @@ function ProductDetail() {
         }
 
     }
-    async function handleCommentPage(event: { selected: number }) {
-
-    }
     useEffect(() => {
         fetchProducts();
         fetchProductRecommend(categoryId,pageCountProducts);
+        if(idProduct){
+            getComments(idProduct,pageComment);
+        }
+
     },[])
 
 
@@ -116,96 +155,67 @@ function ProductDetail() {
                     <div className={"pd2"}>
                         <div className={"pd2_1"}>
                            <div className={"rate-title"}>Đánh giá</div>
-                            <div className={"commentBlock"}>
-                                <div className={"comment-detail"}>
-                                    <div className={"avatarComment"}>
-                                        <img
-                                            src="https://s3-api.fpt.vn/fptvn-storage/2025-10-31/1761877304_top-30-mod-minecraft-hay-moi-nhat-2025.jpg"
-                                            alt="avatar" className="commentImg"/>
-                                        <div className={"nameUser"}>Nguyễn Thiện</div>
-                                    </div>
-                                    <div className={"flex-row"}>
-                                        <div className={"dateComment"}>12/12/2025</div>
-                                        <i className="fa-solid fa-ellipsis-vertical"></i>
-                                    </div>
 
+                            {comments && comments.length === 0 ? (
+                                <div className="no-comment">
+                                    Không có bình luận nào
                                 </div>
+                            ) : (
+                                comments?.map((comment: Comment, index: number) => (
+                                    <div className="commentBlock" key={comment.id ?? index}>
+                                        <div className="comment-detail">
+                                            <div className="avatarComment">
+                                                <img
+                                                    src={comment.user?.avatar}
+                                                    alt="avatar"
+                                                    className="commentImg"
+                                                />
+                                                <div className="nameUser">
+                                                    {comment.user?.fullName}
+                                                </div>
+                                            </div>
 
-                                <div className={"comment-detail"}>
+                                            <div className="flex-row">
+                                                <div className="dateComment">
+                                                    {comment.dateComment}
+                                                </div>
+                                                {!showDelete && userId && String(comment.user?.id) === userId && (
+                                                    <i className="fa-solid fa-ellipsis-vertical delete-comment"
+                                                    onMouseEnter={() =>setShowDelete(true)}
+                                                       onMouseLeave={() =>setShowDelete(false)}
+                                                    ></i>
+                                                )}
+                                                {showDelete && String(comment.user?.id) === userId && (
+                                                    <button className={"btn-delete-comment"}
+                                                        onMouseLeave={() =>setShowDelete(false)}
+                                                            onClick={() => deleteComment(comment.id)}
+                                                    >Thu hồi</button>
+                                                )}
 
-                                    <div className={"comment"}>Ngon ơi là ngon!</div>
-                                    <div><i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
+                                            </div>
+                                        </div>
+
+                                        <div className="comment-detail">
+                                            <div className="comment">{comment.comment}</div>
+
+                                            <div className="stars">
+                                                {Array.from({ length: comment.rateStar }).map((_, index) => {
+                                                    return (<i className="fa-solid fa-star star" key={index}></i>)
+                                                })}
+                                            </div>
+                                        </div>
                                     </div>
+                                ))
+                            )}
 
-                                </div>
-                            </div>
-                            <div className={"commentBlock"}>
-                                <div className={"comment-detail"}>
-                                    <div className={"avatarComment"}>
-                                        <img src="https://s3-api.fpt.vn/fptvn-storage/2025-10-31/1761877304_top-30-mod-minecraft-hay-moi-nhat-2025.jpg" alt="avatar" className="commentImg"/>
-                                        <div className={"nameUser"}>Nguyễn Thiện</div>
-                                    </div>
-                                    <div className={"dateComment"}>12/12/2025</div>
-
-                                </div>
-                                <div className={"comment-detail"}>
-                                    <div className={"comment"}>Ngon ơi là ngon!</div>
-                                    <div><i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div className={"commentBlock"}>
-                                <div className={"comment-detail"}>
-                                    <div className={"avatarComment"}>
-                                        <img src="https://s3-api.fpt.vn/fptvn-storage/2025-10-31/1761877304_top-30-mod-minecraft-hay-moi-nhat-2025.jpg" alt="avatar" className="commentImg"/>
-                                        <div className={"nameUser"}>Nguyễn Thiện</div>
-                                    </div>
-                                    <div className={"dateComment"}>12/12/2025</div>
-
-                                </div>
-                                <div className={"comment-detail"}>
-                                    <div className={"comment"}>Ngon ơi là ngon!</div>
-                                    <div><i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div className={"commentBlock"}>
-                                <div className={"comment-detail"}>
-                                    <div className={"avatarComment"}>
-                                        <img src="https://s3-api.fpt.vn/fptvn-storage/2025-10-31/1761877304_top-30-mod-minecraft-hay-moi-nhat-2025.jpg" alt="avatar" className="commentImg"/>
-                                        <div className={"nameUser"}>Nguyễn Thiện</div>
-                                    </div>
-                                    <div className={"dateComment"}>12/12/2025</div>
-
-                                </div>
-                                <div className={"comment-detail"}>
-                                    <div className={"comment"}>Ngon ơi là ngon!</div>
-                                    <div><i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
-                                        <i className="fa-solid fa-star"></i>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <Paginate pageCount={20} onPageChange={handleCommentPage}/>
                         </div>
-
+                        <Paginate pageCount={pageComment} onPageChange={handlePageCommentClick}/>
                         <div className={"input-comment-block"}>
-                            <input type="text" placeholder={"Bình luận"} className={"input-comment"}/>
-                            <div className={"stars"}>
+                            <input type="text" placeholder={"Bình luận"} className={"input-comment"}
+                                   value={content}
+                                   onChange={(e) => setContent(e.target.value)}
+                            />
+                            <div className={"stars-rate"}>
                                 {Array.from({ length: 5 }).map((_, index) => {
                                     const starValue = index + 1;
                                     const isActive = starValue <= (hoverIndex || rating);
@@ -223,7 +233,9 @@ function ProductDetail() {
                                     );
                                 })}
                             </div>
-                            <i className="fa-solid fa-paper-plane send"></i>
+                            <i className="fa-solid fa-paper-plane send"
+                            onClick={() =>postComment(String(userId), typeof idProduct === "string" ? idProduct :"",rating,content)}
+                            ></i>
                         </div>
                     </div>
 

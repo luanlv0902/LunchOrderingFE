@@ -709,7 +709,9 @@ hr{
     background-color: white;
     /*align-items: center;*/
     /*justify-content: center;*/
+    height: 360px;
     border-radius: 12px;
+    margin-bottom: 10px;
 }
 
 .commentBlock{
@@ -746,6 +748,7 @@ hr{
 .comment-detail i{
     color:#268726;
 }
+
 .avatarComment{
     display: flex;
     flex-direction: row;
@@ -759,6 +762,22 @@ hr{
     height: 30px;
     border-radius: 50%;
     object-fit: cover;
+}
+.delete-comment:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+.btn-delete-comment:hover{
+    cursor: pointer;
+
+
+}
+.no-comment{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    height: 210px;
 }
 .input-comment-block{
     width: 100%;
@@ -774,21 +793,21 @@ hr{
     width: 60%;
     border-radius: 10px;
 }
-.stars{
+.stars-rate{
     display: flex;
     flex-direction: row;
     gap: 5px;
 }
-.stars i {
+.stars-rate i {
     font-size: 20px;
     transition: color 0.2s ease, transform 0.1s ease;
     color: #ccc;
 }
-.stars i:hover{
+.stars-rate i:hover{
     cursor: pointer;
 }
 
-.stars i.active {
+.stars-rate i.active {
     color: #2e7d32;
 }
 .send{

@@ -15,9 +15,18 @@ export interface Product {
     img: string;
     categoryId: string;
     price: number;
-    detailProducts?: DetailProduct[];
+    detailProducts?: DetailProduct;
 }
+export interface Comment {
+    id: string;
+    userId: string;
+    detailProductId: string;
+    rateStar: number;
+    comment: string;
+    dateComment: string
+    user?: User;
 
+}
 export interface Category {
     id: string;
     nameCategory: string;
