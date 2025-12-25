@@ -130,7 +130,6 @@ export const api ={
         return res.json();
     },
 
-
     // Change Password
     changePassword: async (
         userId: string,

@@ -2499,10 +2499,9 @@ hr{
     font-size: 18px;
 }
 .delete-toast {
-    background: #22c55e; /* đỏ */
+    background: #22c55e;
 }
 
-/* Animation */
 @keyframes slideIn {
     from {
         transform: translateX(100%);
@@ -2521,7 +2520,6 @@ hr{
     }
 }
 
-
 /* ================= CHANGE PASSWORD ================= */
 .change-password-wrapper{
     background: #f5f5f5;
@@ -2538,7 +2536,6 @@ hr{
     bottom: 20px;
 }
 
-/* FORM */
 .change-password-form{
     display: flex;
     flex-direction: column;
@@ -2571,7 +2568,6 @@ hr{
     border-color: #d0011b;
 }
 
-/* BUTTON */
 .btn-submit-password{
     margin: 10px auto 0;
     padding: 10px 26px;
@@ -2589,15 +2585,13 @@ hr{
     transform: scale(1.05);
 }
 
-
-/* Password input with eye icon */
 .password-input {
     position: relative;
 }
 
 .password-input input {
     width: 300px;
-    padding-right: 40px; /* chừa chỗ cho icon */
+    padding-right: 40px;
 }
 
 .password-input i {
@@ -2614,8 +2608,6 @@ hr{
     color: #e11d48;
 }
 
-
-
 .success_change {
     width: 100%;
     background-color: #b1f1b1;
@@ -2630,7 +2622,6 @@ hr{
     box-sizing: border-box;
 }
 
-/* animation rung nhẹ khi hiện lỗi */
 @keyframes shake {
     0% { transform: translateX(0); }
     25% { transform: translateX(-4px); }
@@ -2644,7 +2635,6 @@ hr{
 }
 
 /*============Address====================*/
-
 .content_address{
     width: 700px;
     height: auto;
@@ -2688,7 +2678,6 @@ hr{
 .add-address span{
     color: #d0011b;
 }
-
 
 .add-address span {
     transition: all 0.25s ease;
@@ -2776,13 +2765,11 @@ hr{
     padding: 5px;
 }
 
-/* ===== BUTTON CHUNG ===== */
 .btn_address button {
     cursor: pointer;
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-/* ===== UPDATE ===== */
 .btn_update_address button {
     background-color: #0bdc0b;
     color: #ffffff;
@@ -2804,7 +2791,6 @@ hr{
     transform: scale(0.97);
 }
 
-/* ===== DELETE ===== */
 .btn_delete_address button {
     background-color: #edeae6;
     color: #373636;
@@ -2846,7 +2832,6 @@ hr{
     color: #333;
 }
 
-/* Input */
 .address-form input {
     width: 400px;
     padding: 10px 12px;
@@ -2863,7 +2848,6 @@ hr{
     box-shadow: 0 0 0 2px rgba(255, 106, 0, 0.15);
 }
 
-/* Checkbox */
 .default-checkbox {
     display: flex;
     align-items: center;
@@ -2882,15 +2866,12 @@ hr{
     cursor: pointer;
 }
 
-
-/* Buttons */
 .form-btn {
     display: flex;
     gap: 12px;
 }
 
 .form-btn button {
-    /*flex: 1;*/
     width: 200px;
     padding: 10px 0;
     border-radius: 8px;
@@ -2902,7 +2883,6 @@ hr{
     margin: 0 auto;
 }
 
-/* Save button */
 .form-btn button[type="submit"] {
     background-color: #0bdc0b;
     color: #fff;
@@ -2912,7 +2892,6 @@ hr{
     background-color: #059305;
 }
 
-/* Cancel button */
 .form-btn button[type="button"] {
     background: #f2f2f2;
     color: #333;
@@ -2922,7 +2901,6 @@ hr{
     background: #e0e0e0;
 }
 
-/* Animation */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -2933,7 +2911,6 @@ hr{
         transform: translateY(0);
     }
 }
-/* ===== Overlay mờ nền ===== */
 .address-overlay {
     position: fixed;
     inset: 0;
@@ -2945,12 +2922,10 @@ hr{
     animation: overlayFade 0.25s ease;
 }
 
-/* Đảm bảo form nằm trên overlay */
 .address-form {
     z-index: 1000;
 }
 
-/* Animation */
 @keyframes overlayFade {
     from {
         opacity: 0;

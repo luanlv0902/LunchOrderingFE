@@ -13,7 +13,6 @@ function Profile() {
         gender: "",
     });
 
-
     const userId = localStorage.getItem("userId");
 
     useEffect(() => {
@@ -41,7 +40,6 @@ function Profile() {
         reader.readAsDataURL(file);
     };
 
-
     const handleChange = (e: any) => {
         setInfo({
             ...info,
@@ -68,7 +66,6 @@ function Profile() {
         setShowForm(false);
         setSuccess(true);
 
-        // Tự ẩn sau 3 giây
         setTimeout(() => setSuccess(false), 3000);
     };
 

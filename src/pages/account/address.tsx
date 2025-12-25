@@ -47,8 +47,6 @@ function Address() {
         const fetchProvinces = async () => {
             try {
                 const data = await api.getProvinces();
-
-                // 🔥 SORT THEO CHỮ CÁI TIẾNG VIỆT
                 const sorted = data.sort((a: any, b: any) =>
                     a.name.localeCompare(b.name, "vi", { sensitivity: "base" })
                 );
@@ -80,8 +78,6 @@ function Address() {
         if (!provinceCode) return;
 
         const data = await api.getDistrictsByProvince(provinceCode);
-
-        // 🔥 SORT HUYỆN
         const sortedDistricts = data.sort((a: any, b: any) =>
             a.name.localeCompare(b.name, "vi", { sensitivity: "base" })
         );
@@ -106,8 +102,6 @@ function Address() {
         if (!districtCode) return;
 
         const data = await api.getWardsByDistrict(districtCode);
-
-        // 🔥 SORT XÃ
         const sortedWards = data.sort((a: any, b: any) =>
             a.name.localeCompare(b.name, "vi", { sensitivity: "base" })
         );
@@ -147,11 +141,7 @@ function Address() {
 
         try {
             await api.deleteAddress(id);
-
-            // cập nhật lại state
             setAddresses(addresses.filter(addr => addr.id !== id));
-
-            // ✅ THÔNG BÁO XÓA
             setSuccess("Xóa địa chỉ thành công");
             setTimeout(() => setSuccess(""), 2000);
 
@@ -159,8 +149,6 @@ function Address() {
             console.error("Lỗi xóa địa chỉ:", error);
         }
     };
-
-
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -183,7 +171,6 @@ function Address() {
 
 
         try {
-            // ===== HIỆN THÔNG BÁO NGAY =====
             setSuccess(
                 editingId
                     ? "Cập nhật địa chỉ thành công"
@@ -191,7 +178,6 @@ function Address() {
             );
             setTimeout(() => setSuccess(""), 2000);
 
-            // ĐẶT MẶC ĐỊNH
             if (formData.isDefault) {
                 const updates = addresses.map(addr =>
                     api.updateAddress(addr.id, { isDefault: false })
@@ -207,7 +193,6 @@ function Address() {
                     ward: wardName,
                     userId,
                 });
-
 
                 setAddresses(prev =>
                     prev.map(addr =>
@@ -226,8 +211,6 @@ function Address() {
                     ward: wardName,
                     userId,
                 });
-
-
                 setAddresses(prev =>
                     formData.isDefault
                         ? prev.map(addr => ({ ...addr, isDefault: false })).concat(newAddress)
@@ -273,8 +256,6 @@ function Address() {
         }
 
         const provinceCode = provinceObj.code;
-
-        // SET PROVINCE TRƯỚC
         setFormData(prev => ({
             ...prev,
             province: provinceCode,
@@ -337,8 +318,6 @@ function Address() {
         setDistricts([]);
         setWards([]);
     };
-
-
 
     if (loading) return <p>Đang tải địa chỉ...</p>;
 
@@ -418,7 +397,6 @@ function Address() {
                     ))}
             </div>
 
-            {/* ===== FORM (OUTSIDE content_address) ===== */}
             {showForm && (
                 <div className="address-overlay">
                     <form className="address-form" onSubmit={handleSubmit}>
@@ -477,8 +455,6 @@ function Address() {
                                 </option>
                             ))}
                         </select>
-
-
 
                         <input
                             name="detail"
