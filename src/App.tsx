@@ -15,7 +15,7 @@ import ProductDetail from "./components/productDetail";
 
 import AccountLayout from "./pages/account/AccountLayout";
 import Profile from "./pages/account/profile";
-// import Address from "./pages/account/address";
+import Address from "./pages/account/address";
 import ChangePassword from "./pages/account/change-password";
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
                 <Route path="/account" element={<AccountLayout />}>
                     <Route index element={<Profile />} />
                     <Route path="profile" element={<Profile />} />
-                    {/* <Route path="address" element={<Address />} /> */}
+                     <Route path="address" element={<Address />} />
                     <Route path="change-password" element={<ChangePassword />} />
                 </Route>
             </Routes>

@@ -43,3 +43,15 @@ export interface User {
     gender: "Nam" | "Nữ" | "Khác";
     avatar: string;
 }
+
+export interface Address {
+    id: number;
+    userId: string;
+    receiverName: string;
+    phone: string;
+    province: string;
+    district: string;
+    ward: string;
+    detail: string;
+    isDefault: boolean;
+}
