@@ -1,4 +1,6 @@
-import {Comment, User} from "../types/object";
+import {Comment, User, Address} from "../types/object";
+const GHN_TOKEN = "28cdfced-3b05-11f0-baf0-164baeb3f2fd";
+const GHN_BASE = "https://online-gateway.ghn.vn/shiip/public-api/master-data";
 
 const baseUrl = "http://localhost:3001";
 
@@ -127,4 +129,103 @@ export const api ={
         });
         return res.json();
     },
+
+
+    // Change Password
+    changePassword: async (
+        userId: string,
+        currentPassword: string,
+        newPassword: string
+    ) => {
+        const res = await fetch(`${baseUrl}/users/${userId}`);
+
+        if (!res.ok) {
+            throw new Error("Không tìm thấy người dùng");
+        }
+
+        const user = await res.json();
+
+        if (user.password !== currentPassword) {
+            throw new Error("Mật khẩu hiện tại không đúng");
+        }
+
+        await fetch(`${baseUrl}/users/${userId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                password: newPassword,
+            }),
+        });
+
+        return true;
+    },
+
+    //Address:
+    getAddressesByUser: async (userId: string): Promise<Address[]> => {
+        const res = await fetch(
+            `http://localhost:3001/addresses?userId=${userId}`
+        );
+        return res.json();
+    },
+    //Them dia chi
+    addAddress: async (
+        address: Omit<Address, "id">
+    ): Promise<Address> => {
+        const res = await fetch("http://localhost:3001/addresses", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(address),
+        });
+        return res.json();
+    },
+    //Xoa dia chỉ
+    deleteAddress: async (id: number): Promise<void> => {
+        await fetch(`http://localhost:3001/addresses/${id}`, {
+            method: "DELETE",
+        });
+    },
+    //Cap nhat dia chi
+    updateAddress: async (id: number, data: any) => {
+        const res = await fetch(`http://localhost:3001/addresses/${id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+        });
+        return res.json();
+    },
+    // ===== Địa chỉ GHN =====
+    getProvinces: async () => {
+        const res = await fetch(`${GHN_BASE}/province`, {
+            headers: { Token: GHN_TOKEN }
+        });
+        const data = await res.json();
+        return data.data.map((p: any) => ({
+            code: p.ProvinceID,
+            name: p.ProvinceName
+        }));
+    },
+
+    getDistrictsByProvince: async (provinceCode: string) => {
+        const res = await fetch(`${GHN_BASE}/district?province_id=${provinceCode}`, {
+            headers: { Token: GHN_TOKEN }
+        });
+        const data = await res.json();
+        return data.data.map((d: any) => ({
+            code: d.DistrictID,
+            name: d.DistrictName
+        }));
+    },
+
+    getWardsByDistrict: async (districtCode: string) => {
+        const res = await fetch(`${GHN_BASE}/ward?district_id=${districtCode}`, {
+            headers: { Token: GHN_TOKEN }
+        });
+        const data = await res.json();
+        return data.data.map((w: any) => ({
+            code: w.WardCode,
+            name: w.WardName
+        }));
+    }
 }

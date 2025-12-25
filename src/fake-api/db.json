@@ -372,5 +372,40 @@
       "gender": "Khác",
       "avatar": ""
     }
+  ],
+  "addresses": [
+    {
+      "receiverName": "Võ Phước Lộcc",
+      "phone": "0813556473",
+      "province": "Cao Bằng",
+      "district": "Huyện Trà Lĩnh",
+      "ward": "Thị trấn Hùng Quốc",
+      "detail": "319/1 Nguyen Thi Minh Khai",
+      "isDefault": true,
+      "userId": "d066",
+      "id": 10
+    },
+    {
+      "receiverName": "Phuoc Loc",
+      "phone": "0123456789",
+      "province": "Cần Thơ",
+      "district": "Huyện Cờ Đỏ",
+      "ward": "Thị trấn Cờ Đỏ",
+      "detail": "123 Nguyễn Huệ",
+      "isDefault": true,
+      "userId": "3",
+      "id": 11
+    },
+    {
+      "receiverName": "Loc",
+      "phone": "0000",
+      "province": "Bạc Liêu",
+      "district": "Huyện Phước Long",
+      "ward": "Xã Phong Thạnh Tây A",
+      "detail": "Số 16 Đường 120",
+      "isDefault": false,
+      "userId": "d066",
+      "id": 12
+    }
   ]
 }
