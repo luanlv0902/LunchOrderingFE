@@ -1029,7 +1029,8 @@ hr{
 /*CART - icon*/
 .cart-icon {
     position: relative;
-    color: #e67e22;
+    font-size: 18px;
+    color: #2e7d32;
 }
 
 .cart-badge {
@@ -1038,7 +1039,7 @@ hr{
     right: -8px;
     background: red;
     color: white;
-    font-size: 12px;
+    font-size: 10px;
     padding: 2px 6px;
     border-radius: 50%;
 }
