@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import "../styles/styles.css";
 import {api} from "../services/api";
+import {useContext} from "react";
+import {CartContext} from "./CartContext";
 
 const Header = () => {
     const [user, setUser] = useState<{ username: string } | null>(null);
     const [keyword, setKeyword] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
+    const {totalQuantity} = useContext(CartContext);
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
@@ -119,6 +122,7 @@ const Header = () => {
                         {/*{cartCount > 0 && (*/}
                         {/*    <span className="cart-badge">{cartCount}</span>*/}
                         {/*)}*/}
+                        {totalQuantity > 0 && <span className="cart-badge">{totalQuantity}</span>}
                     </NavLink>
 
 
