@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { CartContext } from "../components/CartContext";
 import { Link } from "react-router-dom";
 import "../styles/styles.css";
+import {formatPrice} from "../components/formatPrice";
 
 function Cart() {
     const { cart, increase, decrease, remove, totalPrice } = useContext(CartContext);
@@ -25,7 +26,7 @@ function Cart() {
                 <table className="cart-table">
                     <thead>
                     <tr>
-                        <th>Hình</th>
+                        <th>Hình ảnh</th>
                         <th>Tên món</th>
                         <th>Giá</th>
                         <th>Số lượng</th>
@@ -43,7 +44,7 @@ function Cart() {
 
                             <td>{item.name}</td>
 
-                            <td>{item.price.toLocaleString()} đ</td>
+                            <td>{formatPrice(item.price)}</td>
 
                             <td>
                                 <div className="qty-box">
@@ -54,7 +55,7 @@ function Cart() {
                             </td>
 
                             <td>
-                                {(item.price * item.quantity).toLocaleString()} đ
+                                {formatPrice(item.price * item.quantity)}
                             </td>
 
                             <td>
@@ -70,14 +71,14 @@ function Cart() {
 
             <div className="cart-footer">
                 <h3>
-                    Tổng thanh toán:
+                    Tổng tiền:
                     <span className="total-price">
-                        {totalPrice.toLocaleString()} đ
+                        {formatPrice(totalPrice)}
                     </span>
                 </h3>
 
                 <Link to="/checkout">
-                    <button className="btn-checkout">Tiến hành đặt hàng</button>
+                    <button className="btn-checkout">Đặt hàng</button>
                 </Link>
             </div>
         </div>

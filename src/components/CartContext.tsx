@@ -53,11 +53,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     const decrease = (id: string) => {
         setCart(prev =>
-            prev
-                .map(item =>
-                    item.id === id ? { ...item, quantity: item.quantity - 1 } : item
-                )
-                .filter(item => item.quantity > 0)
+            prev.map(item =>
+                item.id === id
+                    ? { ...item, quantity: Math.max(1, item.quantity - 1) }
+                    : item
+            )
         );
     };
 
