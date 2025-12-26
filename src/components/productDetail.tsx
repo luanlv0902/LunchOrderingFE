@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import Home from "../pages/home";
 import Footer from "./Footer";
 import IconScroll from "./icon-scroll";
@@ -9,6 +9,7 @@ import {formatPrice} from "./formatPrice";
 import ReactPaginate from "react-paginate";
 import Paginate from "./paginate";
 import ScrollContainer from "react-indiana-drag-scroll";
+import {CartContext} from "./CartContext";
 
 function ProductDetail() {
     const userId = localStorage.getItem("userId");
@@ -20,26 +21,27 @@ function ProductDetail() {
     const {idProduct} = useParams();
     const [pageCountProducts, setPageCountProducts] = useState<number>(0);
     const [productRecommend, setProductRecommend] = useState<Product[]>();
+    const {addToCart} = useContext(CartContext);
 
     const [hoverIndex, setHoverIndex] = useState(0);
     const [commentId, setCommentId] = useState<string>("");
     const [rating, setRating] = useState<number>(0);
     const [hoveredCommentId, setHoveredCommentId] = useState<string | null>(null);
     const [content, setContent] = useState("");
-    const categoryId="7";
+    const categoryId = "7";
     const scrollRef = useRef<HTMLDivElement>(null);
 
 
-    async function postComment(userId:string,detailId:string,rateStart:number,content:string) {
+    async function postComment(userId: string, detailId: string, rateStart: number, content: string) {
         console.log("userId ", userId);
         console.log("detailId", detailId);
         console.log("rateStart", rateStart);
         console.log("comment", content);
-        if(rateStart===0||content===""||!userId){
+        if (rateStart === 0 || content === "" || !userId) {
             return;
         }
         const dateComment = new Date().toISOString().split("T")[0];
-        const newComment = await api.postComment(userId,detailId,rateStart,content,dateComment);
+        const newComment = await api.postComment(userId, detailId, rateStart, content, dateComment);
         getComments(detailId, startIndex);
 
 
@@ -49,15 +51,16 @@ function ProductDetail() {
     }
 
     async function deleteComment(idComment: string) {
-            const comment= await api.deleteCommentById(idComment);
-            if (comment) {
-                setComments(prevState => prevState.filter((item) => item.id !== idComment));
-            }
+        const comment = await api.deleteCommentById(idComment);
+        if (comment) {
+            setComments(prevState => prevState.filter((item) => item.id !== idComment));
+        }
     }
 
     function handleClickStart(value: number) {
         setRating(value);
     }
+
     const scrollLeft = () => {
         if (scrollRef.current) {
             scrollRef.current.scrollBy({
@@ -75,17 +78,18 @@ function ProductDetail() {
             });
         }
     };
-    async function getComments(detailId:string,page:number) {
-        const res= await api.getCommentByProductId(detailId,page);
+
+    async function getComments(detailId: string, page: number) {
+        const res = await api.getCommentByProductId(detailId, page);
         setComments(res);
         // setUser(res.users[0]);
         // console.log(res.users[0]);
-        const totalComments= await api.getTotalCommentsByProductId(detailId);
+        const totalComments = await api.getTotalCommentsByProductId(detailId);
         setPageComment(Math.ceil(totalComments.length / 4));
         // console.log("Total ",totalComments);
     }
 
-    async function fetchProductRecommend(categoryId: string,page: number) {
+    async function fetchProductRecommend(categoryId: string, page: number) {
         const res = await api.getProductRecommend(categoryId);
         const totalPage = await api.getTotalPage(categoryId);
         setProductRecommend(res);
@@ -97,8 +101,8 @@ function ProductDetail() {
     function handlePageCommentClick(event: { selected: number }) {
         const newStartIndex = event.selected * 4;
         setStartIndex(newStartIndex);
-        if(idProduct){
-            getComments(idProduct,newStartIndex);
+        if (idProduct) {
+            getComments(idProduct, newStartIndex);
         }
 
     }
@@ -112,16 +116,15 @@ function ProductDetail() {
         }
 
     }
+
     useEffect(() => {
         fetchProducts();
-        fetchProductRecommend(categoryId,pageCountProducts);
-        if(idProduct){
-            getComments(idProduct,pageComment);
+        fetchProductRecommend(categoryId, pageCountProducts);
+        if (idProduct) {
+            getComments(idProduct, pageComment);
         }
 
-    },[])
-
-
+    }, [])
 
     return (
         <>
@@ -140,14 +143,16 @@ function ProductDetail() {
                         <div className={"detailInfor"}>Carbs: {detail?.carbs} g</div>
                         <div className={"rateAvg"}>
                             4.8
-                            <i className="fa-solid fa-star" ></i>
+                            <i className="fa-solid fa-star"></i>
 
                         </div>
                         <div className="price-detail">{
-                            formatPrice(product?.price??0)
+                            formatPrice(product?.price ?? 0)
                         }</div>
                         <div className="priceAndCart">
-                            <div className="add-cart-detail">Thêm vào giỏ</div>
+                            <div className="add-cart-detail"
+                                 onClick={() => product && addToCart(product)}
+                            >Thêm vào giỏ</div>
                             <div className="buy-now">Mua ngay</div>
 
                         </div>
@@ -156,7 +161,7 @@ function ProductDetail() {
 
                     <div className={"pd2"}>
                         <div className={"pd2_1"}>
-                           <div className={"rate-title"}>Đánh giá</div>
+                            <div className={"rate-title"}>Đánh giá</div>
 
                             {comments && comments.length === 0 ? (
                                 <div className="no-comment">
@@ -189,7 +194,7 @@ function ProductDetail() {
                                                     onMouseLeave={() => setHoveredCommentId(null)}
                                                 >
                                                     {commentId === "" && String(comment.user?.id) === userId && hoveredCommentId !== comment.id && (
-                                                        <i className="fa-solid fa-ellipsis-vertical delete-comment" />
+                                                        <i className="fa-solid fa-ellipsis-vertical delete-comment"/>
                                                     )}
 
                                                     {String(comment.user?.id) === userId && hoveredCommentId === comment.id && (
@@ -209,7 +214,7 @@ function ProductDetail() {
                                             <div className="comment">{comment.comment}</div>
 
                                             <div className="stars">
-                                                {Array.from({ length: comment.rateStar }).map((_, index) => {
+                                                {Array.from({length: comment.rateStar}).map((_, index) => {
                                                     return (<i className="fa-solid fa-star star" key={index}></i>)
                                                 })}
                                             </div>
@@ -226,7 +231,7 @@ function ProductDetail() {
                                    onChange={(e) => setContent(e.target.value)}
                             />
                             <div className={"stars-rate"}>
-                                {Array.from({ length: 5 }).map((_, index) => {
+                                {Array.from({length: 5}).map((_, index) => {
                                     const starValue = index + 1;
                                     const isActive = starValue <= (hoverIndex || rating);
 
@@ -244,7 +249,7 @@ function ProductDetail() {
                                 })}
                             </div>
                             <i className="fa-solid fa-paper-plane send"
-                            onClick={() =>postComment(String(userId), typeof idProduct === "string" ? idProduct :"",rating,content)}
+                               onClick={() => postComment(String(userId), typeof idProduct === "string" ? idProduct : "", rating, content)}
                             ></i>
                         </div>
                     </div>
@@ -266,7 +271,6 @@ function ProductDetail() {
                 {/*    })}*/}
 
 
-
                 {/*</div>*/}
                 <div className={"recommend"}>
                     <button className="arrow-btn arrow-left btn-left" onClick={scrollLeft}>
@@ -286,7 +290,9 @@ function ProductDetail() {
                                     <img src={item.img} alt="img-recommend" className="img-recommend"/>
                                     <div>{item.name}</div>
                                     <div className={"price-recommend"}>{formatPrice(item.price)}</div>
-                                    <div className={"add-cart-recommend"}>Thêm vào giỏ</div>
+                                    <div className={"add-cart-recommend"}
+                                         onClick={() => addToCart(item)}
+                                    >Thêm vào giỏ</div>
                                 </div>
                             )
                         })}
@@ -301,4 +307,5 @@ function ProductDetail() {
         </>
     )
 }
+
 export default ProductDetail;
