@@ -3,6 +3,7 @@ import "../styles/styles.css"
 import Category from "../components/item-category";
 import ItemOrder from "../components/item-order";
 import DragScroll from "../components/scroll-item";
+import GetCurrentLocation from "../components/location";
 
 function Order(){
     return (
@@ -47,7 +48,9 @@ function Order(){
 
                 <div className={"container-order-2"}>
                     <div className={"title-detail-order"}>Chi tiết đơn hàng</div>
-                    <div className={"title-address"}>Chọn địa chỉ</div>
+                    <div className={"title-address"}>
+                        <GetCurrentLocation/>
+                    </div>
                     <div className={"list-cart"}>
                         <div className={"cart-detail"} >
                             <img className={"img-cart"} src="https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ac922bdc46c2b04a4dea9.png&w=3840&q=75" alt="food"/>

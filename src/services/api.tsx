@@ -3,19 +3,56 @@ const GHN_TOKEN = "28cdfced-3b05-11f0-baf0-164baeb3f2fd";
 const GHN_BASE = "https://online-gateway.ghn.vn/shiip/public-api/master-data";
 
 const baseUrl = "http://localhost:3001";
-
+interface ProductQuery {
+    categoryId?: string;
+    keyword?: string;
+    sortField?: string;
+    order?: string;
+    page?: number;
+}
 export const api ={
     getCategories: async (): Promise<any> => {
         const response = await fetch(`${baseUrl}/categories`)
         return response.json();
     },
-    getProducts: async (): Promise<any> => {
-        const response = await fetch(`${baseUrl}/products`)
-        return response.json();
+    getProducts: async (query: ProductQuery) => {
+        const params = new URLSearchParams();
+        if (query.categoryId && query.categoryId !== "0") {
+            params.append("categoryId", query.categoryId);
+        }
+
+        if (query.keyword) {
+            params.append("name_like", query.keyword);
+        }
+
+        if (query.sortField && query.order) {
+            params.append("_sort", query.sortField);
+            params.append("_order", query.order);
+        }
+
+        const page = query.page || 0;
+        params.append("_start", String(page));
+        params.append("_end", String(page+8));
+
+        const res = await fetch(`${baseUrl}/products?${params.toString()}`);
+        const data = await res.json();
+
+
+        const totalRes = await fetch(`${baseUrl}/products?${params.toString().replace(/_start=\d+&_end=\d+/, "")}`);
+        const total = await totalRes.json();
+
+        return {
+            data,
+            totalPage: Math.ceil(total.length / 8)
+        };
     },
     getProductByCategory: async (categoryId: string,start:number): Promise<any> => {
         const response = await fetch(`${baseUrl}/products?categoryId=${categoryId}&_start=${start}&_end=${start+8}`)
        return response.json();
+    },
+    sortProductByCategory: async (categoryId:string,sortField: string,order:string): Promise<any> => {
+        const response = await fetch(`${baseUrl}/products?categoryId=${categoryId}&_sort=${sortField}&_order=${order}&_start=0&_end=8`);
+        return response.json();
     },
     getProductRecommend: async (categoryId: string): Promise<any> => {
         const response = await fetch(`${baseUrl}/products?categoryId=${categoryId}`)

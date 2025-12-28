@@ -19,23 +19,29 @@ body{
     text-align: center;
 
 }
-.filter-menu{
+.filter-menu {
+    position: relative;
     display: flex;
-    flex-direction: row;
-    justify-content: right;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 20px;
+}
+
+.title-menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+
+.filter-menu-search {
+    display: flex;
     align-items: center;
     gap: 10px;
-}
-.title-menu{
     margin-right: 20px;
 }
-.filter-menu-search{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
+
 .menu{
     width: 80%;
     margin: auto;
@@ -332,7 +338,7 @@ body{
     border: none;
 }
 .sort-order{
-    /*width: 300px;*/
+    width: 200px;
     height: 40px;
     font-size: 20px;
     border-radius: 5px;

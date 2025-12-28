@@ -11,6 +11,7 @@ import IconScroll from "../components/icon-scroll";
 // import {useSelector,useDispatch} from "react-redux";
 import Paginate from "../components/paginate";
 import {useSearchParams} from "react-router-dom";
+import order from "./order";
 
 
 function Menu() {
@@ -18,12 +19,18 @@ function Menu() {
     const [categories, setCategories] = useState<Category[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
     const [pageCount, setPageCount] = useState(1);
-    const [startIndex, setStartIndex] = useState(0);
-    const [categoryId, setCategoryId] = useState("0");
-    const [activePage, setActivePage] = useState(true);
-    const [searchParams] = useSearchParams();
-    const keyword = searchParams.get("search") || "";
-    const limit = 8
+
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const query = {
+        categoryId: searchParams.get("category") || "",
+        keyword: searchParams.get("search") || "",
+        sortField: searchParams.get("sort") || "",
+        order: searchParams.get("order") || "",
+        page: Number(searchParams.get("page") || 0),
+    };
+
+
     // const [searchParams] = useSearchParams();
     // const currentCategory = searchParams.get('category');
     // const dispatch = useDispatch();
@@ -36,79 +43,107 @@ function Menu() {
             console.log("Error getting categories from API");
         }
     }
+    function onChangeOption(e: React.ChangeEvent<HTMLSelectElement>) {
+        const [field, order] = e.target.value.split("-");
 
-    async function changeProductByCategory(categoryId: string, page: number) {
-        const res = await api.getProductByCategory(categoryId, page);
-        const totalPage = await api.getTotalPage(categoryId);
-        // dispatch(changeProducts(products));
-        setCategoryId(categoryId);
-        setProducts(res);
-        setPageCount(Math.ceil(totalPage.length / limit));
-        console.log(res);
-        console.log(page);
+        setSearchParams(prev => {
+            if (field === "id") {
+                prev.delete("sort");
+                prev.delete("order");
+            } else {
+                prev.set("sort", field);
+                prev.set("order", order);
+            }
+            prev.set("page", "0");
+            return prev;
+        });
     }
 
+
+
+    function changeProductByCategory(categoryId: string) {
+        setSearchParams(prev => {
+            prev.set("category", categoryId);
+            prev.set("page", "0");
+            return prev;
+        });
+    }
+
+
     async function getProducts() {
-        const products = await api.getProducts();
+        const res = await api.getProducts(query);
         // dispatch(changeProducts(products));
-        setProducts(products);
+        console.log(res);
+        setProducts(res.data);
+        setPageCount(res.totalPage);
     }
 
     function handlePageClick(event: { selected: number }) {
-        const newStartIndex = event.selected * limit;
-        setStartIndex(newStartIndex);
-        changeProductByCategory(categoryId, newStartIndex);
-        console.log("New Start Index:", newStartIndex);
+        setSearchParams(prev => {
+            prev.set("page", String(event.selected));
+            return prev;
+        });
     }
 
+
     //search product
-    async function searchProducts() {
-        const res = await api.searchProducts(keyword);
-        setProducts(res);
-        setPageCount(1);
-    }
+    // async function searchProducts() {
+    //     const res = await api.searchProducts(keyword);
+    //     setProducts(res);
+    //     // setPageCount(1);
+    // }
+    useEffect(() => {
+        getProducts();
+    }, [searchParams]);
+
 
     useEffect(() => {
         fetchCategories();
     }, []);
 
     // search or load all
-    useEffect(() => {
-        if (keyword.trim()) {
-            searchProducts();
-        } else {
-            getProducts();
-        }
-    }, [keyword]);
+    // useEffect(() => {
+    //     // if (keyword.trim()) {
+    //     //     searchProducts();
+    //     // } else {
+    //     //     getProducts();
+    //     // }
+    //     setQuery(prev => ({
+    //         ...prev,
+    //         keyword,
+    //         page: 0
+    //     }));
+    //     setIsReady(true);
+    // }, [keyword]);
 
     return (
         <>
             {/*<IconScroll/>*/}
             <div className={"container-menu"}>
                 <div className={"header-menu"}>
-                    <div className={"filter-menu"}>
-                        <h1 className={"title-menu"}>ALL MENUS</h1>
-                        <div className={"filter-order"}>
-                            <input type="text" placeholder={"Tìm kiếm"} className={"search-order"}/>
-                            <div className={"filter-menu-search"}>
-                                <div className={"title-sort"}>Sắp xếp theo</div>
-                                <select name="sort" id="sortOrder" className={"sort-order"}>
-                                    <option>Mặc định</option>
-                                    <option>Giá tăng dần</option>
-                                    <option>Giá giảm dần</option>
-                                </select>
-                            </div>
+                    <div className="filter-menu">
+                        <div className="menu-left"></div>
+
+                        <h1 className="title-menu">ALL MENUS</h1>
+
+                        <div className="filter-menu-search">
+                            <div className="title-sort">Sắp xếp theo</div>
+                            <select className="sort-order" onChange={onChangeOption}>
+                                <option value="id-asc">Mặc định</option>
+                                <option value="price-asc">Giá tăng dần</option>
+                                <option value="price-desc">Giá giảm dần</option>
+                            </select>
                         </div>
                     </div>
+
                     <div className={"menu"}>
                         <div className={"col"}></div>
                         {categories.map(category => (
                             <div className={`menu-item ${active === category.nameCategory ? "active" : ""}`}
                                  key={category.id}>
                                 <h3 className={"title-item"} onClick={() => {
-                                    changeProductByCategory(category.id, startIndex);
+                                    changeProductByCategory(category.id);
                                     setActive(category.nameCategory);
-                                    setStartIndex(0);
                                 }
                                 }
                                 >{category.nameCategory}
