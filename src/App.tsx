@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import {Routes, Route, useLocation, Navigate} from "react-router-dom";
 import "./App.css";
 
 import Home from "./pages/home";
@@ -12,6 +12,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import IconScroll from "./components/icon-scroll";
 import ProductDetail from "./components/productDetail";
+import Cart from "./pages/cart";
 
 import AccountLayout from "./pages/account/AccountLayout";
 import Profile from "./pages/account/profile";
@@ -25,27 +26,28 @@ function App() {
 
     return (
         <div className="App">
-            <Header />
+            <Header/>
             <Routes>
-                <Route path="/" element={<Navigate to="/home" replace />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/menu" element={<Menu />} />
-                <Route path="/order" element={<Order />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/product/:idProduct" element={<ProductDetail />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/" element={<Navigate to="/home" replace/>}/>
+                <Route path="/home" element={<Home/>}/>
+                <Route path="/menu" element={<Menu/>}/>
+                <Route path="/order" element={<Order/>}/>
+                <Route path="/contact" element={<Contact/>}/>
+                <Route path="/cart" element={<Cart/>}/>
+                <Route path="/product/:idProduct" element={<ProductDetail/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/register" element={<Register/>}/>
 
                 {/* ===== ACCOUNT ROUTES ===== */}
-                <Route path="/account" element={<AccountLayout />}>
-                    <Route index element={<Profile />} />
-                    <Route path="profile" element={<Profile />} />
-                     <Route path="address" element={<Address />} />
-                    <Route path="change-password" element={<ChangePassword />} />
+                <Route path="/account" element={<AccountLayout/>}>
+                    <Route index element={<Profile/>}/>
+                    <Route path="profile" element={<Profile/>}/>
+                    <Route path="address" element={<Address/>}/>
+                    <Route path="change-password" element={<ChangePassword/>}/>
                 </Route>
             </Routes>
             <IconScroll/>
-            <Footer />
+            <Footer/>
         </div>
     );
 }
