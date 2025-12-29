@@ -1,10 +1,21 @@
-import React  from "react";
+import React, {useEffect, useState} from "react";
 import "../styles/styles.css"
 import IconScroll from "../components/icon-scroll";
+import {Product} from "../types/object";
+import {api} from "../services/api";
+import {formatPrice} from "../components/formatPrice";
+import { NavLink } from "react-router-dom";
 const LEFT_IMAGE = "https://i.pinimg.com/736x/b6/b8/5f/b6b85f9b4ab78fabebcc5b55596c68ee.jpg";
 const RIGHT_ILLUSTRATION = "https://i.pinimg.com/1200x/12/f0/fd/12f0fdad9c6f80d6f0a8f549bd66ded6.jpg";
 function Home() {
-
+    const [products, setProducts] = useState<Product[]>([]);
+    async function getProducts() {
+        const products = await api.getProductByCategory("1",0);
+        setProducts(products);
+    }
+    useEffect(() => {
+        getProducts();
+    },[])
     return(
         <>
             <IconScroll/>
@@ -99,6 +110,7 @@ function Home() {
                         </div>
                     </div>
                 </section>
+
                 <div className="img-break">
                     <img
                         className="img-top3"
@@ -128,53 +140,15 @@ function Home() {
                         <span className="title-right">NỔI BẬT</span>
                     </div>
                     <div className="highlight-grid">
-                        {[
-                            {
-                                name: "Bánh khọt nước dừa",
-                                price: "145.000đ",
-                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
-                            },
-                            {
-                                name: "Bánh xèo",
-                                price: "145.000đ",
-                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
-                            },
-                            {
-                                name: "Bánh hỏi heo quay",
-                                price: "189.000đ",
-                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
-                            },
-                            {
-                                name: "Thịt kho tiêu",
-                                price: "150.000đ",
-                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
-                            },
-                            {
-                                name: "Mắm kho miền Tây",
-                                price: "150.000đ",
-                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
-                            },
-                            {
-                                name: "Canh chua cá hú",
-                                price: "150.000đ",
-                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
-                            },
-                            {
-                                name: "Lẩu mắm miền Tây",
-                                price: "490.000đ",
-                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
-                            },
-                            {
-                                name: "Lẩu mắm miền Tây",
-                                price: "490.000đ",
-                                img: "https://cdn.tgdd.vn/Files/2017/03/28/965845/cach-lam-thit-kho-trung-5_760x450.jpg"
-                            },
-                        ].map((item, index) => (
-                            <div className="highlight-item" key={index}>
-                                <img src={item.img} alt={item.name} className="hi-img"/>
-                                <h3>{item.name}</h3>
-                                <p className="hi-price">{item.price}</p>
-                            </div>
+                        {products.map((item, index) => (
+                            <NavLink to={`/product/${item.id}`} className={"highlight-item-link"}>
+                                <div className="highlight-item" key={index}>
+                                    <img src={item.img} alt={item.name} className="hi-img"/>
+                                    <h3>{item.name}</h3>
+                                    <p className="hi-price">{formatPrice(item.price)}</p>
+                                </div>
+                            </NavLink>
+
                         ))}
                     </div>
                     <a href="menu">

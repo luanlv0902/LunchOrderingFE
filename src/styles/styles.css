@@ -1597,6 +1597,10 @@ hr{
     position: relative;
     bottom: 80px;
 }
+.img-break:hover{
+    cursor: pointer;
+
+}
 
 .img-break img{
     width: 1300px;
@@ -1684,6 +1688,11 @@ hr{
     border: 6px solid #fce5bd;
     box-shadow: 0 4px 12px rgba(0,0,0,0.18);
     transition: 0.25s ease;
+    text-decoration: none;
+}
+.highlight-item-link {
+    text-decoration: none;
+    color: inherit;
 }
 
 .highlight-item:hover {
@@ -1702,6 +1711,9 @@ hr{
     object-fit: cover;
     border-radius: 6px;
     margin-bottom: 10px;
+}
+.hi-img:hover{
+    cursor: pointer;
 }
 .highlight-item h3 {
     font-size: 15.5px;

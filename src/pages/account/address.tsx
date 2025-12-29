@@ -35,19 +35,85 @@ function Address() {
     const userId = localStorage.getItem("userId");
 
     useEffect(() => {
-        if(!geoAddress) return;
-        if(geoError){
-            alert("GeoLocation could not be found.");
+        if (!geoAddress || geoLoading || geoError || provinces.length === 0) return;
+        const provinceObj = provinces.find(
+            (p: any) =>
+                p.name.trim().toLowerCase() === geoAddress.province?.trim().toLowerCase() ||
+                p.name.trim().toLowerCase().includes(geoAddress.province?.trim().toLowerCase() || "") // fallback nếu tên hơi khác
+        );
+
+        if (!provinceObj) {
+            console.warn("Không tìm thấy tỉnh/thành từ geolocation:", geoAddress.province);
             return;
         }
-        setFormData({
-            ...formData,
-            province: geoAddress.province || "",
-            district: geoAddress.district || "",
-            ward: geoAddress.ward || "",
-            detail: geoAddress.detail || ""
-        });
-    }, [geoAddress, geoError]);
+
+        const provinceCode = String(provinceObj.code);
+
+        setFormData((prev) => ({
+            ...prev,
+            province: provinceCode,
+            district: "",
+            ward: "",
+            detail: geoAddress.detail || prev.detail || "",
+        }));
+
+        const loadAndSetDistricts = async () => {
+            try {
+                const districtList = await api.getDistrictsByProvince(provinceCode);
+                const sorted = districtList.sort((a: any, b: any) =>
+                    a.name.localeCompare(b.name, "vi", { sensitivity: "base" })
+                );
+                setDistricts(sorted);
+
+                const districtObj = sorted.find(
+                    (d: any) =>
+                        d.name.trim().toLowerCase() === geoAddress.district?.trim().toLowerCase() ||
+                        d.name.trim().toLowerCase().includes(geoAddress.district?.trim().toLowerCase() || "")
+                );
+
+                if (!districtObj) {
+                    console.warn("Không tìm thấy quận/huyện:", geoAddress.district);
+
+                    return;
+                }
+
+                const districtCode = String(districtObj.code);
+
+                setFormData((prev) => ({
+                    ...prev,
+                    district: districtCode,
+                    ward: "",
+                }));
+
+                const wardList = await api.getWardsByDistrict(districtCode);
+                const sortedWards = wardList.sort((a: any, b: any) =>
+                    a.name.localeCompare(b.name, "vi", { sensitivity: "base" })
+                );
+                setWards(sortedWards);
+
+                const wardObj = sortedWards.find(
+                    (w: any) =>
+                        w.name.trim().toLowerCase() === geoAddress.ward?.trim().toLowerCase() ||
+                        w.name.trim().toLowerCase().includes(geoAddress.ward?.trim().toLowerCase() || "")
+                );
+
+                if (wardObj) {
+                    setFormData((prev) => ({
+                        ...prev,
+                        ward: String(wardObj.code),
+                    }));
+                } else {
+                    console.warn("Không tìm thấy phường/xã:", geoAddress.ward);
+                }
+
+
+            } catch (err) {
+                console.error("Lỗi auto-fill từ geolocation:", err);
+            }
+        };
+
+        loadAndSetDistricts();
+    }, [geoAddress, provinces, geoLoading, geoError]);
     useEffect(() => {
         if (!userId) return;
 

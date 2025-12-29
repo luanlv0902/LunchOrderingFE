@@ -15,7 +15,7 @@ import order from "./order";
 
 
 function Menu() {
-    const [active, setActive] = useState("Món đặc biệt");
+    const [active, setActive] = useState("Món nổi bật");
     const [categories, setCategories] = useState<Category[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
     const [pageCount, setPageCount] = useState(1);
@@ -59,8 +59,6 @@ function Menu() {
         });
     }
 
-
-
     function changeProductByCategory(categoryId: string) {
         setSearchParams(prev => {
             prev.set("category", categoryId);
@@ -76,6 +74,10 @@ function Menu() {
         console.log(res);
         setProducts(res.data);
         setPageCount(res.totalPage);
+    }
+    async function getProductsByCategory(categoryId: string) {
+        const res= await api.getProductByCategory(categoryId,0);
+        setProducts(res);
     }
 
     function handlePageClick(event: { selected: number }) {
@@ -93,8 +95,17 @@ function Menu() {
     //     // setPageCount(1);
     // }
     useEffect(() => {
+        if (searchParams.toString() === "") {
+            setSearchParams(prev => {
+                prev.set("category", "1");
+                prev.set("page", "0");
+                return prev;
+            }, { replace: true });
+            return;
+        }
         getProducts();
-    }, [searchParams]);
+
+    }, [searchParams, setSearchParams]);
 
 
     useEffect(() => {

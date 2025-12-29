@@ -123,6 +123,10 @@ function ProductDetail() {
         if (idProduct) {
             getComments(idProduct, pageComment);
         }
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
 
     }, [])
 
