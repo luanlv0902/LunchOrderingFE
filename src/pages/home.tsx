@@ -5,10 +5,15 @@ import {Product} from "../types/object";
 import {api} from "../services/api";
 import {formatPrice} from "../components/formatPrice";
 import { NavLink } from "react-router-dom";
+import HomeVoucherNotice from "../components/HomeVoucherNotice";
+
 const LEFT_IMAGE = "https://i.pinimg.com/736x/b6/b8/5f/b6b85f9b4ab78fabebcc5b55596c68ee.jpg";
 const RIGHT_ILLUSTRATION = "https://i.pinimg.com/1200x/12/f0/fd/12f0fdad9c6f80d6f0a8f549bd66ded6.jpg";
+
+
 function Home() {
     const [products, setProducts] = useState<Product[]>([]);
+    const [showVoucher, setShowVoucher] = useState(false);
     async function getProducts() {
         const products = await api.getProductByCategory("1",0);
         setProducts(products);
@@ -19,7 +24,17 @@ function Home() {
     return(
         <>
             <IconScroll/>
+
+            {/* Nút Voucher cố định */}
+            <div className="voucher-toggle" onClick={() => setShowVoucher(!showVoucher)}>
+                NEWS 🔔
+            </div>
+
+            {/* Banner voucher */}
+            <HomeVoucherNotice className={showVoucher ? "show" : ""} />
+
             <div className="container_content">
+                {/* --- Banner voucher mới --- */}
                 <div className="background_cha">
                     <div className="background_top">
                         <img

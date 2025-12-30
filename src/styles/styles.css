@@ -1325,7 +1325,7 @@ hr{
 :root {
     --brown-1: #5c2f0a;
     --brown-2: #8a4f11;
-    --accent: #f0b020;
+    --accent: #f4b71f;
     --text: #fff8ef;
     --muted: rgba(255,255,255,0.85);
 }
@@ -2378,13 +2378,15 @@ hr{
 }
 
 .menu-row:hover{
+    color: #d0011b;
+    font-weight: 600;
     background: #ececec;
     transform: scale(1.04);
     box-shadow: 0 6px 14px rgba(0,0,0,0.08);
 }
 
 .menu-active{
-    background: #fcebed;
+    /*background: #fcebed;*/
     color: #d0011b;
     font-weight: 600;
 }
@@ -3201,7 +3203,6 @@ hr{
     font-size: 14px;
 }
 
-
 /* ----------------VOUCHER --------------------*/
 .voucher-container {
     padding: 20px;
@@ -3527,4 +3528,3 @@ hr{
         padding: 10px 15px;
     }
 }
-
