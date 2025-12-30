@@ -14,7 +14,7 @@ import IconScroll from "./components/icon-scroll";
 import ProductDetail from "./components/productDetail";
 import Cart from "./pages/cart";
 
-import AccountLayout from "./pages/account/AccountLayout";
+import AccountLayout from "./components/AccountLayout";
 import Profile from "./pages/account/profile";
 import Address from "./pages/account/address";
 import ChangePassword from "./pages/account/change-password";

@@ -431,7 +431,7 @@
   ],
   "addresses": [
     {
-      "receiverName": "Võ Phước Lộcc",
+      "receiverName": "Võ Phước Lộc",
       "phone": "0813556473",
       "province": "Cao Bằng",
       "district": "Huyện Trà Lĩnh",
@@ -453,12 +453,12 @@
       "id": 11
     },
     {
-      "receiverName": "Loc",
-      "phone": "0000",
-      "province": "Bạc Liêu",
-      "district": "Huyện Phước Long",
-      "ward": "Xã Phong Thạnh Tây A",
-      "detail": "Số 16 Đường 120",
+      "receiverName": "Phuocloc",
+      "phone": "0813556473",
+      "province": "An Giang",
+      "district": "Huyện Phú Tân",
+      "ward": "Xã Phú An",
+      "detail": "Đường 154",
       "isDefault": false,
       "userId": "d066",
       "id": 12
@@ -516,21 +516,36 @@
       "code": "TET2026",
       "title": "Giảm 5k",
       "description": "Giảm 5.000đ cho mọi đơn",
+      "discountType": "PERCENT",
+      "discountValue": 5,
+      "minOrder": 0,
+      "expireDate": "2025-12-31",
+      "quantity": 100
+    },
+    {
+      "id": 5,
+      "code": "SINHNHAT5TUOI",
+      "title": "Giảm 5k",
+      "description": "Giảm 5.000đ cho mọi đơn",
       "discountType": "FIXED",
       "discountValue": 5000,
       "minOrder": 0,
       "expireDate": "2025-12-31",
-      "quantity": 1
+      "quantity": 100
+    },
+    {
+      "id": 6,
+      "code": "FREESHIP2026",
+      "title": "Miễn phí vận chuyển",
+      "description": "Miễn phí vận chuyển cho mọi đơn hàng",
+      "discountType": "FREESHIP",
+      "discountValue": 0,
+      "minOrder": 0,
+      "expireDate": "2025-12-31",
+      "quantity": 100
     }
   ],
   "userVouchers": [
-    {
-      "userId": "d066",
-      "voucherId": 1,
-      "code": "FOOD20",
-      "used": false,
-      "id": 2
-    },
     {
       "userId": "3",
       "voucherId": 1,
@@ -560,18 +575,39 @@
       "id": 6
     },
     {
-      "userId": "d066",
-      "voucherId": 3,
-      "code": "FOOD",
-      "used": false,
-      "id": 7
-    },
-    {
       "userId": "3",
       "voucherId": 4,
       "code": "Voucher",
       "used": false,
       "id": 8
+    },
+    {
+      "userId": "d066",
+      "voucherId": 3,
+      "code": "FOOD",
+      "used": false,
+      "id": 9
+    },
+    {
+      "userId": "d066",
+      "voucherId": 1,
+      "code": "FOOD20",
+      "used": false,
+      "id": 10
+    },
+    {
+      "userId": "d066",
+      "voucherId": 6,
+      "code": "FREESHIP2026",
+      "used": false,
+      "id": 11
+    },
+    {
+      "userId": "3",
+      "voucherId": 6,
+      "code": "FREESHIP2026",
+      "used": false,
+      "id": 12
     }
   ]
 }

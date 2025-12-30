@@ -1,7 +1,7 @@
-import "../../styles/styles.css";
+import "../styles/styles.css";
 import { NavLink, Outlet, useNavigate, useLocation   } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { api } from "../../services/api";
+import { api } from "../services/api";
 
 
 function AccountLayout() {

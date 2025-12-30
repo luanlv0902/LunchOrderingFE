@@ -61,7 +61,7 @@ export interface Voucher {
     code: string;
     title: string;
     description: string;
-    discountType: "PERCENT" | "FIXED";
+    discountType: "PERCENT" | "FIXED" | "FREESHIP";
     discountValue: number;
     maxDiscount?: number;
     minOrder: number;

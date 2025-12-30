@@ -3,7 +3,7 @@ import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
 
 interface HomeVoucherNoticeProps {
-    className?: string; // nhận className từ ngoài
+    className?: string;
 }
 
 function HomeVoucherNotice({ className }: HomeVoucherNoticeProps) {
@@ -13,10 +13,15 @@ function HomeVoucherNotice({ className }: HomeVoucherNoticeProps) {
     useEffect(() => {
         const fetchVouchers = async () => {
             const newVouchers = await api.getNewVouchers();
-            setVoucherCodes(newVouchers.map((v: any) => v.code));
+            const now = new Date();
+            const validVouchers = newVouchers
+                .filter((v: any) => new Date(v.expireDate) > now)
+                .map((v: any) => v.code);
+            setVoucherCodes(validVouchers);
         };
         fetchVouchers();
     }, []);
+
 
     return (
         <div className={`home-voucher-notice ${className || ""}`}>

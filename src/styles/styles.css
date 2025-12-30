@@ -3214,22 +3214,18 @@ hr{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
 }
 
 .voucher-header h3 {
     font-size: 24px;
+    margin-bottom: 10px;
 }
-.voucher-header-right span {
-    margin-left: 10px;
-    color: #ee4d2d;
-    cursor: pointer;
-}
+
 
 .voucher-input-box {
     display: flex;
     align-items: center;
-    background: #fff;
+    background: #f5f5f5;
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 20px;
@@ -3309,7 +3305,27 @@ hr{
     font-weight: 600;
     font-size: 15px;
     letter-spacing: 0.5px;
+    gap: 5px;
+    position: relative;
+    overflow: hidden;
 }
+.voucher-left::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 0;
+    width: 20px;
+    height: 100%;
+    background: #f5f5f5;
+    background: repeating-linear-gradient(
+            to bottom,
+            #f5f5f5,
+            #f5f5f5 10px,
+            transparent 10px,
+            transparent 20px
+    );
+}
+
 
 .voucher-info {
     flex: 1;
@@ -3317,6 +3333,8 @@ hr{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    text-align: left;
+    margin-left: 20px;
 }
 
 .voucher-info h4 {
@@ -3337,7 +3355,12 @@ hr{
     font-size: 13px;
     color: #999;
 }
-/* ===== BUTTON ===== */
+
+.voucher-left.freeship {
+    background: linear-gradient(135deg, #146814, #17c163);
+    color: #fff;
+}
+
 .btn-use {
     padding: 8px 18px;
     border-radius: 20px;
@@ -3349,6 +3372,7 @@ hr{
     cursor: pointer;
     transition: all 0.25s ease;
     margin-top: 10px;
+    margin-left: 20px ;
 }
 
 .btn-use:hover {
@@ -3526,5 +3550,47 @@ hr{
 
     .voucher-toggle {
         padding: 10px 15px;
+    }
+}
+
+.voucher-filter {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.voucher-filter button {
+    flex: 1;
+    padding: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.voucher-filter button:hover {
+    background-color: #f0f0f0;
+}
+
+.voucher-filter button.active {
+    background-color: #e41e26;
+    color: #fff;
+    border-color: #ff5722;
+}
+
+@media (max-width: 600px) {
+    .voucher-filter {
+        gap: 5px;
+    }
+
+    .voucher-filter button {
+        padding: 6px 12px;
+        font-size: 0.85rem;
     }
 }
