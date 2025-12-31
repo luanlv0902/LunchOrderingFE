@@ -13,15 +13,13 @@ function Address() {
     const [wards, setWards] = useState<any[]>([]);
     const [editingId, setEditingId] = useState<number | null>(null);
     const [success, setSuccess] = useState("");
+    const [locationError, setLocationError] = useState("");
     const {
         address: geoAddress,
         loading: geoLoading,
         error: geoError,
         getCurrentLocation
     } = useGeoLocation();
-
-
-
     const [formData, setFormData] = useState({
         receiverName: "",
         phone: "",
@@ -31,21 +29,42 @@ function Address() {
         detail: "",
         isDefault: false,
     });
-
     const userId = localStorage.getItem("userId");
 
     useEffect(() => {
+        if (locationError) {
+            const timer = setTimeout(() => setLocationError(""), 2000);
+            return () => clearTimeout(timer);
+        }
+    }, [locationError]);
+
+    useEffect(() => {
         if (!geoAddress || geoLoading || geoError || provinces.length === 0) return;
+
+        const provinceName = geoAddress.province?.trim().toLowerCase() || "";
+        if (!provinceName.includes("hồ chí minh") && !provinceName.includes("ho chi minh city")) {
+            setLocationError("Xin lỗi, hiện chúng tôi không hỗ trợ cho các khu vực ngoài TP. HCM");
+            setFormData(prev => ({
+                ...prev,
+                province: "",
+                district: "",
+                ward: "",
+                detail: "",
+            }));
+            setDistricts([]);
+            setWards([]);
+            return;
+        } else {
+            setLocationError("");
+        }
+
         const provinceObj = provinces.find(
             (p: any) =>
-                p.name.trim().toLowerCase() === geoAddress.province?.trim().toLowerCase() ||
-                p.name.trim().toLowerCase().includes(geoAddress.province?.trim().toLowerCase() || "") // fallback nếu tên hơi khác
+                p.name.trim().toLowerCase() === provinceName ||
+                p.name.trim().toLowerCase().includes(provinceName)
         );
 
-        if (!provinceObj) {
-            console.warn("Không tìm thấy tỉnh/thành từ geolocation:", geoAddress.province);
-            return;
-        }
+        if (!provinceObj) return;
 
         const provinceCode = String(provinceObj.code);
 
@@ -114,6 +133,7 @@ function Address() {
 
         loadAndSetDistricts();
     }, [geoAddress, provinces, geoLoading, geoError]);
+
     useEffect(() => {
         if (!userId) return;
 
@@ -135,11 +155,32 @@ function Address() {
         const fetchProvinces = async () => {
             try {
                 const data = await api.getProvinces();
-                const sorted = data.sort((a: any, b: any) =>
-                    a.name.localeCompare(b.name, "vi", { sensitivity: "base" })
-                );
+                const hcm = data.find((p: any) => p.name.includes("Hồ Chí Minh"));
+                if (hcm) {
+                    setProvinces([hcm]);
+                    const provinceCode = String(hcm.code);
 
-                setProvinces(sorted);
+                    // Set mặc định province
+                    setFormData(prev => ({ ...prev, province: provinceCode }));
+
+                    // Load districts
+                    const districtList = await api.getDistrictsByProvince(provinceCode);
+                    const sortedDistricts = districtList.sort((a:any,b:any)=>a.name.localeCompare(b.name,"vi",{sensitivity:"base"}));
+                    setDistricts(sortedDistricts);
+
+                    if (sortedDistricts.length > 0) {
+                        setFormData(prev => ({ ...prev, district: String(sortedDistricts[0].code) }));
+
+                        // Load wards
+                        const wardList = await api.getWardsByDistrict(sortedDistricts[0].code);
+                        const sortedWards = wardList.sort((a:any,b:any)=>a.name.localeCompare(b.name,"vi",{sensitivity:"base"}));
+                        setWards(sortedWards);
+
+                        if (sortedWards.length > 0) {
+                            setFormData(prev => ({ ...prev, ward: String(sortedWards[0].code) }));
+                        }
+                    }
+                }
             } catch (err) {
                 console.error("Lỗi load tỉnh:", err);
             }
@@ -392,20 +433,26 @@ function Address() {
         }));
 
     };
-    const resetForm = () => {
+
+    const resetForm = async () => {
+        if (provinces.length === 0) return;
+        const provinceCode = String(provinces[0].code);
+        setFormData({ receiverName: "", phone: "", province: provinceCode, district: "", ward: "", detail: "", isDefault: false });
+
+        // Load districts
+        const districtList = await api.getDistrictsByProvince(provinceCode);
+        const sortedDistricts = districtList.sort((a:any,b:any)=>a.name.localeCompare(b.name,"vi",{sensitivity:"base"}));
+        setDistricts(sortedDistricts);
+
+        if (sortedDistricts.length > 0) {
+            const wardList = await api.getWardsByDistrict(sortedDistricts[0].code);
+            const sortedWards = wardList.sort((a:any,b:any)=>a.name.localeCompare(b.name,"vi",{sensitivity:"base"}));
+            setWards(sortedWards);
+        }
+
         setEditingId(null);
-        setFormData({
-            receiverName: "",
-            phone: "",
-            province: "",
-            district: "",
-            ward: "",
-            detail: "",
-            isDefault: false,
-        });
-        setDistricts([]);
-        setWards([]);
     };
+
 
     if (loading) return <p>Đang tải địa chỉ...</p>;
 
@@ -495,6 +542,15 @@ function Address() {
                                 <div>Vị trí hiện tại</div>
                             </div>
                         </div>
+
+                        {locationError && (
+                            <div className="custom-toast error">
+                                <i className="fa-solid fa-triangle-exclamation"></i>
+                                {locationError}
+                            </div>
+                        )}
+
+
                         <input
                             name="receiverName"
                             placeholder="Họ và tên"
