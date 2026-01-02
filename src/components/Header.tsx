@@ -10,7 +10,7 @@ const Header = () => {
     const [keyword, setKeyword] = useState("");
     const navigate = useNavigate();
     const location = useLocation();
-  
+
     const [searchParams] = useSearchParams();
     const {totalQuantity} = useContext(CartContext);
     const {clearCart} = useContext(CartContext);
