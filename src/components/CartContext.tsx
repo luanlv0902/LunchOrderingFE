@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect, ReactNode } from "react";
-import { Product } from "../types/object";
+import {createContext, useState, useEffect, ReactNode} from "react";
+import {Product} from "../types/object";
 
 export interface CartItem extends Product {
     quantity: number;
@@ -16,37 +16,58 @@ interface CartContextType {
     totalQuantity: number;
 }
 
-export const CartContext = createContext<CartContextType>({} as CartContextType);
+export const CartContext = createContext<CartContextType>(
+    {} as CartContextType
+);
 
-export const CartProvider = ({ children }: { children: ReactNode }) => {
+export const CartProvider = ({children}: { children: ReactNode }) => {
+    const userId = localStorage.getItem("userId");
+
     const [cart, setCart] = useState<CartItem[]>(() => {
-        const stored = localStorage.getItem("cart");
+        if (!userId) return [];
+        const stored = localStorage.getItem(`cart_${userId}`);
         return stored ? JSON.parse(stored) : [];
     });
 
+    // Khi cart hoặc userId thay đổi → lưu lại
     useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cart));
-    }, [cart]);
+        if (!userId) return;
+        localStorage.setItem(`cart_${userId}`, JSON.stringify(cart));
+    }, [cart, userId]);
 
-    // Thêm vào giỏ
+    // Khi user login/logout → reload cart
+    useEffect(() => {
+        if (!userId) {
+            setCart([]);
+            return;
+        }
+        const stored = localStorage.getItem(`cart_${userId}`);
+        setCart(stored ? JSON.parse(stored) : []);
+    }, [userId]);
+
     const addToCart = (product: Product) => {
+        if (!userId) {
+            alert("Vui lòng đăng nhập để thêm vào giỏ hàng");
+            return;
+        }
+
         setCart(prev => {
             const exist = prev.find(item => item.id === product.id);
             if (exist) {
                 return prev.map(item =>
                     item.id === product.id
-                        ? { ...item, quantity: item.quantity + 1 }
+                        ? {...item, quantity: item.quantity + 1}
                         : item
                 );
             }
-            return [...prev, { ...product, quantity: 1 }];
+            return [...prev, {...product, quantity: 1}];
         });
     };
 
     const increase = (id: string) => {
         setCart(prev =>
             prev.map(item =>
-                item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+                item.id === id ? {...item, quantity: item.quantity + 1} : item
             )
         );
     };
@@ -55,7 +76,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         setCart(prev =>
             prev.map(item =>
                 item.id === id
-                    ? { ...item, quantity: Math.max(1, item.quantity - 1) }
+                    ? {...item, quantity: Math.max(1, item.quantity - 1)}
                     : item
             )
         );
@@ -67,12 +88,28 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     const clearCart = () => setCart([]);
 
-    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const totalPrice = cart.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0
+    );
+
+    const totalQuantity = cart.reduce(
+        (sum, item) => sum + item.quantity,
+        0
+    );
 
     return (
         <CartContext.Provider
-            value={{ cart, addToCart, increase, decrease, remove, clearCart, totalPrice, totalQuantity }}
+            value={{
+                cart,
+                addToCart,
+                increase,
+                decrease,
+                remove,
+                clearCart,
+                totalPrice,
+                totalQuantity
+            }}
         >
             {children}
         </CartContext.Provider>

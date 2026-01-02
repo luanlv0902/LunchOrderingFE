@@ -13,7 +13,7 @@ const Header = () => {
   
     const [searchParams] = useSearchParams();
     const {totalQuantity} = useContext(CartContext);
-
+    const {clearCart} = useContext(CartContext);
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
@@ -34,13 +34,13 @@ const Header = () => {
         localStorage.removeItem("userId");
 
         // Điều hướng
+        clearCart();
         navigate("/login"); // hoặc "/home"
     };
 
     // search
     const handleSearch = () => {
         const params = new URLSearchParams(searchParams);
-
         if (!keyword.trim()) {
             params.delete("search");
         } else {

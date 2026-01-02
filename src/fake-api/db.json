@@ -427,6 +427,17 @@
       "birthday": "2004-07-10",
       "gender": "Khác",
       "avatar": ""
+    },
+    {
+      "username": "vanluanpv",
+      "password": "vanluanpv",
+      "phone": "0971649429",
+      "fullName": "Lê Văn Luận",
+      "role": "USER",
+      "id": "X2A_Kmd",
+      "birthday": "2004-02-09",
+      "gender": "",
+      "avatar": ""
     }
   ],
   "addresses": [
