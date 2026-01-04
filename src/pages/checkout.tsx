@@ -17,10 +17,14 @@ const Checkout = () => {
     const [selectedAddressId, setSelectedAddressId] = useState<number | null>(null);
 
     // ===== VOUCHER =====
-    const [voucherCode, setVoucherCode] = useState("");
+    const [myVouchers, setMyVouchers] = useState<any[]>([]);
+    const [selectedVoucherId, setSelectedVoucherId] = useState<number | null>(null);
     const [voucherId, setVoucherId] = useState<string | undefined>();
-    const [discount, setDiscount] = useState(0);
     const [userVoucherId, setUserVoucherId] = useState<number | null>(null);
+    const [discount, setDiscount] = useState(0);
+
+    // ===== PAYMENT =====
+    const [paymentMethod, setPaymentMethod] = useState<string>("CASH");
 
     // ===== LOAD ADDRESS =====
     useEffect(() => {
@@ -31,6 +35,12 @@ const Checkout = () => {
             const defaultAddr = data.find((a: Address) => a.isDefault);
             if (defaultAddr) setSelectedAddressId(defaultAddr.id);
         });
+    }, [userId]);
+
+    // ===== LOAD USER VOUCHERS =====
+    useEffect(() => {
+        if (!userId) return;
+        api.getUserVouchersWithDetail(userId).then(setMyVouchers);
     }, [userId]);
 
     // ===== CALCULATE DISCOUNT =====
@@ -51,53 +61,34 @@ const Checkout = () => {
         return 0;
     };
 
+    // ===== FILTER AVAILABLE VOUCHERS =====
+    const availableVouchers = myVouchers.filter(v => {
+        const voucher = v.voucher;
+        if (!voucher || v.used) return false;
+        if (new Date(voucher.expireDate) < new Date()) return false;
+        if (totalPrice < voucher.minOrder) return false;
+        return true;
+    });
+
     // ===== APPLY VOUCHER =====
-    const handleApplyVoucher = async () => {
-        if (!voucherCode || !userId) return;
+    const handleSelectVoucher = (v: any) => {
+        const voucher = v.voucher;
+        const discountValue = calculateDiscount(voucher, totalPrice);
 
-        const vouchers = await api.getVoucherByCode(voucherCode);
-        if (vouchers.length === 0) {
-            alert("Voucher không tồn tại");
-            return;
-        }
-
-        const v = vouchers[0];
-        const discountValue = calculateDiscount(v, totalPrice);
-
-        if (discountValue <= 0) {
-            alert("Không đủ điều kiện áp dụng voucher");
-            return;
-        }
-
-        const userVouchers = await api.getUserVouchers(userId);
-        const uv = userVouchers.find(
-            (u: any) => u.voucherId === v.id && !u.used
-        );
-
-        if (!uv) {
-            alert("Voucher đã dùng hoặc không thuộc về bạn");
-            return;
-        }
-
-        setVoucherId(v.id);
         setDiscount(discountValue);
-        setUserVoucherId(uv.id);
+        setVoucherId(voucher.id);
+        setUserVoucherId(v.id);
+        setSelectedVoucherId(v.id);
     };
 
     // ===== PLACE ORDER =====
     const handlePlaceOrder = async () => {
-        if (!userId) {
-            alert("Vui lòng đăng nhập");
-            return;
-        }
-
-        if (!selectedAddressId) {
-            alert("Vui lòng chọn địa chỉ giao hàng");
-            return;
-        }
+        if (!userId) return alert("Vui lòng đăng nhập");
+        if (!selectedAddressId) return alert("Vui lòng chọn địa chỉ");
+        const orderStatus =
+            paymentMethod === "CASH" ? "PENDING" : "WAITING_PAYMENT";
 
         try {
-            // CREATE ORDER
             const order: Omit<Order, "id"> = {
                 userId,
                 totalPrice,
@@ -105,46 +96,33 @@ const Checkout = () => {
                 finalPrice: totalPrice - discount,
                 addressId: selectedAddressId,
                 voucherId,
-                methodPayment: "CASH",
-                status: "LOADING",
+                methodPayment: paymentMethod as Order["methodPayment"],
+                status: orderStatus,
                 createdAt: new Date().toISOString(),
             };
 
             const createdOrder: Order = await api.createOrder(order);
 
-            // CREATE ORDER ITEMS
             const orderItems: Omit<OrderItem, "id">[] = cart.map(item => ({
                 productId: item.id,
                 orderId: createdOrder.id,
                 quantity: item.quantity,
             }));
 
-            await Promise.all(
-                orderItems.map(item =>
-                    api.createOrderItem(item)
-                )
-            );
+            await Promise.all(orderItems.map(item => api.createOrderItem(item)));
 
-            // USE VOUCHER
             if (userVoucherId) {
                 await api.useVoucher(userVoucherId);
             }
 
-            // CLEAR CART
             clearCart();
-
-            // REDIRECT
             navigate(`/order-success?orderId=${createdOrder.id}`);
-
-        } catch (error) {
-            console.error(error);
+        } catch {
             alert("Đặt hàng thất bại");
         }
     };
 
-    if (cart.length === 0) {
-        return <h2>Giỏ hàng trống</h2>;
-    }
+    if (cart.length === 0) return <h2>Giỏ hàng trống</h2>;
 
     return (
         <div className="checkout-page">
@@ -157,33 +135,21 @@ const Checkout = () => {
                     <div className="checkout-card">
                         <h3>Địa chỉ giao hàng</h3>
 
-                        {addresses.length === 0 && (
-                            <p className="empty-address">
-                                Bạn chưa có địa chỉ.
-                                <span
-                                    className="add-address-link"
-                                    onClick={() => navigate("/account/address")}
-                                >
-                                    Thêm địa chỉ
-                                </span>
-                            </p>
-                        )}
-
                         {addresses.map(addr => (
                             <label
                                 key={addr.id}
-                                className={`address-card ${
-                                    selectedAddressId === addr.id ? "active" : ""
-                                }`}
+                                className={`address-card ${selectedAddressId === addr.id ? "active" : ""}`}
                             >
                                 <input
                                     type="radio"
                                     checked={selectedAddressId === addr.id}
                                     onChange={() => setSelectedAddressId(addr.id)}
                                 />
-                                <div>
+                                <div className="address-content">
                                     <strong>{addr.receiverName}</strong>
-                                    <p>{addr.detail}</p>
+                                    <p>
+                                        {addr.detail}, {addr.ward}, {addr.district}, {addr.province}
+                                    </p>
                                 </div>
                             </label>
                         ))}
@@ -191,21 +157,68 @@ const Checkout = () => {
 
                     {/* VOUCHER */}
                     <div className="checkout-card">
-                        <h3>Voucher</h3>
-                        <div className="voucher-box">
-                            <input
-                                value={voucherCode}
-                                onChange={e => setVoucherCode(e.target.value)}
-                                placeholder="Nhập mã voucher"
-                            />
-                            <button onClick={handleApplyVoucher}>Áp dụng</button>
-                        </div>
+                        <h3>Voucher của bạn</h3>
 
-                        {discount > 0 && (
-                            <p className="voucher-success">
-                                Đã giảm {formatPrice(discount)}
-                            </p>
+                        {availableVouchers.length === 0 && (
+                            <p className="text-muted">Không có voucher phù hợp</p>
                         )}
+
+                        {availableVouchers.map(v => {
+                            const voucher = v.voucher;
+                            return (
+                                <div
+                                    key={v.id}
+                                    className={`voucher-row ${selectedVoucherId === v.id ? "active" : ""}`}
+                                    onClick={() => handleSelectVoucher(v)}
+                                >
+                                    <div className="voucher-content">
+                                        <strong>
+                                            {voucher.discountType === "PERCENT"
+                                                ? `Giảm ${voucher.discountValue}%`
+                                                : `Giảm ${voucher.discountValue.toLocaleString()}đ`}
+                                        </strong>
+                                        <p>Đơn tối thiểu {voucher.minOrder.toLocaleString()}đ</p>
+                                    </div>
+
+                                    <button>
+                                        {selectedVoucherId === v.id ? "Đã áp dụng" : "Dùng"}
+                                    </button>
+                                </div>
+
+                            );
+                        })}
+                    </div>
+
+                    {/* PAYMENT */}
+                    <div className="checkout-card">
+                        <h3>Phương thức thanh toán</h3>
+
+                        <label className={`payment-option ${paymentMethod === "CASH" ? "active" : ""}`}>
+                            <input
+                                type="radio"
+                                checked={paymentMethod === "CASH"}
+                                onChange={() => setPaymentMethod("CASH")}
+                            />
+                            <span>💵 Tiền mặt khi nhận hàng</span>
+                        </label>
+
+                        <label className={`payment-option ${paymentMethod === "BANK" ? "active" : ""}`}>
+                            <input
+                                type="radio"
+                                checked={paymentMethod === "BANK"}
+                                onChange={() => setPaymentMethod("BANK")}
+                            />
+                            <span>💳 Chuyển khoản ngân hàng</span>
+                        </label>
+
+                        <label className={`payment-option ${paymentMethod === "MOMO" ? "active" : ""}`}>
+                            <input
+                                type="radio"
+                                checked={paymentMethod === "MOMO"}
+                                onChange={() => setPaymentMethod("MOMO")}
+                            />
+                            <span>📱 Ví Momo / ZaloPay</span>
+                        </label>
                     </div>
                 </div>
 
@@ -229,6 +242,15 @@ const Checkout = () => {
                         <div className="summary-row discount">
                             <span>Giảm giá</span>
                             <span>-{formatPrice(discount)}</span>
+                        </div>
+
+                        <div className="summary-row">
+                            <span>Phương thức thanh toán</span>
+                            <span>
+                                {paymentMethod === "CASH" && "Tiền mặt"}
+                                {paymentMethod === "BANK" && "Chuyển khoản"}
+                                {paymentMethod === "MOMO" && "Ví điện tử"}
+                            </span>
                         </div>
 
                         <div className="summary-total">

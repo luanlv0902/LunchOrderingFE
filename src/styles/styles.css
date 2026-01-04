@@ -3617,7 +3617,6 @@ hr{
 }
 
 /* ===== CARD ===== */
-
 .checkout-card {
     background: #fff;
     border-radius: 10px;
@@ -3631,35 +3630,50 @@ hr{
 }
 
 /* ===== ADDRESS ===== */
-
 .address-card {
     display: flex;
-    gap: 12px;
-    padding: 12px;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    border-radius: 10px;
+    margin-bottom: 12px;
     cursor: pointer;
     transition: 0.2s;
 }
 
-.address-card:hover {
-    background: #f9f9f9;
+.address-card input[type="radio"] {
+    margin-top: 4px;
+    flex-shrink: 0;
 }
+
+.address-content {
+    flex: 1;
+    text-align: left;
+}
+
+.address-content strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.address-content p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.4;
+}
+
 
 .address-card.active {
     border-color: #e53935;
     background: #fff5f5;
 }
 
-.address-card p {
-    margin: 4px 0 0;
-    font-size: 14px;
-    color: #555;
-}
 
 /* ===== VOUCHER ===== */
-
 .voucher-box {
     display: flex;
     gap: 10px;
@@ -3720,7 +3734,6 @@ hr{
 }
 
 /* ===== Checkout ===== */
-
 .btn-place-order {
     width: 100%;
     padding: 14px;
@@ -3751,8 +3764,6 @@ hr{
     text-decoration: underline;
 }
 
-/* ===== RESPONSIVE ===== */
-
 @media (max-width: 768px) {
     .checkout-container {
         grid-template-columns: 1fr;
@@ -3762,3 +3773,120 @@ hr{
         position: static;
     }
 }
+
+.checkout-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+.voucher-row {
+    width: 95%;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: #fff;
+    margin-bottom: 12px;
+}
+
+.voucher-content {
+    flex: 1;
+    text-align: left;
+}
+
+.voucher-content strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.voucher-content p {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.voucher-row:hover {
+    border-color: #22c55e;
+    background: #f0fdf4;
+}
+
+.voucher-row.active {
+    border-color: #16a34a;
+    background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+}
+
+.voucher-row button {
+    min-width: 90px;
+    height: 34px;
+    border-radius: 999px;
+    border: 1.5px solid #22c55e;
+    background: #fff;
+    color: #16a34a;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.voucher-row:hover button {
+    background: #22c55e;
+    color: #fff;
+}
+
+.voucher-row.active button {
+    background: #16a34a;
+    color: #fff;
+    border-color: #16a34a;
+}
+
+/* ====PAYMENT METHOD=== */
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px 16px;
+    margin-bottom: 10px;
+
+    border: 2px solid #e5e7eb;
+    border-radius: 14px;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #fff;
+}
+
+.payment-option:hover {
+    border-color: #22c55e;
+    background: #f0fdf4;
+}
+
+.payment-option input {
+    display: none;
+}
+
+.payment-option.active {
+    border-color: #22c55e;
+    background: linear-gradient(135deg, #22c55e15, #16a34a10);
+}
+
+.payment-option span {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.payment-option span::before {
+    margin-right: 6px;
+}
+
