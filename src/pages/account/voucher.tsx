@@ -156,7 +156,7 @@ function Voucher() {
                                 {expired ? (
                                     <button className="btn-use disabled" disabled>Đã hết hạn</button>
                                 ) : (
-                                    <Link to="/checkout">
+                                    <Link to="/cart">
                                         <button className="btn-use">{voucher.discountType === "FREESHIP" ? "Dùng ngay" : "Dùng ngay"}</button>
                                     </Link>
                                 )}

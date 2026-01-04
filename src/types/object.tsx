@@ -100,8 +100,8 @@ export interface Order {
     addressId: number;
     voucherId?: string;
     noteForChef?: string;
-    methodPayment: string;
-    status: "LOADING" | "DELIVERING" | "COMPLETE" | "CANCEL";
+    methodPayment: | "CASH" | "BANK" | "MOMO" | "VNPAY";
+    status: | "WAITING_PAYMENT" | "PENDING" | "COOKING" | "DELIVERING" | "COMPLETE" | "CANCEL";
     createdAt: string;
     voucher?: Voucher;
     address?: Address;
