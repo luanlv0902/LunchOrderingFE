@@ -6,7 +6,6 @@ export interface DetailProduct {
     protein: number;
     fat: number;
     carbs: number;
-    quantity: number;
 }
 
 export interface Product {
@@ -80,21 +79,26 @@ export interface UserVoucher {
 }
 
 export interface OrderItem {
-    productId: string;
-    name: string;
-    price: number;
-    quantity: number;
+   id: string;
+   productId: string;
+   orderId: string;
+   quantity: number;
+   product?: Product;
 }
 
 export interface Order {
-    id?: number;
+    id: string;
     userId: string;
-    items: OrderItem[];
+    orderItems?: OrderItem[];
     totalPrice: number;
-    discount: number;
-    finalPrice: number;
+    discount?: number;
+    finalPrice?: number;
     addressId: number;
-    voucherCode?: string;
-    status: "PENDING" | "CONFIRMED";
+    voucherId?: string;
+    noteForChef?: string;
+    methodPayment: string;
+    status: "LOADING" | "DELIVERING" | "COMPLETE" | "CANCEL";
     createdAt: string;
+    voucher?: Voucher;
+    address?: Address;
 }

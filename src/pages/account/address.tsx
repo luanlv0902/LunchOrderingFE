@@ -3,7 +3,7 @@ import "../../styles/styles.css";
 import { api } from "../../services/api";
 import { Address as AddressType } from "../../types/object";
 import useGeoLocation from "../../components/location";
-
+import Alert from '@mui/material/Alert';
 function Address() {
     const [addresses, setAddresses] = useState<AddressType[]>([]);
     const [loading, setLoading] = useState(true);
@@ -39,6 +39,10 @@ function Address() {
     }, [locationError]);
 
     useEffect(() => {
+        if(geoError){
+            setLocationError(geoError);
+            return;
+        }
         if (!geoAddress || geoLoading || geoError || provinces.length === 0) return;
 
         const provinceName = geoAddress.province?.trim().toLowerCase() || "";

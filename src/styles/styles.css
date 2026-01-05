@@ -662,6 +662,8 @@ hr{
     color: saddlebrown;
 }
 .detailInfor{
+    display: flex;
+    text-align: left;
     font-size: 15px;
     font-weight: bold;
     color: #616161;
@@ -977,6 +979,70 @@ hr{
 
 /*ProductDetail*/
 /*HEADER*/
+/*OrderHistory*/
+.filter-history{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    align-items: center;
+    justify-content: end;
+}
+.search-history{
+    font-size: 20px;
+    width: 50%;
+    border-radius: 10px;
+    border: 1px gray solid;
+}
+.selected-history{
+    width: 50%;
+    font-size: 20px;
+    border-radius: 10px;
+}
+.labeled-box {
+    position: relative;
+    padding: 24px 20px;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    background: white;
+    margin-top: 20px;
+}
+
+.labeled-box::before {
+    content: attr(data-label);
+    position: absolute;
+    top: -12px;
+    left: 16px;
+    padding: 0 12px;
+    background: white;
+    color: black;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 20px;
+    border: 1.5px solid #3498db;
+}
+.detailOrder{
+    display: flex;
+    flex-direction: column;
+    /*align-items: end;*/
+}
+.titleDetailOrder{
+    font-weight: bold;
+}
+.cancelOrder{
+   margin: auto;
+    font-weight: bold;
+    width: 40%;
+    height: 40px;
+    border-radius: 10px;
+    color: #d62828;
+    border: none;
+    background-color: #ffc9c9;
+}
+.cancelOrder:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
+/*OrderHistory*/
 .header {
     width: 100%;
     background-color: #ffffff;

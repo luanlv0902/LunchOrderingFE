@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+
 interface Location {
     latitude: number;
     longitude: number;
@@ -64,10 +65,17 @@ export function useGeoLocation() {
             }
 
             const r = data.results[0];
+            const province = r.compound?.province || "";
+            if (!province.toLowerCase().includes("hồ chí minh") &&
+                !province.toLowerCase().includes("ho chi minh")) {
+                setError("Xin lỗi, hiện chúng tôi chỉ hỗ trợ giao hàng tại TP. Hồ Chí Minh");
+                setAddress(null);
+                return;
+            }
 
             setAddress({
                 detail: r.formatted_address,
-                province: r.compound?.province,
+                province: province,
                 district: r.compound?.district,
                 ward: r.compound?.commune,
             });

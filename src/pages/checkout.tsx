@@ -96,25 +96,25 @@ const Checkout = () => {
             return;
         }
 
-        const order: Order = {
-            userId,
-            items: cart.map(item => ({
-                productId: item.id,
-                name: item.name,
-                price: item.price,
-                quantity: item.quantity,
-            })),
-            totalPrice,
-            discount,
-            finalPrice: totalPrice - discount,
-            addressId: selectedAddressId,
-            voucherCode: voucher?.code,
-            status: "PENDING",
-            createdAt: new Date().toISOString(),
-        };
+        // const order: Order = {
+        //     userId,
+        //     items: cart.map(item => ({
+        //         productId: item.id,
+        //         name: item.name,
+        //         price: item.price,
+        //         quantity: item.quantity,
+        //     })),
+        //     totalPrice,
+        //     discount,
+        //     finalPrice: totalPrice - discount,
+        //     addressId: selectedAddressId,
+        //     voucherCode: voucher?.code,
+        //     status: "LOADING",
+        //     createdAt: new Date().toISOString(),
+        // };
 
         try {
-            await api.createOrder(order);
+            // await api.createOrder(order);
 
             if (userVoucherId) {
                 await api.useVoucher(userVoucherId);

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import {CartContext} from "../components/CartContext";
-import { Link } from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 import "../styles/styles.css";
 import {formatPrice} from "../components/formatPrice";
 
@@ -31,7 +31,9 @@ function Cart() {
                         <th>Giá</th>
                         <th>Số lượng</th>
                         <th>Thành tiền</th>
+                        {/*<th>Ghi chú</th>*/}
                         <th></th>
+
                     </tr>
                     </thead>
 
@@ -39,7 +41,10 @@ function Cart() {
                     {cart.map(item => (
                         <tr key={item.id}>
                             <td>
-                                <img src={item.img} className="cart-img" alt={item.name}/>
+                                <NavLink to={`/product/${item.id}`}>
+                                    <img src={item.img} className="cart-img" alt={item.name}/>
+                                </NavLink>
+
                             </td>
 
                             <td>{item.name}</td>
@@ -63,6 +68,7 @@ function Cart() {
                                     Xóa
                                 </button>
                             </td>
+
                         </tr>
                     ))}
                     </tbody>

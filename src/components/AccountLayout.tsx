@@ -108,7 +108,7 @@ function AccountLayout() {
                     </div>
 
                     <NavLink
-                        to="/account/order-history"
+                        to={`/account/order-history?userId=${user.id}&sort=createdAt&order=desc`}
                         className={({ isActive }) =>
                             isActive ? "menu-row menu-active" : "menu-row"
                         }

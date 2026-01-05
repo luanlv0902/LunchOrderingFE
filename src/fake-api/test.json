@@ -1,22 +1,1256 @@
 {
+  "categories": [
+    {
+      "id": "1",
+      "nameCategory": "Món nổi bật"
+    },
+    {
+      "id": "2",
+      "nameCategory": "Món cơm"
+    },
+    {
+      "id": "3",
+      "nameCategory": "Món chay"
+    },
+    {
+      "id": "4",
+      "nameCategory": "Món bún"
+    },
+    {
+      "id": "5",
+      "nameCategory": "Món thịt"
+    },
+    {
+      "id": "6",
+      "nameCategory": "Món canh"
+    },
+    {
+      "id": "7",
+      "nameCategory": "Nước uống"
+    },
+    {
+      "id": "8",
+      "nameCategory": "Món tráng miệng"
+    }
+  ],
   "products": [
     {
       "id": "1",
+      "name": "Cơm trắng",
+      "img": "https://sannhiquangninh.vn/wp-content/uploads/2024/12/com-gao-trang-1733277980707677561987.jpg",
+      "categoryId": "2",
+      "price": 15000
+    },
+    {
+      "id": "2",
       "name": "Cơm chiên trứng",
       "img": "https://cdnv2.tgdd.vn/bhx-static/bhx/News/Images/2024/11/18/1572245/hinh-bai-tin-bhx_202411181401164171.jpg",
-      "nameCategory": "Món cơm",
+      "categoryId": "2",
       "price": 25000
-    }],
-  "details": [
+    },
+    {
+      "id": "3",
+      "name": "Cơm tấm",
+      "img": "https://www.seriouseats.com/thmb/dYd_1lCRQwb2kdq_yyMgAUN0kbU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20230309-SEA-VietnameseBrokenRice-VyTran-hedenote-38b68317c3f64ffba5b664e1c22ae1a1.JPG",
+      "categoryId": "2",
+      "price": 35000
+    },
+    {
+      "id": "4",
+      "name": "Cơm gà",
+      "img": "https://icdn.dantri.com.vn/thumb_w/960/2017/com-ngon-viet-nam-2-1487129112313.jpg",
+      "categoryId": "2",
+      "price": 28000
+    },
+    {
+      "id": "5",
+      "name": "Cơm hến",
+      "img": "https://photo.znews.vn/w1920/Uploaded/kbd_bcvi/2020_10_02/ch.jpg",
+      "categoryId": "2",
+      "price": 35000
+    },
+    {
+      "id": "6",
+      "name": "Cơm chiên xào rau củ",
+      "img": "https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/kien-thuc/cach-lam-com-chien-rau-cu-chay/cach-lam-com-chien-rau-cu-chay-5.jpg",
+      "categoryId": "2",
+      "price": 40000
+    },
+    {
+      "id": "7",
+      "name": "Cơm chiên bò lúc lắc",
+      "img": "https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/com_chien_bo_luc_lac_thumb_c464dabbe4.JPG",
+      "categoryId": "2",
+      "price": 35000
+    },
+    {
+      "id": "8",
+      "name": "Cơm chiên dương châu",
+      "img": "https://congthucgiadinh.com/storage/19/01J2DPSWQCHGTKEQ4RR3YG4VP9.jpg",
+      "categoryId": "2",
+      "price": 40000
+    },
+
+    {
+      "id": "95",
+      "name": "Đậu hủ kho nước tương",
+      "img": "https://nuocmamtin.com/wp-content/uploads/2021/09/15-2.jpg",
+      "categoryId": "3",
+      "price": 25000
+    },
+    {
+      "id": "96",
+      "name": "Cháo nấm cà rốt",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/image58.png",
+      "categoryId": "3",
+      "price": 25000
+    },
+    {
+      "id": "97",
+      "name": "Nấm đông cô kho nước tương",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/image26.png",
+      "categoryId": "3",
+      "price": 35000
+    },
+    {
+      "id": "98",
+      "name": "Nấm kho tiêu",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/image8.png",
+      "categoryId": "3",
+      "price": 25000
+    },
+    {
+      "id": "99",
+      "name": "Nấm kim châm xào",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/image54.png",
+      "categoryId": "3",
+      "price": 25000
+    },
+    {
+      "id": "100",
+      "name": "Mì xào nấm chay",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/image20.png",
+      "categoryId": "3",
+      "price": 35000
+    },
+    {
+      "id": "101",
+      "name": "Nấm rơm chiên giòn",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/image43.png",
+      "categoryId": "3",
+      "price": 25000
+    },
+    {
+      "id": "102",
+      "name": "Đậu hủ kho rau củ",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/image50.png",
+      "categoryId": "3",
+      "price": 35000
+    },
+    {
+      "id": "103",
+      "name": "Đậu hủ hấp muối tiêu rau răm",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/image48.png",
+      "categoryId": "3",
+      "price": 25000
+    },
+    {
+      "id": "104",
+      "name": "Canh rong biển đậu hủ non",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/Article3407-636235477486838769.jpg",
+      "categoryId": "3",
+      "price": 30000
+    },
+    {
+      "id": "105",
+      "name": "Đậu hủ sốt nấm đông cô",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/image5.png",
+      "categoryId": "3",
+      "price": 45000
+    },
+    {
+      "id": "106",
+      "name": "Chả giò chay",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/image10.png",
+      "categoryId": "3",
+      "price": 30000
+    },
+    {
+      "id": "107",
+      "name": "Đậu hủ sốt cà chua",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/image3.png",
+      "categoryId": "3",
+      "price": 35000
+    },
+    {
+      "id": "108",
+      "name": "Giá xào đậu hủ",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/image52.png",
+      "categoryId": "3",
+      "price": 25000
+    },
+    {
+      "id": "109",
+      "name": "Đậu hủ xào rau củ",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/image30.png",
+      "categoryId": "3",
+      "price": 35000
+    },
+    {
+      "id": "110",
+      "name": "Đậu hủ chiên sả ớt",
+      "img": "https://statics.vincom.com.vn/xu-huong/0-0-0-0-mon-chay-ngon/image2.png",
+      "categoryId": "3",
+      "price": 25000
+    },
+    {
+      "id": "111",
+      "name": "Bún bò Huế",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-bo-hue-1.jpg",
+      "categoryId": "4",
+      "price": 48000
+    },
+    {
+      "id": "112",
+      "name": "Bún riêu cua",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-rieu-cua-2.jpg",
+      "categoryId": "4",
+      "price": 38000
+    },
+    {
+      "id": "113",
+      "name": "Bún đỏ",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-do.jpg",
+      "categoryId": "4",
+      "price": 40000
+    },
+    {
+      "id": "114",
+      "name": "Bún giò heo",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-gio-heo.jpg",
+      "categoryId": "4",
+      "price": 58000
+    },
+    {
+      "id": "115",
+      "name": "Bún mắm",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-mam.jpg",
+      "categoryId": "4",
+      "price": 68000
+    },
+    {
+      "id": "116",
+      "name": "Bún ốc",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-oc.jpg",
+      "categoryId": "4",
+      "price": 30000
+    },
+    {
+      "id": "117",
+      "name": "Bún cá Châu Đốc",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-ca-chau-doc.jpg",
+      "categoryId": "4",
+      "price": 50000
+    },
+    {
+      "id": "118",
+      "name": "Bún gạo lứt",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-gao-lut.jpg",
+      "categoryId": "4",
+      "price": 40000
+    },
+    {
+      "id": "119",
+      "name": "Bún cá",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-ca.jpg",
+      "categoryId": "4",
+      "price": 40000
+    },
+    {
+      "id": "120",
+      "name": "Bún mọc",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-moc.jpg",
+      "categoryId": "4",
+      "price": 58000
+    },
+    {
+      "id": "121",
+      "name": "Bún thang",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-thang.jpg",
+      "categoryId": "4",
+      "price": 30000
+    },
+    {
+      "id": "123",
+      "name": "Bún măng vịt",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-mang-vit.jpg",
+      "categoryId": "4",
+      "price": 50000
+    },
+    {
+      "id": "124",
+      "name": "Bún sườn chua",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-suon-chua.jpg",
+      "categoryId": "4",
+      "price": 38000
+    },
+    {
+      "id": "125",
+      "name": "Bún tôm",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-tom.jpg",
+      "categoryId": "4",
+      "price": 48000
+    },
+    {
+      "id": "126",
+      "name": "Bún dọc mùng",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-doc-mung.jpg",
+      "categoryId": "4",
+      "price": 40000
+    },
+    {
+      "id": "127",
+      "name": "Bún gà",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/bun-ga.jpg",
+      "categoryId": "4",
+      "price": 54000
+    },
+    {
+      "id": "128",
+      "name": "Thịt bọc sả chiên",
+      "img": "https://cdn.tgdd.vn/2021/03/CookProduct/Thitbocsachien(2)-1200x676.jpg",
+      "categoryId": "5",
+      "price": 25000
+    },
+    {
+      "id": "129",
+      "name": "Dưa chua xào thịt bò",
+      "img": "https://cdn.tgdd.vn/2020/09/CookRecipe/Avatar/dua-chua-xao-thit-bo-thumbnail-2.jpg",
+      "categoryId": "5",
+      "price": 45000
+    },
+    {
+      "id": "130",
+      "name": "Sườn kho nước dừa",
+      "img": "https://cdn.tgdd.vn/2020/10/CookProduct/thumbcn-1200x676-13.jpg",
+      "categoryId": "5",
+      "price": 35000
+    },
+    {
+      "id": "131",
+      "name": "Thịt ba chỉ kho tiêu",
+      "img": "https://cdn.tgdd.vn/2021/01/CookProduct/Thitkhotieu-1200x676.jpg",
+      "categoryId": "5",
+      "price": 35000
+    },
+    {
+      "id": "132",
+      "name": "Chả giò",
+      "img": "https://cdn.tgdd.vn/2021/09/CookProduct/Chagiore-1200x676.jpg",
+      "categoryId": "5",
+      "price": 45000
+    },
+    {
+      "id": "133",
+      "name": "Sườn non ram mặn ngọt",
+      "img": "https://cdn2.fptshop.com.vn/unsafe/800x0/cong_thuc_mon_heo_3_f764817d65.png",
+      "categoryId": "5",
+      "price": 35000
+    },
+    {
+      "id": "134",
+      "name": "Bánh gối nhân thịt",
+      "img": "https://cdn.tgdd.vn/2023/04/CookRecipe/Avatar/Thiet-ke-chua-co-ten--72-.jpg",
+      "categoryId": "5",
+      "price": 45000
+    },
+    {
+      "id": "135",
+      "name": "Nem chua",
+      "img": "https://cdn2.fptshop.com.vn/unsafe/800x0/cong_thuc_mon_heo_5_da386f053b.png",
+      "categoryId": "5",
+      "price": 25000
+    },
+    {
+      "id": "136",
+      "name": "Thịt heo xào dứa chua ngọt",
+      "img": "https://cdn2.fptshop.com.vn/unsafe/cong_thuc_mon_heo_6830c5b112.jpg",
+      "categoryId": "5",
+      "price": 45000
+    },
+    {
+      "id": "137",
+      "name": "Bánh tráng cuốn thịt heo",
+      "img": "https://cdn2.fptshop.com.vn/unsafe/800x0/cong_thuc_mon_heo_6_e36de478fa.png",
+      "categoryId": "5",
+      "price": 125000
+    },
+    {
+      "id": "138",
+      "name": "Sườn non sốt me chua ngọt",
+      "img": "https://scontent.fsgn2-6.fna.fbcdn.net/v/t39.30808-6/487533428_1209551917465936_7783465795413420200_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=ew35y71a3pcQ7kNvwEstI84&_nc_oc=Adk5cwuQb6Xz_3sGNgCihXkp5hdQ9cUHngi2bbvyuNQMQE1LDUMxK44_bq0a7xQB-ho&_nc_zt=23&_nc_ht=scontent.fsgn2-6.fna&_nc_gid=YeUrtJGqqtQnutjCsn-Ixg&oh=00_Afm_YAaAtt3T-7k8SI_ZTDkOLWBcMDmeyViULhU0kKdrNA&oe=695A60A0",
+      "categoryId": "5",
+      "price": 45000
+    },
+    {
+      "id": "139",
+      "name": "Sườn xào chua ngọt",
+      "img": "https://cdn2.fptshop.com.vn/unsafe/cong_thuc_mon_heo_9_2087427843.png",
+      "categoryId": "5",
+      "price": 35000
+    },
+    {
+      "id": "140",
+      "name": "Ba chỉ rang cháy cạnh",
+      "img": "https://cdn2.fptshop.com.vn/unsafe/800x0/cong_thuc_mon_heo_10_c0bf6b303c.png",
+      "categoryId": "5",
+      "price": 30000
+    },
+    {
+      "id": "141",
+      "name": "Thịt heo xào sả ớt",
+      "img": "https://cdn2.fptshop.com.vn/unsafe/cong_thuc_mon_heo_11_0d34e87a2b.png",
+      "categoryId": "5",
+      "price": 35000
+    },
+    {
+      "id": "142",
+      "name": "Thịt heo kho mắm ruốc",
+      "img": "https://cdn2.fptshop.com.vn/unsafe/800x0/cong_thuc_mon_heo_14_2436c9ce7a.png",
+      "categoryId": "5",
+      "price": 35000
+    },
+    {
+      "id": "143",
+      "name": "Đâu hủ dồn thịt sốt cà",
+      "img": "https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/487091489_1209552000799261_8278084382841620163_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=aa7b47&_nc_ohc=ztcEmA6HQe4Q7kNvwFYLAUk&_nc_oc=AdnsQa3zBmiZ-_98JrjDoV2IDCu27iH6vdXNdHknzgkcwylvUAXeNzWbenCNTIZN8xI&_nc_zt=23&_nc_ht=scontent.fsgn2-5.fna&_nc_gid=8pM50BKoItzfk9er07Zjpw&oh=00_Afn4d3vdiYp0v1b3mS4YkcPbHRIgw3H7skKB-LMGDGistw&oe=695A3B4A",
+      "categoryId": "5",
+      "price": 35000
+    },
+    {
+      "id": "144",
+      "name": "Tôm khô nấu với bầu",
+      "img": "https://haisanphucgia.com/wp-content/uploads/2018/06/tom-kho-nau-canh-gi-ngon-1.jpg",
+      "categoryId": "6",
+      "price": 20000
+    },
+    {
+      "id": "145",
+      "name": "Canh cá thác lác",
+      "img": "https://cdn.tgdd.vn/2021/06/content/10-800x500-2.jpg",
+      "categoryId": "6",
+      "price": 45000
+    },
+    {
+      "id": "146",
+      "name": "Canh hoa thiên lý",
+      "img": "https://cdn.tgdd.vn/2021/06/content/12-800x500-4.jpg",
+      "categoryId": "6",
+      "price": 30000
+    },
+    {
+      "id": "147",
+      "name": "Canh hến nấu khế chua",
+      "img": "https://cdn.tgdd.vn/2021/06/content/13-800x500-3.jpg",
+      "categoryId": "6",
+      "price": 35000
+    },
+    {
+      "id": "148",
+      "name": "Canh hẹ đậu phụ",
+      "img": "https://cdn.tgdd.vn/2021/06/content/15-800x500-1.jpg",
+      "categoryId": "6",
+      "price": 20000
+    },
+    {
+      "id": "149",
+      "name": "Canh khổ qua (mướp đắng)",
+      "img": "https://cdn.tgdd.vn/2021/06/content/2-800x500-6.jpg",
+      "categoryId": "6",
+      "price": 20000
+    },
+    {
+      "id": "150",
+      "name": "Canh trứng cà chua",
+      "img": "https://cdn.tgdd.vn/2021/06/content/3-800x500-10.jpg",
+      "categoryId": "6",
+      "price": 20000
+    },
+    {
+      "id": "151",
+      "name": "Canh gà lá giang",
+      "img": "https://cdn.tgdd.vn/2021/06/content/4-800x500-6.jpg",
+      "categoryId": "6",
+      "price": 25000
+    },
+    {
+      "id": "152",
+      "name": "Canh bầu nấu hến",
+      "img": "https://cdn.tgdd.vn/2021/06/content/5-800x500-5.jpg",
+      "categoryId": "6",
+      "price": 30000
+    },
+    {
+      "id": "153",
+      "name": "Canh bí đao nấu xương",
+      "img": "https://cdn.tgdd.vn/2021/06/content/6-800x500-5.jpg",
+      "categoryId": "6",
+      "price": 40000
+    },
+    {
+      "id": "154",
+      "name": "Canh cua mồng tơi",
+      "img": "https://cdn.tgdd.vn/2021/06/content/7-800x500-2.jpg",
+      "categoryId": "6",
+      "price": 30000
+    },
+    {
+      "id": "155",
+      "name": "Canh rau muống nấu tôm",
+      "img": "https://cdn.tgdd.vn/2021/06/content/8-800x500-3.jpg",
+      "categoryId": "6",
+      "price": 25000
+    },
+    {
+      "id": "156",
+      "name": "Canh rau dền thịt băm",
+      "img": "https://cdn.tgdd.vn/2021/06/content/9-800x500-2.jpg",
+      "categoryId": "6",
+      "price": 25000
+    },
+    {
+      "id": "157",
+      "name": "Canh sấu nấu thịt băm",
+      "img": "https://cdn.tgdd.vn/2021/06/content/4a-800x500-1.jpg",
+      "categoryId": "6",
+      "price": 30000
+    },
+    {
+      "id": "158",
+      "name": "Canh dưa chua sườn heo",
+      "img": "https://cdn.tgdd.vn/2021/06/content/14-800x500-2.jpg",
+      "categoryId": "6",
+      "price": 40000
+    },
+    {
+      "id": "159",
+      "name": "Canh nấm rơm nấu bí đỏ",
+      "img": "https://cdn.tgdd.vn/2021/06/content/16-800x500-2.jpg",
+      "categoryId": "6",
+      "price": 30000
+    },
+    {
+      "id": "161",
+      "name": "Bánh flan",
+      "img": "https://monngonmoingay.com/wp-content/uploads/2024/08/cach-lam-banh-flan-bang-noi-chien-khong-dau-1-1.jpg",
+      "categoryId": "8",
+      "price": 15000
+    },
+    {
+      "id": "162",
+      "name": "Chè đậu đỏ",
+      "img": "https://cdn.tgdd.vn/Files/2021/08/20/1376549/top-15-mon-trang-mieng-viet-nam-ngon-nhat-ma-ban-nen-biet-202108201444523994.jpg",
+      "categoryId": "8",
+      "price": 20000
+    },
+    {
+      "id": "163",
+      "name": "Rau câu",
+      "img": "https://giadinh.mediacdn.vn/thumb_w/640/296230595582509056/2021/8/25/photo-2-16298871993431706464007.jpeg",
+      "categoryId": "8",
+      "price": 20000
+    },
+    {
+      "id": "164",
+      "name": "Chè trôi nước",
+      "img": "https://static.kinhtedouong.vn/w640/images/upload/12022024/d9954039-58bd-4293-b898-d567ab8b69ad_5a446431.jpg",
+      "categoryId": "8",
+      "price": 25000
+    },
+    {
+      "id": "165",
+      "name": "Chè ba màu",
+      "img": "https://media.baoquangninh.vn/thumb/600/upload/image/202412/thumbnail/2291349_2291344_f1bb187f7d334c0a30a76c2b7d45c37b_09423912.jpg",
+      "categoryId": "8",
+      "price": 20000
+    },
+    {
+      "id": "166",
+      "name": "Sữa chua trái cây",
+      "img": "https://file.hstatic.net/200000721249/file/mon_trang_mieng_sua_chua_trai_cay_7d58be3d434848709a1c38419e800078.jpg",
+      "categoryId": "8",
+      "price": 25000
+    },
+    {
+      "id": "167",
+      "name": "Chè vải hạt sen",
+      "img": "https://cdn.tgdd.vn/Files/2021/08/20/1376549/top-15-mon-trang-mieng-viet-nam-ngon-nhat-ma-ban-nen-biet-202108201445168873.jpg",
+      "categoryId": "8",
+      "price": 35000
+    },
+    {
+      "id": "168",
+      "name": "Bánh chuối hấp",
+      "img": "https://cdn.tgdd.vn/Files/2021/08/20/1376549/top-15-mon-trang-mieng-viet-nam-ngon-nhat-ma-ban-nen-biet-202108201446325834.jpg",
+      "categoryId": "8",
+      "price": 25000
+    },
+    {
+      "id": "169",
+      "name": "Chè trái cây",
+      "img": "https://cdn.tgdd.vn/Files/2021/08/20/1376549/top-15-mon-trang-mieng-viet-nam-ngon-nhat-ma-ban-nen-biet-202108201447471034.jpg",
+      "categoryId": "8",
+      "price": 35000
+    },
+    {
+      "id": "170",
+      "name": "Chè chuối",
+      "img": "https://exotrails.com/wp-content/uploads/2024/11/vietnamese-dessert-8.jpg",
+      "categoryId": "8",
+      "price": 25000
+    },
+    {
+      "id": "171",
+      "name": "Chuối nếp nướng",
+      "img": "https://cafefcdn.com/203337114487263232/2025/10/31/chuoi-nep-nuong-banana-grilled-sweet-rice-1761730678509-1761730678763103461571-1761874732789-17618747330441688234620.jpg",
+      "categoryId": "8",
+      "price": 25000
+    },
+    {
+      "id": "172",
+      "name": "Chè mè đen",
+      "img": "https://cdn3.ivivu.com/2023/03/mon-trang-mieng-sai-gon-ivivu-7.jpg",
+      "categoryId": "8",
+      "price": 15000
+    },
+    {
+      "id": "173",
+      "name": "Chè bắp",
+      "img": "https://cdn.tgdd.vn/2021/09/CookProduct/1-1200x676-11.jpg",
+      "categoryId": "8",
+      "price": 20000
+    },
+    {
+      "id": "174",
+      "name": "Chè dưỡng nhan",
+      "img": "https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/473673IEX/che-sam-436857.jpg",
+      "categoryId": "8",
+      "price": 45000
+    },
+    {
+      "id": "175",
+      "name": "Chè đậu đen",
+      "img": "https://cdn.tgdd.vn/2021/11/CookDish/cach-lam-banh-pizza-khoai-lang-don-gian-it-calo-vua-ngon-vua-avt-1200x676-2.jpg",
+      "categoryId": "8",
+      "price": 25000
+    },
+    {
+      "id": "176",
+      "name": "Chè thập cẩm",
+      "img": "https://www.btaskee.com/wp-content/uploads/2023/04/che-thap-cam-cac-loai-dau.jpeg",
+      "categoryId": "8",
+      "price": 25000
+    },
+    {
+      "id": "177",
+      "name": "Soda quýt",
+      "img": "https://product.hstatic.net/200000140863/product/soda_quyt_bf21b39967fa4cf8b3ac2fb675a9aeef_grande.png",
+      "categoryId": "7",
+      "price": 25000
+    },
+    {
+      "id": "178",
+      "name": "Nước cam",
+      "img": "https://png.pngtree.com/png-clipart/20250614/original/pngtree-fresh-orange-juice-in-a-plastic-cup-png-image_21191516.png",
+      "categoryId": "7",
+      "price": 25000
+    },
+    {
+      "id": "179",
+      "name": "Cà phê sữa đá",
+      "img": "https://product.hstatic.net/200000140863/product/ca_phe_sua_e38d1f6253284b4f806b128ed09b9401_large.png",
+      "categoryId": "7",
+      "price": 35000
+    },
+    {
+      "id": "180",
+      "name": "Trà sữa",
+      "img": "https://product.hstatic.net/200000140863/product/sua_tuoi_duong_den_032cdd2dd0f94252959c028b23aba7ea_large.png",
+      "categoryId": "7",
+      "price": 45000
+    },
+    {
+      "id": "181",
+      "name": "Matcha latte",
+      "img": "https://product.hstatic.net/200000140863/product/matcha_latte__89c8bcc12ec9430483d546d4f9f7f4f6_large.png",
+      "categoryId": "7",
+      "price": 45000
+    },
+    {
+      "id": "182",
+      "name": "Trà đào",
+      "img": "https://product.hstatic.net/200000140863/product/tra_dao_15b5991c67c048b6b1ae168d185a2d30_large.png",
+      "categoryId": "7",
+      "price": 49000
+    },
+    {
+      "id": "183",
+      "name": "Trà quýt hoa nhài",
+      "img": "https://product.hstatic.net/200000140863/product/tra_quyt_2b8885747aef4663bc49dd836226b703_large.png",
+      "categoryId": "7",
+      "price": 25000
+    },
+    {
+      "id": "184",
+      "name": "Soda chanh",
+      "img": "https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ab012bdc46c3e30d85e1b.png&w=3840&q=75",
+      "categoryId": "7",
+      "price": 20000
+    },
+    {
+      "id": "185",
+      "name": "Sinh tố xoài",
+      "img": "https://dayphache.edu.vn/wp-content/uploads/2016/02/cach-lam-sinh-to-xoai-sua-dac.jpg",
+      "categoryId": "7",
+      "price": 25000
+    },
+    {
+      "id": "186",
+      "name": "Đá chanh",
+      "img": "https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ab013bdc46d390039cccd.png&w=3840&q=75",
+      "categoryId": "7",
+      "price": 25000
+    },
+    {
+      "id": "187",
+      "name": "Nước ép cóc",
+      "img": "https://cdn-together.hellohealthgroup.com/2025/06/1750407762_68551a5262cf73.03218056",
+      "categoryId": "7",
+      "price": 25000
+    },
+    {
+      "id": "188",
+      "name": "Nước mơ",
+      "img": "https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ab013bdc46c3e30d85e1c.png&w=3840&q=75",
+      "categoryId": "7",
+      "price": 25000
+    },
+    {
+      "id": "189",
+      "name": "Nước dâu tằm",
+      "img": "https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ab016bdc46e2ed06c83b1.png&w=3840&q=75",
+      "categoryId": "7",
+      "price": 35000
+    },
+    {
+      "id": "190",
+      "name": "Nha đam hạt chia",
+      "img": "https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F674ab017bdc46e2ed06c83b5.png&w=3840&q=75",
+      "categoryId": "7",
+      "price": 30000
+    },
+    {
+      "id": "191",
+      "name": "Nước ép lựu",
+      "img": "https://congnghenhat.com/wp-content/uploads/2024/09/nuoc-ep-luu.jpg",
+      "categoryId": "7",
+      "price": 25000
+    },
+    {
+      "id": "192",
+      "name": "Soda chanh sả gừng",
+      "img": "https://comnieuthienly.com/_next/image?url=https%3A%2F%2Fhos.comnieuthienly.com%2Fimages%2Fwebp%2F68ef0a94bdc46c1b2c9adbd2.png&w=3840&q=75",
+      "categoryId": "7",
+      "price": 25000
+    },
+    {
+      "id": "193",
+      "name": "Chả rươi",
+      "img": "https://n7media.coolmate.me/image/September2023/mon-an-ngon-truyen-thong-viet-nam-de-lam_347.jpg",
+      "categoryId": "1",
+      "price": 35000
+    },
+    {
+      "id": "194",
+      "name": "Gỏi cuốn",
+      "img": "https://n7media.coolmate.me/image/September2023/mon-an-ngon-truyen-thong-viet-nam-de-lam_830.jpg",
+      "categoryId": "1",
+      "price": 25000
+    },
+    {
+      "id": "195",
+      "name": "Bún đậu mắm tôm",
+      "img": "https://hunghy.com.vn/assets/upload/hunghy/res/tin-tuc/mon-an-viet-ngon-8.jpg",
+      "categoryId": "1",
+      "price": 125000
+    },
+    {
+      "id": "196",
+      "name": "Bánh xèo",
+      "img": "https://media-int.vnecdn.net/3562759/data/images/2017/03/31/banh-xeo_1490966768_VnEx_mobile_600x0.jpg",
+      "categoryId": "1",
+      "price": 25000
+    },
+    {
+      "id": "197",
+      "name": "Phở bò",
+      "img": "https://khaisanfood.vn/wp-content/uploads/2025/05/thumb-12-1.jpg",
+      "categoryId": "1",
+      "price": 45000
+    },
+    {
+      "id": "198",
+      "name": "Hủ tiếu",
+      "img": "https://khaisanfood.vn/wp-content/uploads/2025/05/Buoc-8-Thanh-pham-1-8-8366-1684125654-1.jpg",
+      "categoryId": "1",
+      "price": 55000
+    },
+    {
+      "id": "199",
+      "name": "Bánh hỏi",
+      "img": "https://images.vietnamtourism.gov.vn/vn/images/2023/thang_9/mg2.jpg",
+      "categoryId": "1",
+      "price": 35000
+    },
+    {
+      "id": "200",
+      "name": "Thịt kho trứng",
+      "img": "https://matika.vn/wp-content/uploads/2022/12/thit-kho-hot-vit-mon-ngon-ngay-tet.jpg",
+      "categoryId": "1",
+      "price": 120000
+    }
+  ],
+  "detailProducts": [
     {
       "id": "1",
+      "productId": "1",
       "ingredients": "Cơm, trứng, hành lá",
       "calories": 400,
       "protein": 100,
       "fat": 200,
       "carbs": 100,
-      "quantity": 10,
-      "productId": "1"
+      "quantity": 10
+    }
+  ],
+  "comments": [
+    {
+      "id": "3",
+      "userId": "2",
+      "detailProductId": "1",
+      "rateStar": 5,
+      "comment": "Hôm nay nấu rất vừa miệng.",
+      "dateComment": "2025-12-05"
+    },
+    {
+      "id": "4",
+      "userId": "2",
+      "detailProductId": "1",
+      "rateStar": 4,
+      "comment": "Giao hàng nhanh, món ăn còn nóng.",
+      "dateComment": "2025-12-07"
+    },
+    {
+      "id": "5",
+      "userId": "2",
+      "detailProductId": "1",
+      "rateStar": 3,
+      "comment": "Hôm nay cơm hơi khô so với mọi lần.",
+      "dateComment": "2025-12-09"
+    },
+    {
+      "id": "6",
+      "userId": "2",
+      "detailProductId": "1",
+      "rateStar": 4,
+      "comment": "Chất lượng đã cải thiện hơn.",
+      "dateComment": "2025-12-11"
+    },
+    {
+      "id": "7",
+      "userId": "2",
+      "detailProductId": "1",
+      "rateStar": 5,
+      "comment": "Rất ngon, đúng khẩu vị của mình.",
+      "dateComment": "2025-12-13"
+    },
+    {
+      "id": "8",
+      "userId": "2",
+      "detailProductId": "1",
+      "rateStar": 5,
+      "comment": "Ăn nhiều lần vẫn thấy ngon.",
+      "dateComment": "2025-12-15"
+    },
+    {
+      "id": "9",
+      "userId": "2",
+      "detailProductId": "1",
+      "rateStar": 4,
+      "comment": "Ổn định, phù hợp cho bữa trưa.",
+      "dateComment": "2025-12-17"
+    },
+    {
+      "userId": "3",
+      "detailProductId": "1",
+      "rateStar": 5,
+      "comment": "Ngon",
+      "dateComment": "2025-12-24",
+      "id": "HCXOE8S"
+    },
+    {
+      "userId": "3",
+      "detailProductId": "1",
+      "rateStar": 4,
+      "comment": "Ngon lắm luôn",
+      "dateComment": "2025-12-24",
+      "id": "lYmLOYK"
+    },
+    {
+      "userId": "3",
+      "detailProductId": "193",
+      "rateStar": 4,
+      "comment": "Ngon lắm",
+      "dateComment": "2026-01-03",
+      "id": "TOgWCRM"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "123456",
+      "fullName": "Admin",
+      "role": "ADMIN"
+    },
+    {
+      "id": "2",
+      "username": "thien",
+      "password": "123",
+      "fullName": "Nguyễn Thiện",
+      "role": "USER",
+      "phone": "0123456789",
+      "birthday": "2025-12-05",
+      "gender": "Khác",
+      "avatar": "https://png.pngtree.com/png-vector/20230831/ourmid/pngtree-man-avatar-image-for-profile-png-image_9197908.png"
+    },
+    {
+      "id": "3",
+      "username": "user",
+      "password": "123",
+      "fullName": "Võ Phước Lộc",
+      "role": "USER",
+      "phone": "0123456789",
+      "birthday": "2025-12-05",
+      "gender": "Khác",
+      "avatar": "https://minotar.net/armor/bust/mhf_steve/500.png"
+    },
+    {
+      "id": "d066",
+      "username": "phuoclocgg123",
+      "password": "123",
+      "phone": "0346058843",
+      "fullName": "PhuocLoc",
+      "role": "USER",
+      "birthday": "2004-07-10",
+      "gender": "Khác",
+      "avatar": ""
+    },
+    {
+      "username": "vanluanpv",
+      "password": "vanluanpv",
+      "phone": "0971649429",
+      "fullName": "Lê Văn Luận",
+      "role": "USER",
+      "id": "X2A_Kmd",
+      "birthday": "2004-02-09",
+      "gender": "Nam",
+      "avatar": ""
+    }
+  ],
+  "addresses": [
+    {
+      "receiverName": "Phuoc Loc",
+      "phone": "0123456789",
+      "province": "Cần Thơ",
+      "district": "Huyện Cờ Đỏ",
+      "ward": "Thị trấn Cờ Đỏ",
+      "detail": "123 Nguyễn Huệ",
+      "isDefault": false,
+      "userId": "3",
+      "id": 11
+    },
+    {
+      "receiverName": "Phuoc Loc",
+      "phone": "0123456789",
+      "province": "Bình Dương",
+      "district": "Thành phố Dĩ An",
+      "ward": "Phường Đông Hòa",
+      "detail": "Nhà trọ cô lý, Võ thị dung, Long Thạnh Mỹ, Thủ Đức, Hồ Chí Minh 00700",
+      "isDefault": true,
+      "userId": "3",
+      "id": 13
+    },
+    {
+      "receiverName": "Loc",
+      "phone": "0813556473",
+      "province": "Hồ Chí Minh",
+      "district": "Quận 9",
+      "ward": "Phường Tân Phú",
+      "detail": "Số 16, Đường 120",
+      "isDefault": true,
+      "userId": "d066",
+      "id": 14
+    },
+    {
+      "receiverName": "Võ Phước Lộc",
+      "phone": "0813556473",
+      "province": "Hồ Chí Minh",
+      "district": "Quận 6",
+      "ward": "Phường 6",
+      "detail": "319/1 Nguyen Thi Minh Khai",
+      "isDefault": false,
+      "userId": "d066",
+      "id": 15
+    },
+    {
+      "receiverName": "Thiện",
+      "phone": "0123456789",
+      "province": "Hồ Chí Minh",
+      "district": "Quận Thủ Đức",
+      "ward": "Phường Linh Xuân",
+      "detail": "Services Hub Thủ Đức, 18/2C QL1A, Linh Xuân, Thủ Đức, Hồ Chí Minh",
+      "isDefault": false,
+      "userId": "2",
+      "id": 16
+    },
+    {
+      "receiverName": "Lê Văn Luận",
+      "phone": "0971649429",
+      "province": "Hồ Chí Minh",
+      "district": "Quận Thủ Đức",
+      "ward": "Phường Linh Xuân",
+      "detail": "Services Hub Thủ Đức, 18/2C QL1A, Linh Xuân, Thủ Đức, Hồ Chí Minh",
+      "isDefault": true,
+      "userId": "X2A_Kmd",
+      "id": 17
+    }
+  ],
+  "vouchers": [
+    {
+      "id": 1,
+      "code": "FOOD20",
+      "title": "Giảm 20%",
+      "description": "Giảm 20% tối đa 100k",
+      "discountType": "PERCENT",
+      "discountValue": 20,
+      "maxDiscount": 100000,
+      "minOrder": 150000,
+      "expireDate": "2025-12-31",
+      "quantity": 2
+    },
+    {
+      "id": 3,
+      "code": "FOOD",
+      "title": "Giảm 20%",
+      "description": "Giảm 20% cho đơn từ 0K",
+      "discountType": "PERCENT",
+      "discountValue": 20,
+      "maxDiscount": 100000,
+      "minOrder": 0,
+      "expireDate": "2026-12-31",
+      "quantity": 100
+    },
+    {
+      "id": 2,
+      "code": "FREESHIP",
+      "title": "Giảm 5k",
+      "description": "Giảm 5.000đ cho mọi đơn",
+      "discountType": "FIXED",
+      "discountValue": 5000,
+      "minOrder": 0,
+      "expireDate": "2025-12-20",
+      "quantity": 200
+    },
+    {
+      "id": 4,
+      "code": "TET2026",
+      "title": "Giảm 5k",
+      "description": "Giảm 5.000đ cho mọi đơn",
+      "discountType": "PERCENT",
+      "discountValue": 5,
+      "minOrder": 0,
+      "expireDate": "2025-12-31",
+      "quantity": 100
+    },
+    {
+      "id": 5,
+      "code": "SINHNHAT5TUOI",
+      "title": "Giảm 5k",
+      "description": "Giảm 5.000đ cho mọi đơn",
+      "discountType": "FIXED",
+      "discountValue": 5000,
+      "minOrder": 0,
+      "expireDate": "2025-12-31",
+      "quantity": 100
+    },
+    {
+      "id": 6,
+      "code": "FREESHIP2026",
+      "title": "Miễn phí vận chuyển",
+      "description": "Miễn phí vận chuyển cho mọi đơn hàng",
+      "discountType": "FREESHIP",
+      "discountValue": 0,
+      "minOrder": 0,
+      "expireDate": "2025-12-31",
+      "quantity": 100
+    },
+    {
+      "id": 7,
+      "code": "FREESHIP2",
+      "title": "Miễn phí vận chuyển",
+      "description": "Miễn phí vận chuyển cho mọi đơn hàng",
+      "discountType": "FREESHIP",
+      "discountValue": 0,
+      "minOrder": 0,
+      "expireDate": "2026-1-1",
+      "quantity": 100
+    },
+    {
+      "id": 8,
+      "code": "TETTAY2026",
+      "title": "Giảm 20% ",
+      "description": "Giảm 20% cho đơn từ 50k",
+      "discountType": "PERCENT",
+      "discountValue": 20,
+      "maxDiscount": 10000,
+      "minOrder": 50000,
+      "expireDate": "2026-1-1",
+      "quantity": 100
+    }
+  ],
+  "userVouchers": [
+    {
+      "userId": "3",
+      "voucherId": 1,
+      "code": "FOOD20",
+      "used": false,
+      "id": 3
+    },
+    {
+      "userId": "3",
+      "voucherId": 2,
+      "code": "FREESHIP",
+      "used": false,
+      "id": 4
+    },
+    {
+      "userId": "3",
+      "voucherId": 3,
+      "code": "FOOD",
+      "used": false,
+      "id": 5
+    },
+    {
+      "userId": "2",
+      "voucherId": 3,
+      "code": "FOOD",
+      "used": false,
+      "id": 6
+    },
+    {
+      "userId": "3",
+      "voucherId": 4,
+      "code": "Voucher",
+      "used": false,
+      "id": 8
+    },
+    {
+      "userId": "d066",
+      "voucherId": 3,
+      "code": "FOOD",
+      "used": false,
+      "id": 9
+    },
+    {
+      "userId": "d066",
+      "voucherId": 1,
+      "code": "FOOD20",
+      "used": false,
+      "id": 10
+    },
+    {
+      "userId": "d066",
+      "voucherId": 6,
+      "code": "FREESHIP2026",
+      "used": false,
+      "id": 11
+    },
+    {
+      "userId": "3",
+      "voucherId": 6,
+      "code": "FREESHIP2026",
+      "used": false,
+      "id": 12
+    },
+    {
+      "userId": "d066",
+      "voucherId": 7,
+      "code": "FREESHIP2",
+      "used": false,
+      "id": 13
+    },
+    {
+      "userId": "d066",
+      "voucherId": 8,
+      "code": "TETTAY2026",
+      "used": false,
+      "id": 14
+    },
+    {
+      "userId": "3",
+      "voucherId": 8,
+      "code": "TETTAY2026",
+      "used": false,
+      "id": 15
+    },
+    {
+      "userId": "3",
+      "voucherId": 7,
+      "code": "FREESHIP2",
+      "used": false,
+      "id": 16
+    }
+  ],
+  "orders": [
+    {
+      "userId": "X2A_Kmd",
+      "items": [
+        {
+          "productId": "193",
+          "name": "Chả rươi",
+          "price": 35000,
+          "quantity": 1
+        },
+        {
+          "productId": "12",
+          "name": "Nước cam",
+          "price": 25000,
+          "quantity": 1
+        },
+        {
+          "productId": "13",
+          "name": "Bánh flan",
+          "price": 15000,
+          "quantity": 2
+        }
+      ],
+      "totalPrice": 90000,
+      "discount": 0,
+      "finalPrice": 90000,
+      "addressId": 17,
+      "status": "PENDING",
+      "createdAt": "2026-01-02T17:11:29.667Z",
+      "id": 1
     }
   ]
 }
