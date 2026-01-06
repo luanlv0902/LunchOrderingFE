@@ -1029,7 +1029,7 @@ hr{
     font-weight: bold;
 }
 .cancelOrder{
-   margin: auto;
+    margin: auto;
     font-weight: bold;
     width: 40%;
     height: 40px;
@@ -3847,6 +3847,7 @@ hr{
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    margin-top: 15px;
 }
 
 .btn-place-order:hover {
@@ -3994,3 +3995,48 @@ hr{
     margin-right: 6px;
 }
 
+.btn-add-address {
+    position: relative;
+    left: 300px;
+    bottom: 35px;
+    border-radius: 5px;
+    border: 1px solid #9c9a9a;
+    background-color: white;
+    padding: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.btn-add-address:hover {
+    background-color: #f2f2f2;
+}
+
+.note-order {
+    margin-top: 12px;
+    font-weight: 600;
+    color: #333;
+}
+
+.order-note {
+    width: 90%;
+    margin-top: 6px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    font-family: inherit;
+    resize: none;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: #fff;
+}
+
+/* Focus */
+.order-note:focus {
+    border-color: #ff6a00;
+    box-shadow: 0 0 0 2px rgba(255, 106, 0, 0.15);
+}
+
+/* Placeholder */
+.order-note::placeholder {
+    color: #aaa;
+}

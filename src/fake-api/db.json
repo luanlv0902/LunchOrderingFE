@@ -2239,6 +2239,32 @@
       "status": "PENDING",
       "createdAt": "2026-01-06T07:41:07.993Z",
       "id": 4
+    },
+    {
+      "userId": "d066",
+      "totalPrice": 125000,
+      "discount": 0,
+      "finalPrice": 125000,
+      "addressId": 14,
+      "voucherId": "",
+      "noteForChef": "Thay mắm tôm bằng nước mắm giúp mình nhé",
+      "methodPayment": "BANK",
+      "status": "WAITING_PAYMENT",
+      "createdAt": "2026-01-06T15:12:41.086Z",
+      "id": 5
+    },
+    {
+      "userId": "d066",
+      "totalPrice": 25000,
+      "discount": 0,
+      "finalPrice": 25000,
+      "addressId": 14,
+      "voucherId": "",
+      "noteForChef": "Cho tôi nhiều ớt",
+      "methodPayment": "CASH",
+      "status": "PENDING",
+      "createdAt": "2026-01-06T15:13:47.737Z",
+      "id": 6
     }
   ],
   "orderItems": [
@@ -2265,6 +2291,18 @@
       "orderId": 4,
       "quantity": 1,
       "id": 4
+    },
+    {
+      "productId": "195",
+      "orderId": 5,
+      "quantity": 1,
+      "id": 5
+    },
+    {
+      "productId": "194",
+      "orderId": 6,
+      "quantity": 1,
+      "id": 6
     }
   ]
 }

@@ -22,9 +22,94 @@ const Checkout = () => {
     const [voucherId, setVoucherId] = useState("");
     const [userVoucherId, setUserVoucherId] = useState<number | null>(null);
     const [discount, setDiscount] = useState(0);
-
+    const [noteForChef, setNoteForChef] = useState("");
     // ===== PAYMENT =====
     const [paymentMethod, setPaymentMethod] = useState<string>("CASH");
+    // ===== ADD ADDRESS FORM =====
+    const [showForm, setShowForm] = useState(false);
+    const [provinces, setProvinces] = useState<any[]>([]);
+    const [districts, setDistricts] = useState<any[]>([]);
+    const [wards, setWards] = useState<any[]>([]);
+
+    const [formData, setFormData] = useState({
+        receiverName: "",
+        phone: "",
+        province: "",
+        district: "",
+        ward: "",
+        detail: "",
+        isDefault: false,
+    });
+    useEffect(() => {
+        const fetchProvinces = async () => {
+            const data = await api.getProvinces();
+            const hcm = data.find((p: any) => p.name.includes("Hồ Chí Minh"));
+
+            if (hcm) {
+                setProvinces([hcm]);
+                const provinceCode = String(hcm.code);
+                setFormData(prev => ({ ...prev, province: provinceCode }));
+
+                const districts = await api.getDistrictsByProvince(provinceCode);
+                setDistricts(districts);
+
+                if (districts.length > 0) {
+                    const wards = await api.getWardsByDistrict(districts[0].code);
+                    setWards(wards);
+                }
+            }
+        };
+        fetchProvinces();
+    }, []);
+    const handleProvinceChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const code = e.target.value;
+        setFormData({ ...formData, province: code, district: "", ward: "" });
+
+        const data = await api.getDistrictsByProvince(code);
+        setDistricts(data);
+    };
+
+    const handleDistrictChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const code = e.target.value;
+        setFormData({ ...formData, district: code, ward: "" });
+
+        const data = await api.getWardsByDistrict(code);
+        setWards(data);
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value, type, checked } = e.target;
+        setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
+    };
+    const handleAddAddress = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!userId) return;
+
+        const provinceName =
+            provinces.find(p => p.code === Number(formData.province))?.name || "";
+        const districtName =
+            districts.find(d => d.code === Number(formData.district))?.name || "";
+        const wardName =
+            wards.find(w => String(w.code) === formData.ward)?.name || "";
+
+        const newAddress = await api.addAddress({
+            ...formData,
+            province: provinceName,
+            district: districtName,
+            ward: wardName,
+            userId,
+        });
+
+        setAddresses(prev =>
+            formData.isDefault
+                ? prev.map(a => ({ ...a, isDefault: false })).concat(newAddress)
+                : [...prev, newAddress]
+        );
+
+        setSelectedAddressId(newAddress.id);
+        setShowForm(false);
+    };
+
 
     // ===== LOAD ADDRESS =====
     useEffect(() => {
@@ -97,6 +182,7 @@ const Checkout = () => {
                 finalPrice: totalPrice - discount,
                 addressId: selectedAddressId,
                 voucherId,
+                noteForChef,
                 methodPayment: paymentMethod as Order["methodPayment"],
                 status: orderStatus,
                 createdAt: new Date().toISOString(),
@@ -135,6 +221,18 @@ const Checkout = () => {
                     {/* ADDRESS */}
                     <div className="checkout-card">
                         <h3>Địa chỉ giao hàng</h3>
+                        <button
+                            className="btn-add-address"
+                            onClick={() => setShowForm(true)}
+                        >
+                            ➕ Thêm địa chỉ mới
+                        </button>
+                        {addresses.length === 0 && (
+                            <p className="text-muted" style={{ marginBottom: 10 }}>
+                                Bạn chưa có địa chỉ
+                            </p>
+                        )}
+
 
                         {addresses.map(addr => (
                             <label
@@ -147,7 +245,7 @@ const Checkout = () => {
                                     onChange={() => setSelectedAddressId(addr.id)}
                                 />
                                 <div className="address-content">
-                                    <strong>{addr.receiverName}</strong>
+                                    <strong>{addr.receiverName} - {addr.phone}</strong>
                                     <p>
                                         {addr.detail}, {addr.ward}, {addr.district}, {addr.province}
                                     </p>
@@ -259,14 +357,85 @@ const Checkout = () => {
                             <span>{formatPrice(totalPrice - discount)}</span>
                         </div>
 
+                        <div className="summary-row note-order">
+                            <span>Ghi chú</span>
+                        </div>
+
+                        <textarea
+                            className="order-note"
+                            placeholder=""
+                            value={noteForChef}
+                            onChange={(e) => setNoteForChef(e.target.value)}
+                            rows={3}
+                        />
+
+
                         <button className="btn-place-order" onClick={handlePlaceOrder}>
                             Đặt hàng
                         </button>
                     </div>
                 </div>
             </div>
+            {showForm && (
+                <div className="address-overlay">
+                    <form className="address-form" onSubmit={handleAddAddress}>
+                        <h3>Thêm địa chỉ mới</h3>
+
+                        <input
+                            name="receiverName"
+                            placeholder="Họ và tên"
+                            value={formData.receiverName}
+                            onChange={handleChange}
+                            required
+                        />
+
+                        <input
+                            name="phone"
+                            placeholder="Số điện thoại"
+                            value={formData.phone}
+                            onChange={handleChange}
+                            required
+                        />
+
+                        <select value={formData.province} onChange={handleProvinceChange} required>
+                            <option value="">-- Chọn Tỉnh --</option>
+                            {provinces.map(p => (
+                                <option key={p.code} value={p.code}>{p.name}</option>
+                            ))}
+                        </select>
+
+                        <select value={formData.district} onChange={handleDistrictChange} required>
+                            <option value="">-- Chọn Quận --</option>
+                            {districts.map(d => (
+                                <option key={d.code} value={d.code}>{d.name}</option>
+                            ))}
+                        </select>
+
+                        <select value={formData.ward} onChange={e => setFormData({ ...formData, ward: e.target.value })} required>
+                            <option value="">-- Chọn Phường --</option>
+                            {wards.map(w => (
+                                <option key={w.code} value={String(w.code)}>{w.name}</option>
+                            ))}
+                        </select>
+
+                        <input
+                            name="detail"
+                            placeholder="Số nhà, tên đường"
+                            value={formData.detail}
+                            onChange={handleChange}
+                            required
+                        />
+                        <div className="form-btn">
+                            <button type="submit">Lưu</button>
+                            <button type="button" onClick={() => setShowForm(false)}>Hủy</button>
+                        </div>
+                    </form>
+                </div>
+            )}
+
         </div>
     );
+
 };
 
 export default Checkout;
