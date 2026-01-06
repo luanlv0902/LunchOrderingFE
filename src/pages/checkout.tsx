@@ -19,7 +19,7 @@ const Checkout = () => {
     // ===== VOUCHER =====
     const [myVouchers, setMyVouchers] = useState<any[]>([]);
     const [selectedVoucherId, setSelectedVoucherId] = useState<number | null>(null);
-    const [voucherId, setVoucherId] = useState<string | undefined>();
+    const [voucherId, setVoucherId] = useState("");
     const [userVoucherId, setUserVoucherId] = useState<number | null>(null);
     const [discount, setDiscount] = useState(0);
 
@@ -89,6 +89,7 @@ const Checkout = () => {
             paymentMethod === "CASH" ? "PENDING" : "WAITING_PAYMENT";
 
         try {
+
             const order: Omit<Order, "id"> = {
                 userId,
                 totalPrice,
@@ -116,7 +117,7 @@ const Checkout = () => {
             }
 
             clearCart();
-            navigate(`/order-success?orderId=${createdOrder.id}`);
+            navigate(`/account/order-history?userId=${userId}&sort=createdAt&order=desc`);
         } catch {
             alert("Đặt hàng thất bại");
         }

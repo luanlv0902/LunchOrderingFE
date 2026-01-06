@@ -52,7 +52,7 @@ function AccountLayout() {
                             user.avatar ||
                             "https://scr.vn/wp-content/uploads/2020/07/avt-con-trai-ng%E1%BA%A7u-978x1024.jpg"
                         }
-                    />
+                     alt="img_avartar"/>
 
                 </div>
 

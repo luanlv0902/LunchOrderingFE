@@ -396,18 +396,18 @@ export const api = {
         const order = await getRes.json();
 
         // console.log(order.status);
-        if (order.status!=="PENDING") {
-            throw new Error(
-                `Không thể hủy đơn hàng. Trạng thái hiện tại: ${order.status || "không xác định"}`
-            );
+        if (order.status==="PENDING") {
+            await fetch(`${baseUrl}/orders/${orderId}`, {
+                method: "PATCH",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    status: "CANCEL"
+                })
+            });
         }
-        const deleteRes = await fetch(`${baseUrl}/orders/${orderId}`, {
-            method: "DELETE",
-        });
 
-        if (!deleteRes.ok) {
-            throw new Error("Hủy đơn hàng thất bại");
-        }
         return {
             success: true,
             message: "Đơn hàng đã được hủy thành công",

@@ -82,6 +82,7 @@ function OrderHistory() {
     async function confirmCancelOrder() {
         setConfirmOpen(false);
         try {
+            console.log("selectOrderId ",selectedOrderId);
             await api.cancelOrder(selectedOrderId);
             setNotifyCancel(true);
             await getOrderHistory();
@@ -233,7 +234,11 @@ function OrderHistory() {
                             <div className={"valueDetail"}>{formatPrice(order.finalPrice as number)}</div>
                         </div>
                         {order.status==="PENDING" &&(
-                            <button className={"cancelOrder"} onClick={()=>handleCancelClick(order.id)}>Hủy đơn hàng</button>
+                            <button className={"cancelOrder"} onClick={()=>{
+                                console.log("Order.id:", order.id);
+                                console.log("Type:", typeof order.id);
+                                handleCancelClick(order.id)
+                            }}>Hủy đơn hàng</button>
 
                         )}
 
