@@ -2265,6 +2265,19 @@
       "status": "PENDING",
       "createdAt": "2026-01-06T15:13:47.737Z",
       "id": 6
+    },
+    {
+      "userId": "d066",
+      "totalPrice": 55000,
+      "discount": 0,
+      "finalPrice": 55000,
+      "addressId": 14,
+      "voucherId": "",
+      "noteForChef": "Không bỏ hành giúp tôi nhé!!",
+      "methodPayment": "BANK",
+      "status": "WAITING_PAYMENT",
+      "createdAt": "2026-01-07T08:29:46.311Z",
+      "id": 7
     }
   ],
   "orderItems": [
@@ -2303,6 +2316,12 @@
       "orderId": 6,
       "quantity": 1,
       "id": 6
+    },
+    {
+      "productId": "198",
+      "orderId": 7,
+      "quantity": 1,
+      "id": 7
     }
   ]
 }
