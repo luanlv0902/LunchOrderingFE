@@ -2000,21 +2000,20 @@
       "isDefault": true,
       "userId": "3",
       "id": 17
+    },
+    {
+      "receiverName": "phuocloc",
+      "phone": "0813556473",
+      "province": "Hồ Chí Minh",
+      "district": "Quận Thủ Đức",
+      "ward": "Phường Linh Trung",
+      "detail": "123",
+      "isDefault": false,
+      "userId": "d066",
+      "id": 18
     }
   ],
   "vouchers": [
-    {
-      "id": 1,
-      "code": "FOOD20",
-      "title": "Giảm 20%",
-      "description": "Giảm 20% tối đa 100k",
-      "discountType": "PERCENT",
-      "discountValue": 20,
-      "maxDiscount": 100000,
-      "minOrder": 150000,
-      "expireDate": "2025-12-31",
-      "quantity": 2
-    },
     {
       "id": 3,
       "code": "FOOD",
@@ -2028,25 +2027,14 @@
       "quantity": 100
     },
     {
-      "id": 2,
-      "code": "FREESHIP",
-      "title": "Giảm 5k",
-      "description": "Giảm 5.000đ cho mọi đơn",
-      "discountType": "FIXED",
-      "discountValue": 5000,
-      "minOrder": 0,
-      "expireDate": "2025-12-20",
-      "quantity": 200
-    },
-    {
       "id": 4,
       "code": "TET2026",
-      "title": "Giảm 15% ",
-      "description": "Giảm 15% cho đơn từ 20k",
+      "title": "Giảm 20% ",
+      "description": "Giảm 20% cho đơn từ 20k",
       "discountType": "PERCENT",
       "discountValue": 20,
-      "maxDiscount": 10000,
-      "minOrder": 20000,
+      "maxDiscount": 50000,
+      "minOrder": 200000,
       "expireDate": "2026-12-31",
       "quantity": 100
     },
@@ -2058,18 +2046,7 @@
       "discountType": "FIXED",
       "discountValue": 5000,
       "minOrder": 0,
-      "expireDate": "2025-12-31",
-      "quantity": 100
-    },
-    {
-      "id": 6,
-      "code": "FREESHIP2026",
-      "title": "Miễn phí vận chuyển",
-      "description": "Miễn phí vận chuyển cho mọi đơn hàng",
-      "discountType": "FREESHIP",
-      "discountValue": 0,
-      "minOrder": 0,
-      "expireDate": "2025-12-31",
+      "expireDate": "2026-12-31",
       "quantity": 100
     },
     {
@@ -2079,8 +2056,8 @@
       "description": "Miễn phí vận chuyển cho mọi đơn hàng",
       "discountType": "FREESHIP",
       "discountValue": 0,
-      "minOrder": 0,
-      "expireDate": "2026-1-1",
+      "minOrder": 50000,
+      "expireDate": "2026-1-31",
       "quantity": 100
     },
     {
@@ -2167,7 +2144,8 @@
       "voucherId": 7,
       "code": "FREESHIP2",
       "used": false,
-      "id": 13
+      "id": 13,
+      "usedAt": "2026-01-08T07:13:36.530Z"
     },
     {
       "userId": "d066",
@@ -2189,139 +2167,78 @@
       "code": "FREESHIP2",
       "used": false,
       "id": 16
+    },
+    {
+      "userId": "d066",
+      "voucherId": 5,
+      "code": "SINHNHAT5TUOI",
+      "used": true,
+      "id": 17,
+      "usedAt": "2026-01-08T07:22:43.651Z"
     }
   ],
   "orders": [
     {
-      "userId": "3",
-      "totalPrice": 25000,
-      "discount": 0,
-      "finalPrice": 25000,
-      "addressId": 17,
-      "voucherId": "",
-      "methodPayment": "CASH",
-      "status": "CANCEL",
-      "createdAt": "2026-01-06T07:36:35.884Z",
+      "userId": "d066",
+      "totalPrice": 15000,
+      "discount": 5000,
+      "shippingFee": 10000,
+      "finalPrice": 20000,
+      "addressId": 18,
+      "voucherId": 5,
+      "noteForChef": "Lấy cơm dẻo khô",
+      "methodPayment": "MOMO",
+      "status": "WAITING_PAYMENT",
+      "createdAt": "2026-01-08T07:22:43.590Z",
       "id": 1
-    },
-    {
-      "userId": "3",
-      "totalPrice": 25000,
-      "discount": 0,
-      "finalPrice": 25000,
-      "addressId": 17,
-      "voucherId": "",
-      "methodPayment": "CASH",
-      "status": "CANCEL",
-      "createdAt": "2026-01-06T07:36:40.952Z",
-      "id": 2
-    },
-    {
-      "userId": "3",
-      "totalPrice": 25000,
-      "discount": 0,
-      "finalPrice": 25000,
-      "addressId": 17,
-      "voucherId": "",
-      "methodPayment": "CASH",
-      "status": "PENDING",
-      "createdAt": "2026-01-06T07:38:07.912Z",
-      "id": 3
-    },
-    {
-      "userId": "3",
-      "totalPrice": 25000,
-      "discount": 0,
-      "finalPrice": 25000,
-      "addressId": 17,
-      "voucherId": "",
-      "methodPayment": "CASH",
-      "status": "PENDING",
-      "createdAt": "2026-01-06T07:41:07.993Z",
-      "id": 4
     },
     {
       "userId": "d066",
       "totalPrice": 125000,
       "discount": 0,
-      "finalPrice": 125000,
+      "shippingFee": 30000,
+      "finalPrice": 155000,
       "addressId": 14,
       "voucherId": "",
-      "noteForChef": "Thay mắm tôm bằng nước mắm giúp mình nhé",
+      "noteForChef": "",
       "methodPayment": "BANK",
       "status": "WAITING_PAYMENT",
-      "createdAt": "2026-01-06T15:12:41.086Z",
-      "id": 5
+      "createdAt": "2026-01-08T07:26:23.975Z",
+      "id": 2
     },
     {
       "userId": "d066",
-      "totalPrice": 25000,
+      "totalPrice": 35000,
       "discount": 0,
-      "finalPrice": 25000,
+      "shippingFee": 30000,
+      "finalPrice": 65000,
       "addressId": 14,
       "voucherId": "",
-      "noteForChef": "Cho tôi nhiều ớt",
+      "noteForChef": "Lấy nhiều ớt",
       "methodPayment": "CASH",
       "status": "PENDING",
-      "createdAt": "2026-01-06T15:13:47.737Z",
-      "id": 6
-    },
-    {
-      "userId": "d066",
-      "totalPrice": 55000,
-      "discount": 0,
-      "finalPrice": 55000,
-      "addressId": 14,
-      "voucherId": "",
-      "noteForChef": "Không bỏ hành giúp tôi nhé!!",
-      "methodPayment": "BANK",
-      "status": "WAITING_PAYMENT",
-      "createdAt": "2026-01-07T08:29:46.311Z",
-      "id": 7
+      "createdAt": "2026-01-08T07:30:19.323Z",
+      "id": 3
     }
   ],
   "orderItems": [
     {
-      "productId": "2",
+      "productId": "1",
       "orderId": 1,
       "quantity": 1,
       "id": 1
     },
     {
-      "productId": "196",
+      "productId": "195",
       "orderId": 2,
       "quantity": 1,
       "id": 2
     },
     {
-      "productId": "194",
+      "productId": "193",
       "orderId": 3,
       "quantity": 1,
       "id": 3
-    },
-    {
-      "productId": "196",
-      "orderId": 4,
-      "quantity": 1,
-      "id": 4
-    },
-    {
-      "productId": "195",
-      "orderId": 5,
-      "quantity": 1,
-      "id": 5
-    },
-    {
-      "productId": "194",
-      "orderId": 6,
-      "quantity": 1,
-      "id": 6
-    },
-    {
-      "productId": "198",
-      "orderId": 7,
-      "quantity": 1,
-      "id": 7
     }
   ]
 }
