@@ -87,8 +87,6 @@ export interface OrderItem {
    orderId: string;
    quantity: number;
    product?: Product;
-
-
 }
 
 export interface Order {
@@ -97,6 +95,7 @@ export interface Order {
     orderItems?: OrderItem[];
     totalPrice: number;
     discount?: number;
+    shippingFee: number;
     finalPrice?: number;
     addressId: number;
     voucherId?: string;

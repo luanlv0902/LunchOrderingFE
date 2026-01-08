@@ -30,6 +30,30 @@ const Checkout = () => {
     const [provinces, setProvinces] = useState<any[]>([]);
     const [districts, setDistricts] = useState<any[]>([]);
     const [wards, setWards] = useState<any[]>([]);
+    const [shippingFee, setShippingFee] = useState(0);
+    const [isFreeShipVoucher, setIsFreeShipVoucher] = useState(false);
+    const finalTotal = totalPrice - discount + shippingFee;
+
+    const calculateShippingFee = (address: Address | undefined, total: number) => {
+        if (!address) return 0;
+
+        if (total >= 250000) return 0;
+
+        if (isFreeShipVoucher) return 0;
+
+        const district = address.district.toLowerCase();
+        const ward = address.ward.toLowerCase();
+
+        if (district.includes("thủ đức") && ward.includes("linh trung")) {
+            return 10000;
+        }
+
+        if (district.includes("thủ đức")) {
+            return 20000;
+        }
+
+        return 30000;
+    };
 
     const [formData, setFormData] = useState({
         receiverName: "",
@@ -40,6 +64,7 @@ const Checkout = () => {
         detail: "",
         isDefault: false,
     });
+
     useEffect(() => {
         const fetchProvinces = async () => {
             const data = await api.getProvinces();
@@ -61,6 +86,7 @@ const Checkout = () => {
         };
         fetchProvinces();
     }, []);
+
     const handleProvinceChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         const code = e.target.value;
         setFormData({ ...formData, province: code, district: "", ward: "" });
@@ -158,13 +184,36 @@ const Checkout = () => {
     // ===== APPLY VOUCHER =====
     const handleSelectVoucher = (v: any) => {
         const voucher = v.voucher;
-        const discountValue = calculateDiscount(voucher, totalPrice);
 
-        setDiscount(discountValue);
         setVoucherId(voucher.id);
         setUserVoucherId(v.id);
         setSelectedVoucherId(v.id);
+
+        if (voucher.discountType === "FREESHIP") {
+            setIsFreeShipVoucher(true);
+            setDiscount(0);
+        } else {
+            const discountValue = calculateDiscount(voucher, totalPrice);
+            setDiscount(discountValue);
+            setIsFreeShipVoucher(false);
+        }
     };
+    const handleCancelVoucher = () => {
+        setSelectedVoucherId(null);
+        setVoucherId("");
+        setUserVoucherId(null);
+        setDiscount(0);
+        setIsFreeShipVoucher(false);
+    };
+
+
+    useEffect(() => {
+        if (!selectedAddressId) return;
+
+        const addr = addresses.find(a => a.id === selectedAddressId);
+        setShippingFee(calculateShippingFee(addr, totalPrice));
+    }, [selectedAddressId, isFreeShipVoucher, totalPrice]);
+
 
     // ===== PLACE ORDER =====
     const handlePlaceOrder = async () => {
@@ -179,7 +228,8 @@ const Checkout = () => {
                 userId,
                 totalPrice,
                 discount,
-                finalPrice: totalPrice - discount,
+                shippingFee,
+                finalPrice: finalTotal,
                 addressId: selectedAddressId,
                 voucherId,
                 noteForChef,
@@ -242,8 +292,12 @@ const Checkout = () => {
                                 <input
                                     type="radio"
                                     checked={selectedAddressId === addr.id}
-                                    onChange={() => setSelectedAddressId(addr.id)}
+                                    onChange={() => {
+                                        setSelectedAddressId(addr.id);
+                                        setShippingFee(calculateShippingFee(addr, totalPrice));
+                                    }}
                                 />
+
                                 <div className="address-content">
                                     <strong>{addr.receiverName} - {addr.phone}</strong>
                                     <p>
@@ -272,16 +326,41 @@ const Checkout = () => {
                                 >
                                     <div className="voucher-content">
                                         <strong>
-                                            {voucher.discountType === "PERCENT"
-                                                ? `Giảm ${voucher.discountValue}%`
-                                                : `Giảm ${voucher.discountValue.toLocaleString()}đ`}
+                                            {voucher.discountType === "FREESHIP" && "Miễn phí vận chuyển"}
+                                            {voucher.discountType === "PERCENT" && `Giảm ${voucher.discountValue}%`}
+                                            {voucher.discountType === "FIXED" && `Giảm ${voucher.discountValue.toLocaleString()}đ`}
                                         </strong>
-                                        <p>Đơn tối thiểu {voucher.minOrder.toLocaleString()}đ</p>
+
+                                        <p>
+                                            Đơn tối thiểu {voucher.minOrder.toLocaleString()}đ
+                                            {voucher.discountType === "PERCENT" && voucher.maxDiscount && (
+                                                <span className="voucher-max-inline">
+            {" "} -    Giảm tối đa {voucher.maxDiscount.toLocaleString()}đ
+        </span>
+                                            )}
+                                        </p>
+
+
                                     </div>
 
-                                    <button>
-                                        {selectedVoucherId === v.id ? "Đã áp dụng" : "Dùng"}
-                                    </button>
+
+                                    {selectedVoucherId === v.id ? (
+                                        <div className="voucher-applied-actions">
+                                            <span className="voucher-applied-text">Đã áp dụng</span>
+                                            <button
+                                                className="btn-cancel-voucher"
+                                                onClick={(e) => {
+                                                    e.stopPropagation(); // không chọn lại voucher
+                                                    handleCancelVoucher();
+                                                }}
+                                            >
+                                                Hủy
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <button>Dùng</button>
+                                    )}
+
                                 </div>
 
                             );
@@ -344,6 +423,17 @@ const Checkout = () => {
                         </div>
 
                         <div className="summary-row">
+                            <span>Phí vận chuyển</span>
+                            <span>
+        {shippingFee === 0
+            ? "Miễn phí"
+            : formatPrice(shippingFee)}
+    </span>
+                        </div>
+
+
+
+                        <div className="summary-row">
                             <span>Phương thức thanh toán</span>
                             <span>
                                 {paymentMethod === "CASH" && "Tiền mặt"}
@@ -354,8 +444,9 @@ const Checkout = () => {
 
                         <div className="summary-total">
                             <span>Tổng thanh toán</span>
-                            <span>{formatPrice(totalPrice - discount)}</span>
+                            <span>{formatPrice(finalTotal)}</span>
                         </div>
+
 
                         <div className="summary-row note-order">
                             <span>Ghi chú</span>

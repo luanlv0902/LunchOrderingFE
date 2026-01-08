@@ -70,6 +70,8 @@ function Voucher() {
     };
 
     const filteredVouchers = myVouchers.filter((v) => {
+        if (v.used) return false;
+
         const voucher = v.voucher;
         if (!voucher) return false;
         const expired = isExpired(voucher.expireDate);
