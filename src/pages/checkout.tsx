@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import { CartContext } from "../components/CartContext";
-import { api } from "../services/api";
-import { Address, Order, OrderItem } from "../types/object";
-import { formatPrice } from "../components/formatPrice";
-import { useNavigate } from "react-router-dom";
+import {useContext, useEffect, useState} from "react";
+import {CartContext} from "../components/CartContext";
+import {api} from "../services/api";
+import {Address, Order, OrderItem} from "../types/object";
+import {formatPrice} from "../components/formatPrice";
+import {useNavigate} from "react-router-dom";
 import "../styles/styles.css";
 import useGeoLocation from "../components/location";
 
@@ -11,7 +11,7 @@ const Checkout = () => {
     const navigate = useNavigate();
     const userId = localStorage.getItem("userId");
 
-    const { cart, totalPrice, clearCart } = useContext(CartContext);
+    const {cart, totalPrice, clearCart} = useContext(CartContext);
 
     // ===== ADDRESS =====
     const [addresses, setAddresses] = useState<Address[]>([]);
@@ -73,7 +73,7 @@ const Checkout = () => {
         isDefault: false,
     });
     useEffect(() => {
-        if(geoError){
+        if (geoError) {
             setLocationError(geoError);
             return;
         }
@@ -118,7 +118,7 @@ const Checkout = () => {
             try {
                 const districtList = await api.getDistrictsByProvince(provinceCode);
                 const sorted = districtList.sort((a: any, b: any) =>
-                    a.name.localeCompare(b.name, "vi", { sensitivity: "base" })
+                    a.name.localeCompare(b.name, "vi", {sensitivity: "base"})
                 );
                 setDistricts(sorted);
 
@@ -144,7 +144,7 @@ const Checkout = () => {
 
                 const wardList = await api.getWardsByDistrict(districtCode);
                 const sortedWards = wardList.sort((a: any, b: any) =>
-                    a.name.localeCompare(b.name, "vi", { sensitivity: "base" })
+                    a.name.localeCompare(b.name, "vi", {sensitivity: "base"})
                 );
                 setWards(sortedWards);
 
@@ -180,7 +180,7 @@ const Checkout = () => {
             if (hcm) {
                 setProvinces([hcm]);
                 const provinceCode = String(hcm.code);
-                setFormData(prev => ({ ...prev, province: provinceCode }));
+                setFormData(prev => ({...prev, province: provinceCode}));
 
                 const districts = await api.getDistrictsByProvince(provinceCode);
                 setDistricts(districts);
@@ -196,7 +196,7 @@ const Checkout = () => {
 
     const handleProvinceChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         const code = e.target.value;
-        setFormData({ ...formData, province: code, district: "", ward: "" });
+        setFormData({...formData, province: code, district: "", ward: ""});
 
         const data = await api.getDistrictsByProvince(code);
         setDistricts(data);
@@ -204,15 +204,15 @@ const Checkout = () => {
 
     const handleDistrictChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         const code = e.target.value;
-        setFormData({ ...formData, district: code, ward: "" });
+        setFormData({...formData, district: code, ward: ""});
 
         const data = await api.getWardsByDistrict(code);
         setWards(data);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value, type, checked } = e.target;
-        setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
+        const {name, value, type, checked} = e.target;
+        setFormData({...formData, [name]: type === "checkbox" ? checked : value});
     };
     const handleAddAddress = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -235,7 +235,7 @@ const Checkout = () => {
 
         setAddresses(prev =>
             formData.isDefault
-                ? prev.map(a => ({ ...a, isDefault: false })).concat(newAddress)
+                ? prev.map(a => ({...a, isDefault: false})).concat(newAddress)
                 : [...prev, newAddress]
         );
 
@@ -328,9 +328,7 @@ const Checkout = () => {
         if (!selectedAddressId) return alert("Vui lòng chọn địa chỉ");
         const orderStatus =
             paymentMethod === "CASH" ? "PENDING" : "WAITING_PAYMENT";
-
         try {
-
             const order: Omit<Order, "id"> = {
                 userId,
                 totalPrice,
@@ -360,7 +358,11 @@ const Checkout = () => {
             }
 
             clearCart();
-            navigate(`/account/order-history?userId=${userId}&sort=createdAt&order=desc`);
+            navigate("/order-success", {
+                state: {
+                    orderId: createdOrder.id
+                }
+            });
         } catch {
             alert("Đặt hàng thất bại");
         }
@@ -382,10 +384,10 @@ const Checkout = () => {
                             className="btn-add-address"
                             onClick={() => setShowForm(true)}
                         >
-                            ➕ Thêm địa chỉ mới
+                            Thêm địa chỉ mới
                         </button>
                         {addresses.length === 0 && (
-                            <p className="text-muted" style={{ marginBottom: 10 }}>
+                            <p className="text-muted" style={{marginBottom: 10}}>
                                 Bạn chưa có địa chỉ
                             </p>
                         )}
@@ -539,7 +541,6 @@ const Checkout = () => {
                         </div>
 
 
-
                         <div className="summary-row">
                             <span>Phương thức thanh toán</span>
                             <span>
@@ -554,7 +555,6 @@ const Checkout = () => {
                             <span>{formatPrice(finalTotal)}</span>
                         </div>
 
-
                         <div className="summary-row note-order">
                             <span>Ghi chú</span>
                         </div>
@@ -566,7 +566,6 @@ const Checkout = () => {
                             onChange={(e) => setNoteForChef(e.target.value)}
                             rows={3}
                         />
-
 
                         <button className="btn-place-order" onClick={handlePlaceOrder}>
                             Đặt hàng
@@ -621,7 +620,8 @@ const Checkout = () => {
                             ))}
                         </select>
 
-                        <select value={formData.ward} onChange={e => setFormData({ ...formData, ward: e.target.value })} required>
+                        <select value={formData.ward} onChange={e => setFormData({...formData, ward: e.target.value})}
+                                required>
                             <option value="">-- Chọn Phường --</option>
                             {wards.map(w => (
                                 <option key={w.code} value={String(w.code)}>{w.name}</option>

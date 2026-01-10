@@ -6,7 +6,6 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Menu from "./pages/menu";
-import Order from "./pages/order";
 import Contact from "./pages/contact";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -14,6 +13,7 @@ import IconScroll from "./components/icon-scroll";
 import ProductDetail from "./components/productDetail";
 import Cart from "./pages/cart";
 import Checkout from "./pages/checkout";
+import OrderSuccess from "./pages/OrderSuccess";
 
 import AccountLayout from "./components/AccountLayout";
 import Profile from "./pages/account/profile";
@@ -34,10 +34,10 @@ function App() {
                 <Route path="/" element={<Navigate to="/home" replace/>}/>
                 <Route path="/home" element={<Home/>}/>
                 <Route path="/menu" element={<Menu/>}/>
-                {/*<Route path="/order" element={<Order/>}/>*/}
                 <Route path="/contact" element={<Contact/>}/>
                 <Route path="/cart" element={<Cart/>}/>
                 <Route path="/checkout" element={<Checkout />} />
+                <Route path="/order-success" element={<OrderSuccess />} />
                 <Route path="/product/:idProduct" element={<ProductDetail/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>

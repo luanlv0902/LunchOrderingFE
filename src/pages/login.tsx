@@ -20,6 +20,7 @@ function Login() {
             localStorage.setItem("userId", String(user.id));
             // localStorage.setItem("userId", user.id);
             navigate("/home", { replace: true });
+            window.location.reload();
         } catch (err) {
             setError("Sai tài khoản hoặc mật khẩu");
         }

@@ -94,7 +94,6 @@ const Header = () => {
                     <nav className="nav">
                         <NavLink to="/home" className="nav-item">TRANG CHỦ</NavLink>
                         <NavLink to="/menu" className="nav-item">MENU</NavLink>
-                        <NavLink to="/order" className="nav-item">ĐẶT HÀNG</NavLink>
                         <NavLink to="/contact" className="nav-item">LIÊN HỆ</NavLink>
 
                         <NavLink to="/cart" className="nav-item cart-icon">

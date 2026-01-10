@@ -16,12 +16,10 @@ interface ProductQuery {
     page?: number;
 }
 interface OrderQuery {
-    userId?: string;
+    userId: string;
     status?: string;
     sortField?: string;
     order?: string;
-
-
 }
 
 export const api = {
@@ -368,24 +366,37 @@ export const api = {
 
         return res.json();
     },
-    getOrderByUserId: async (query:OrderQuery) => {
-        const params = new URLSearchParams();
-        if(query.userId){
-            params.append("userId", query.userId);
+
+    getOrderByUserId: async (query: OrderQuery): Promise<Order[]> => {
+        if (!query.userId) {
+            throw new Error("userId is required");
         }
+
+        const params = new URLSearchParams();
+        params.append("userId", query.userId);
+
+        if (query.status) {
+            params.append("status", query.status);
+        }
+
         if (query.sortField && query.order) {
             params.append("_sort", query.sortField);
             params.append("_order", query.order);
         }
-        if (query.status){
-            params.append("status", query.status);
+
+        params.append("_embed", "orderItems");
+        params.append("_expand", "voucher");
+        params.append("_expand", "address");
+
+        const res = await fetch(`${baseUrl}/orders?${params.toString()}`);
+
+        if (!res.ok) {
+            throw new Error("Không thể lấy đơn hàng");
         }
-        params.append("_embed","orderItems")
-        params.append("_expand","voucher")
-        params.append("_expand","address")
-        const res = await fetch(`${baseUrl}/orders?${params.toString()}`, {})
+
         return res.json();
     },
+
     getOrderItemByOrderId: async (orderId: string) => {
         const res = await fetch(`${baseUrl}/orderItems?orderId=${orderId}&_expand=product`, {})
         return res.json();

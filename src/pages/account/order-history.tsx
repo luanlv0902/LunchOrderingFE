@@ -1,16 +1,13 @@
 import "../../styles/styles.css";
-import {Link, NavLink, useParams, useSearchParams} from "react-router-dom";
+import {Link, NavLink, useParams, useSearchParams, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {formatPrice} from "../../components/formatPrice";
-import {Order,OrderItem,Product} from "../../types/object";
+import {Order, OrderItem, Product} from "../../types/object";
 import {api} from "../../services/api";
 import itemOrder from "../../components/item-order";
 import Alert from '@mui/material/Alert';
 import {Snackbar} from "@mui/material";
 import ConfirmDialog from "../../components/Dialog";
-
-
-
 
 function OrderHistory() {
     const [filter, setFilter] = useState<"ALL" | "WAITING_PAYMENT" | "PENDING" | "COOKING" | "DELIVERING" | "COMPLETE" | "CANCEL">("ALL");
@@ -19,13 +16,17 @@ function OrderHistory() {
     const [searchParams, setSearchParams] = useSearchParams();
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [selectedOrderId, setSelectedOrderId] = useState<string>("");
-    const query= {
-        userId: searchParams.get("userId") || "",
+    const userId = localStorage.getItem("userId");
+    const query = {
+        userId,
         status: searchParams.get("status") || "",
         sortField: searchParams.get("sort") || "",
         order: searchParams.get("order") || "",
     }
-    function getOrderStatusText (status: "WAITING_PAYMENT" | "PENDING" | "COOKING" | "DELIVERING" | "COMPLETE" | "CANCEL"): string {
+    const navigate = useNavigate();
+
+
+    function getOrderStatusText(status: "WAITING_PAYMENT" | "PENDING" | "COOKING" | "DELIVERING" | "COMPLETE" | "CANCEL"): string {
         switch (status) {
             case "WAITING_PAYMENT":
                 return "Đợi thanh toán";
@@ -91,6 +92,7 @@ function OrderHistory() {
             hour12: false
         }).replace(/,/, '');
     }
+
     function sortOrder(e: React.ChangeEvent<HTMLSelectElement>) {
         const sortedOrders = e.currentTarget.value;
         setSearchParams(prev => {
@@ -100,8 +102,9 @@ function OrderHistory() {
         });
 
     }
+
     function changeFilter() {
-        if(filter ==="ALL"){
+        if (filter === "ALL") {
             setSearchParams(prev => {
                 prev.delete("status");
                 return prev;
@@ -113,14 +116,16 @@ function OrderHistory() {
             return prev;
         });
     }
+
     function handleCancelClick(orderId: string) {
         setSelectedOrderId(orderId);
         setConfirmOpen(true);
     }
+
     async function confirmCancelOrder() {
         setConfirmOpen(false);
         try {
-            console.log("selectOrderId ",selectedOrderId);
+            console.log("selectOrderId ", selectedOrderId);
             await api.cancelOrder(selectedOrderId);
             setNotifyCancel(true);
             await getOrderHistory();
@@ -133,8 +138,16 @@ function OrderHistory() {
         setConfirmOpen(false);
         setSelectedOrderId("");
     }
+
     async function getOrderHistory() {
-        const ordersRes = await api.getOrderByUserId(query);
+        if (!userId) return;
+
+        const ordersRes = await api.getOrderByUserId({
+            userId,
+            status: query.status,
+            sortField: query.sortField,
+            order: query.order,
+        });
         const ordersWithItems = await Promise.all(
             ordersRes.map(async (order: Order) => {
                 const items = await api.getOrderItemByOrderId(String(order.id));
@@ -149,11 +162,18 @@ function OrderHistory() {
     }
 
     useEffect(() => {
+        if (!userId) {
+            navigate("/login");
+        }
+    }, [userId]);
+
+    useEffect(() => {
         changeFilter()
     }, [filter, setSearchParams]);
     useEffect(() => {
+        if (!userId) return;
         getOrderHistory();
-    }, [query.status, query.sortField, query.order]);
+    }, [userId, query.status, query.sortField, query.order]);
 
     return (
         <div className="voucher-container">
@@ -163,7 +183,8 @@ function OrderHistory() {
 
             <div className="voucher-filter">
                 <button className={filter === "ALL" ? "active" : ""} onClick={() => setFilter("ALL")}>Tất cả</button>
-                <button className={filter === "WAITING_PAYMENT" ? "active" : ""} onClick={() => setFilter("WAITING_PAYMENT")}>Đợi thanh toán
+                <button className={filter === "WAITING_PAYMENT" ? "active" : ""}
+                        onClick={() => setFilter("WAITING_PAYMENT")}>Đợi thanh toán
                 </button>
                 <button className={filter === "PENDING" ? "active" : ""} onClick={() => setFilter("PENDING")}>Đang xử lý
                 </button>
@@ -205,7 +226,7 @@ function OrderHistory() {
                         </thead>
 
                         <tbody>
-                        {order.orderItems?.map((item,index) => (
+                        {order.orderItems?.map((item, index) => (
                             <tr key={index}>
                                 <td>
                                     <NavLink to={`/product/${item.productId}`}>
@@ -225,7 +246,7 @@ function OrderHistory() {
                                 </td>
 
                                 <td>
-                                    {formatPrice( (item.product?.price ?? 0) * item.quantity)}
+                                    {formatPrice((item.product?.price ?? 0) * item.quantity)}
                                 </td>
 
                             </tr>
@@ -237,11 +258,13 @@ function OrderHistory() {
                     <div className="detailOrder">
                         <div className="flex-row">
                             <div className={"titleDetailOrder"}>Địa chỉ</div>
-                            <div className={"valueDetail"}>{order.address?.detail +", "+order.address?.district+", "+order.address?.province}</div>
+                            <div
+                                className={"valueDetail"}>{order.address?.detail + ", " + order.address?.district + ", " + order.address?.province}</div>
                         </div>
                         <div className="flex-row">
                             <div className={"titleDetailOrder"}>Người nhận</div>
-                            <div className={"valueDetail"}>{order.address?.receiverName+" - "+order.address?.phone} </div>
+                            <div
+                                className={"valueDetail"}>{order.address?.receiverName + " - " + order.address?.phone} </div>
                         </div>
                         <div className="flex-row">
                             <div className={"titleDetailOrder"}>Trạng thái</div>
@@ -289,8 +312,8 @@ function OrderHistory() {
                             </div>
                         </div>
 
-                        {order.status==="PENDING" &&(
-                            <button className={"cancelOrder"} onClick={()=>{
+                        {order.status === "PENDING" && (
+                            <button className={"cancelOrder"} onClick={() => {
                                 console.log("Order.id:", order.id);
                                 console.log("Type:", typeof order.id);
                                 handleCancelClick(order.id)
@@ -310,7 +333,7 @@ function OrderHistory() {
                 open={notifyCancel}
                 autoHideDuration={2000}
                 onClose={() => setNotifyCancel(false)}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                anchorOrigin={{vertical: 'top', horizontal: 'right'}}
                 sx={{
                     paddingTop: '80px',
                     zIndex: 9999,
@@ -321,7 +344,7 @@ function OrderHistory() {
                     // onClose={() => setNotifyCancel(false)}
                     severity="success"
                     variant="filled"
-                    sx={{ width: '100%', minWidth: 300 }}
+                    sx={{width: '100%', minWidth: 300}}
                 >
                     Đơn hàng đã được hủy thành công!
                 </Alert>
