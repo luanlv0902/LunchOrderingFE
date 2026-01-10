@@ -5,6 +5,7 @@ import { Address, Order, OrderItem } from "../types/object";
 import { formatPrice } from "../components/formatPrice";
 import { useNavigate } from "react-router-dom";
 import "../styles/styles.css";
+import useGeoLocation from "../components/location";
 
 const Checkout = () => {
     const navigate = useNavigate();
@@ -33,6 +34,13 @@ const Checkout = () => {
     const [shippingFee, setShippingFee] = useState(0);
     const [isFreeShipVoucher, setIsFreeShipVoucher] = useState(false);
     const finalTotal = totalPrice - discount + shippingFee;
+    const [locationError, setLocationError] = useState("");
+    const {
+        address: geoAddress,
+        loading: geoLoading,
+        error: geoError,
+        getCurrentLocation
+    } = useGeoLocation();
 
     const calculateShippingFee = (address: Address | undefined, total: number) => {
         if (!address) return 0;
@@ -64,6 +72,105 @@ const Checkout = () => {
         detail: "",
         isDefault: false,
     });
+    useEffect(() => {
+        if(geoError){
+            setLocationError(geoError);
+            return;
+        }
+        if (!geoAddress || geoLoading || geoError || provinces.length === 0) return;
+
+        const provinceName = geoAddress.province?.trim().toLowerCase() || "";
+        if (!provinceName.includes("hồ chí minh") && !provinceName.includes("ho chi minh city")) {
+            setLocationError("Xin lỗi, hiện chúng tôi không hỗ trợ cho các khu vực ngoài TP. HCM");
+            setFormData(prev => ({
+                ...prev,
+                province: "",
+                district: "",
+                ward: "",
+                detail: "",
+            }));
+            setDistricts([]);
+            setWards([]);
+            return;
+        } else {
+            setLocationError("");
+        }
+
+        const provinceObj = provinces.find(
+            (p: any) =>
+                p.name.trim().toLowerCase() === provinceName ||
+                p.name.trim().toLowerCase().includes(provinceName)
+        );
+
+        if (!provinceObj) return;
+
+        const provinceCode = String(provinceObj.code);
+
+        setFormData((prev) => ({
+            ...prev,
+            province: provinceCode,
+            district: "",
+            ward: "",
+            detail: geoAddress.detail || prev.detail || "",
+        }));
+
+        const loadAndSetDistricts = async () => {
+            try {
+                const districtList = await api.getDistrictsByProvince(provinceCode);
+                const sorted = districtList.sort((a: any, b: any) =>
+                    a.name.localeCompare(b.name, "vi", { sensitivity: "base" })
+                );
+                setDistricts(sorted);
+
+                const districtObj = sorted.find(
+                    (d: any) =>
+                        d.name.trim().toLowerCase() === geoAddress.district?.trim().toLowerCase() ||
+                        d.name.trim().toLowerCase().includes(geoAddress.district?.trim().toLowerCase() || "")
+                );
+
+                if (!districtObj) {
+                    console.warn("Không tìm thấy quận/huyện:", geoAddress.district);
+
+                    return;
+                }
+
+                const districtCode = String(districtObj.code);
+
+                setFormData((prev) => ({
+                    ...prev,
+                    district: districtCode,
+                    ward: "",
+                }));
+
+                const wardList = await api.getWardsByDistrict(districtCode);
+                const sortedWards = wardList.sort((a: any, b: any) =>
+                    a.name.localeCompare(b.name, "vi", { sensitivity: "base" })
+                );
+                setWards(sortedWards);
+
+                const wardObj = sortedWards.find(
+                    (w: any) =>
+                        w.name.trim().toLowerCase() === geoAddress.ward?.trim().toLowerCase() ||
+                        w.name.trim().toLowerCase().includes(geoAddress.ward?.trim().toLowerCase() || "")
+                );
+
+                if (wardObj) {
+                    setFormData((prev) => ({
+                        ...prev,
+                        ward: String(wardObj.code),
+                    }));
+                } else {
+                    console.warn("Không tìm thấy phường/xã:", geoAddress.ward);
+                }
+
+
+            } catch (err) {
+                console.error("Lỗi auto-fill từ geolocation:", err);
+            }
+        };
+
+        loadAndSetDistricts();
+    }, [geoAddress, provinces, geoLoading, geoError]);
 
     useEffect(() => {
         const fetchProvinces = async () => {
@@ -467,10 +574,22 @@ const Checkout = () => {
                     </div>
                 </div>
             </div>
+            {locationError && (
+                <div className="custom-toast error">
+                    <i className="fa-solid fa-triangle-exclamation"></i>
+                    {locationError}
+                </div>
+            )}
             {showForm && (
                 <div className="address-overlay">
                     <form className="address-form" onSubmit={handleAddAddress}>
-                        <h3>Thêm địa chỉ mới</h3>
+                        <div className={"title-location"}>
+                            <h3>Thêm địa chỉ mới</h3>
+                            <div className={"location"} onClick={getCurrentLocation}>
+                                <i className="fa-solid fa-location-dot"></i>
+                                <div>Vị trí hiện tại</div>
+                            </div>
+                        </div>
 
                         <input
                             name="receiverName"
