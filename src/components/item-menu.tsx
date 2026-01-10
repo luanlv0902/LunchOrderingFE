@@ -1,7 +1,7 @@
 import React from "react";
 import {Product} from "../types/object";
 import "../styles/styles.css";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {formatPrice} from "./formatPrice";
 import {useContext} from "react";
 import {CartContext} from "./CartContext";
@@ -12,7 +12,18 @@ interface ItemMenuProps {
 }
 
 function ItemMenu({product}: ItemMenuProps) {
-    const { addToCart } = useContext(CartContext);
+    const {addToCart} = useContext(CartContext);
+    const navigate = useNavigate();
+
+    function addToCartContext(product: Product) {
+        const userId = localStorage.getItem("userId");
+        if (userId) {
+            addToCart(product);
+            return
+        }
+        navigate("/login");
+    }
+
     return (
         <div className={"item-menu"}>
             <NavLink to={`/product/${product.id}`}>
@@ -28,7 +39,9 @@ function ItemMenu({product}: ItemMenuProps) {
                     {formatPrice(product?.price ?? 0)}
                 </div>
                 <button className={"add-cart"}
-                        onClick={() => addToCart(product)}
+                        onClick={() =>
+
+                            addToCartContext(product)}
                 >
                     Thêm vào giỏ
                 </button>
