@@ -1996,7 +1996,7 @@
       "province": "Hồ Chí Minh",
       "district": "Quận Thủ Đức",
       "ward": "Phường Linh Xuân",
-      "detail": "Kho JV Sunrise, City, 27B Highway 1A, Linh Xuân, Thủ Đức, Hồ Chí Minh",
+      "detail": "246 Đường Số 8, Linh Xuân, Thủ Đức, Hồ Chí Minh",
       "isDefault": true,
       "userId": "3",
       "id": 17
@@ -2219,6 +2219,34 @@
       "status": "PENDING",
       "createdAt": "2026-01-08T07:30:19.323Z",
       "id": 3
+    },
+    {
+      "userId": "3",
+      "totalPrice": 35000,
+      "discount": 0,
+      "shippingFee": 20000,
+      "finalPrice": 55000,
+      "addressId": 17,
+      "voucherId": "",
+      "noteForChef": "",
+      "methodPayment": "CASH",
+      "status": "PENDING",
+      "createdAt": "2026-01-10T10:15:50.123Z",
+      "id": 4
+    },
+    {
+      "userId": "3",
+      "totalPrice": 35000,
+      "discount": 0,
+      "shippingFee": 20000,
+      "finalPrice": 55000,
+      "addressId": 17,
+      "voucherId": "",
+      "noteForChef": "Đừng thêm rau",
+      "methodPayment": "CASH",
+      "status": "CANCEL",
+      "createdAt": "2026-01-10T11:47:12.369Z",
+      "id": 5
     }
   ],
   "orderItems": [
@@ -2239,6 +2267,18 @@
       "orderId": 3,
       "quantity": 1,
       "id": 3
+    },
+    {
+      "productId": "193",
+      "orderId": 4,
+      "quantity": 1,
+      "id": 4
+    },
+    {
+      "productId": "193",
+      "orderId": 5,
+      "quantity": 1,
+      "id": 5
     }
   ]
 }
