@@ -312,7 +312,7 @@ function OrderHistory() {
                             </div>
                         </div>
 
-                        {order.status === "PENDING" && (
+                        {(order.status === "PENDING" || order.status === "WAITING_PAYMENT") &&(
                             <button className={"cancelOrder"} onClick={() => {
                                 console.log("Order.id:", order.id);
                                 console.log("Type:", typeof order.id);

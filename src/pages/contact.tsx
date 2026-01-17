@@ -44,7 +44,7 @@ function Contact() {
                         <div>
                         <div className="contact-title">Email</div>
                             <div className="contact-text">
-                                22130156@st.hcmuaf.edu.vn
+                                comtruaanzi@gmail.com
                             </div>
                         </div>
                     </div>
