@@ -2227,6 +2227,20 @@
       "status": "PENDING",
       "createdAt": "2026-01-17T09:14:51.576Z",
       "id": 1
+    },
+    {
+      "userId": "X2A_Kmd",
+      "totalPrice": 245000,
+      "discount": 0,
+      "shippingFee": 20000,
+      "finalPrice": 265000,
+      "addressId": 19,
+      "voucherId": "",
+      "noteForChef": "",
+      "methodPayment": "CASH",
+      "status": "PENDING",
+      "createdAt": "2026-01-17T16:38:48.371Z",
+      "id": 2
     }
   ],
   "orderItems": [
@@ -2235,6 +2249,30 @@
       "orderId": 1,
       "quantity": 1,
       "id": 1
+    },
+    {
+      "productId": "193",
+      "orderId": 2,
+      "quantity": 2,
+      "id": 2
+    },
+    {
+      "productId": "194",
+      "orderId": 2,
+      "quantity": 1,
+      "id": 3
+    },
+    {
+      "productId": "195",
+      "orderId": 2,
+      "quantity": 1,
+      "id": 4
+    },
+    {
+      "productId": "196",
+      "orderId": 2,
+      "quantity": 1,
+      "id": 5
     }
   ]
 }
