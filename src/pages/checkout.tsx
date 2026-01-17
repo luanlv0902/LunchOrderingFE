@@ -33,6 +33,7 @@ const Checkout = () => {
     const [wards, setWards] = useState<any[]>([]);
     const [shippingFee, setShippingFee] = useState(0);
     const [isFreeShipVoucher, setIsFreeShipVoucher] = useState(false);
+    const isAlreadyFreeShip = shippingFee === 0 && !isFreeShipVoucher;
     const finalTotal = totalPrice - discount + shippingFee;
     const [locationError, setLocationError] = useState("");
     const {
@@ -72,6 +73,14 @@ const Checkout = () => {
         detail: "",
         isDefault: false,
     });
+
+    useEffect(() => {
+        if (locationError) {
+            const timer = setTimeout(() => setLocationError(""), 2000);
+            return () => clearTimeout(timer);
+        }
+    }, [locationError]);
+
     useEffect(() => {
         if (geoError) {
             setLocationError(geoError);
@@ -285,6 +294,7 @@ const Checkout = () => {
         if (!voucher || v.used) return false;
         if (new Date(voucher.expireDate) < new Date()) return false;
         if (totalPrice < voucher.minOrder) return false;
+        if (voucher.discountType === "FREESHIP" && isAlreadyFreeShip) return false;
         return true;
     });
 
@@ -326,8 +336,6 @@ const Checkout = () => {
     const handlePlaceOrder = async () => {
         if (!userId) return alert("Vui lòng đăng nhập");
         if (!selectedAddressId) return alert("Vui lòng chọn địa chỉ");
-        const orderStatus =
-            paymentMethod === "CASH" ? "PENDING" : "WAITING_PAYMENT";
         try {
             const order: Omit<Order, "id"> = {
                 userId,
@@ -339,7 +347,7 @@ const Checkout = () => {
                 voucherId,
                 noteForChef,
                 methodPayment: paymentMethod as Order["methodPayment"],
-                status: orderStatus,
+                status: "PENDING",
                 createdAt: new Date().toISOString(),
             };
 
@@ -573,12 +581,7 @@ const Checkout = () => {
                     </div>
                 </div>
             </div>
-            {locationError && (
-                <div className="custom-toast error">
-                    <i className="fa-solid fa-triangle-exclamation"></i>
-                    {locationError}
-                </div>
-            )}
+
             {showForm && (
                 <div className="address-overlay">
                     <form className="address-form" onSubmit={handleAddAddress}>
@@ -589,6 +592,13 @@ const Checkout = () => {
                                 <div>Vị trí hiện tại</div>
                             </div>
                         </div>
+
+                        {locationError && (
+                            <div className="custom-toast error">
+                                <i className="fa-solid fa-triangle-exclamation"></i>
+                                {locationError}
+                            </div>
+                        )}
 
                         <input
                             name="receiverName"
