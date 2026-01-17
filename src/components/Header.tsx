@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
-import { NavLink, useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import React, {useEffect, useState, useContext} from "react";
+import {NavLink, useNavigate, useLocation, useSearchParams} from "react-router-dom";
 import "../styles/styles.css";
-import { CartContext } from "./CartContext";
+import {CartContext} from "./CartContext";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import ConfirmDialog from "../components/Dialog";
@@ -14,7 +14,7 @@ const Header = () => {
     const location = useLocation();
     const [searchParams] = useSearchParams();
 
-    const { totalQuantity, clearCart } = useContext(CartContext);
+    const {totalQuantity, clearCart} = useContext(CartContext);
 
     // logout states
     const [confirmLogoutOpen, setConfirmLogoutOpen] = useState(false);
@@ -61,8 +61,10 @@ const Header = () => {
     };
 
     useEffect(() => {
+        if (location.pathname !== "/menu") return;
         handleSearch();
     }, [keyword]);
+
 
     return (
         <>
@@ -70,10 +72,13 @@ const Header = () => {
                 <div className="header-container">
                     {/* LOGO */}
                     <div className="logo">
-                        <img
-                            src="https://anzi.com.vn/images/icon/logo-red.png"
-                            alt="Anzi Logo"
-                        />
+                        <a href="/">
+                            <img
+                                src="https://anzi.com.vn/images/icon/logo-red.png"
+                                alt="Anzi Logo"
+                            />
+                        </a>
+
                     </div>
 
                     {/* SEARCH */}
@@ -111,7 +116,7 @@ const Header = () => {
                                 <span
                                     className="nav-item logout"
                                     onClick={handleLogout}
-                                    style={{ cursor: "pointer" }}
+                                    style={{cursor: "pointer"}}
                                 >
                                     <i className="fa-solid fa-right-from-bracket"></i>
                                 </span>
@@ -130,10 +135,10 @@ const Header = () => {
                 open={notifyLogout}
                 autoHideDuration={1000}
                 onClose={() => setNotifyLogout(false)}
-                anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                sx={{ paddingTop: "80px", zIndex: 9999 }}
+                anchorOrigin={{vertical: "top", horizontal: "right"}}
+                sx={{paddingTop: "80px", zIndex: 9999}}
             >
-                <Alert severity="success" variant="filled" sx={{ minWidth: 300 }}>
+                <Alert severity="success" variant="filled" sx={{minWidth: 300}}>
                     Đăng xuất thành công!
                 </Alert>
             </Snackbar>
