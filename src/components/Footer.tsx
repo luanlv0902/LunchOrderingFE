@@ -23,9 +23,6 @@ const Footer: React.FC = () => {
                             <Link to="/menu">Menu</Link>
                         </li>
                         <li>
-                            <Link to="/order">Đặt hàng</Link>
-                        </li>
-                        <li>
                             <Link to="/contact">Liên hệ</Link>
                         </li>
                     </ul>
@@ -33,8 +30,8 @@ const Footer: React.FC = () => {
 
                 <div className="footer-col">
                     <h4>Liên hệ</h4>
-                    <p>123 Nguyễn Văn A, Quận 1, TP.HCM</p>
-                    <p>0909 999 999</p>
+                    <p>Khu phố 33, phường Linh Xuân, TP.HCM</p>
+                    <p>0971649429</p>
                     <p>comtruaanzi@gmail.com</p>
                 </div>
 

@@ -333,12 +333,14 @@ function OrderHistory() {
                             )}
 
 
-                            {order.status === "PENDING" && (
-                                <button className={"cancelOrder"} onClick={() => {
-                                    console.log("Order.id:", order.id);
-                                    console.log("Type:", typeof order.id);
-                                    handleCancelClick(order.id)
-                                }}>Hủy đơn hàng</button>
+
+                        {(order.status === "PENDING" || order.status === "WAITING_PAYMENT") &&(
+                            <button className={"cancelOrder"} onClick={() => {
+                                console.log("Order.id:", order.id);
+                                console.log("Type:", typeof order.id);
+                                handleCancelClick(order.id)
+                            }}>Hủy đơn hàng</button>
+
 
                             )}
 

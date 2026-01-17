@@ -2134,8 +2134,9 @@
       "userId": "d066",
       "voucherId": 3,
       "code": "FOOD",
-      "used": false,
-      "id": 9
+      "used": true,
+      "id": 9,
+      "usedAt": "2026-01-17T07:45:42.239Z"
     },
     {
       "userId": "d066",
@@ -2192,7 +2193,7 @@
       "userId": "d066",
       "voucherId": 5,
       "code": "SINHNHAT5TUOI",
-      "used": true,
+      "used": false,
       "id": 17,
       "usedAt": "2026-01-08T07:22:43.651Z"
     },
@@ -2203,246 +2204,19 @@
       "used": true,
       "id": 18,
       "usedAt": "2026-01-10T11:48:50.947Z"
+    },
+    {
+      "userId": "d066",
+      "voucherId": 4,
+      "code": "TET2026",
+      "used": false,
+      "id": 19
     }
   ],
   "orders": [
-    {
-      "userId": "X2A_Kmd",
-      "totalPrice": 35000,
-      "discount": 0,
-      "shippingFee": 20000,
-      "finalPrice": 55000,
-      "addressId": 19,
-      "voucherId": "",
-      "noteForChef": "",
-      "methodPayment": "CASH",
-      "status": "PENDING",
-      "createdAt": "2026-01-10T15:02:49.207Z",
-      "id": 1
-    },
-    {
-      "userId": "3",
-      "totalPrice": 85000,
-      "discount": 0,
-      "shippingFee": 0,
-      "finalPrice": 85000,
-      "addressId": 17,
-      "voucherId": 7,
-      "noteForChef": "",
-      "methodPayment": "BANK",
-      "status": "WAITING_PAYMENT",
-      "createdAt": "2026-01-10T15:11:00.885Z",
-      "id": 2
-    },
-    {
-      "userId": "3",
-      "totalPrice": 30000,
-      "discount": 0,
-      "shippingFee": 20000,
-      "finalPrice": 50000,
-      "addressId": 17,
-      "voucherId": "",
-      "noteForChef": "",
-      "methodPayment": "CASH",
-      "status": "PENDING",
-      "createdAt": "2026-01-10T15:25:00.060Z",
-      "id": 3
-    },
-    {
-      "userId": "X2A_Kmd",
-      "totalPrice": 60000,
-      "discount": 0,
-      "shippingFee": 20000,
-      "finalPrice": 80000,
-      "addressId": 19,
-      "voucherId": "",
-      "noteForChef": "",
-      "methodPayment": "CASH",
-      "status": "PENDING",
-      "createdAt": "2026-01-10T15:36:20.490Z",
-      "id": 4
-    },
-    {
-      "userId": "X2A_Kmd",
-      "totalPrice": 60000,
-      "discount": 0,
-      "shippingFee": 20000,
-      "finalPrice": 80000,
-      "addressId": 19,
-      "voucherId": "",
-      "noteForChef": "",
-      "methodPayment": "CASH",
-      "status": "PENDING",
-      "createdAt": "2026-01-10T15:43:56.578Z",
-      "id": 5
-    },
-    {
-      "userId": "3",
-      "totalPrice": 25000,
-      "discount": 0,
-      "shippingFee": 20000,
-      "finalPrice": 45000,
-      "addressId": 17,
-      "voucherId": "",
-      "noteForChef": "Đừng bỏ hành",
-      "methodPayment": "CASH",
-      "status": "CANCEL",
-      "createdAt": "2026-01-10T15:48:37.990Z",
-      "id": 6
-    },
-    {
-      "userId": "3",
-      "totalPrice": 25000,
-      "discount": 0,
-      "shippingFee": 20000,
-      "finalPrice": 45000,
-      "addressId": 17,
-      "voucherId": "",
-      "noteForChef": "",
-      "methodPayment": "CASH",
-      "status": "PENDING",
-      "createdAt": "2026-01-10T15:50:01.725Z",
-      "id": 7
-    },
-    {
-      "userId": "3",
-      "totalPrice": 45000,
-      "discount": 0,
-      "shippingFee": 20000,
-      "finalPrice": 65000,
-      "addressId": 17,
-      "voucherId": "",
-      "noteForChef": "",
-      "methodPayment": "CASH",
-      "status": "PENDING",
-      "createdAt": "2026-01-10T15:54:07.474Z",
-      "id": 8
-    },
-    {
-      "userId": "3",
-      "totalPrice": 25000,
-      "discount": 0,
-      "shippingFee": 20000,
-      "finalPrice": 45000,
-      "addressId": 17,
-      "voucherId": "",
-      "noteForChef": "",
-      "methodPayment": "CASH",
-      "status": "PENDING",
-      "createdAt": "2026-01-10T15:56:04.524Z",
-      "id": 9
-    },
-    {
-      "userId": "3",
-      "totalPrice": 295000,
-      "discount": 0,
-      "shippingFee": 0,
-      "finalPrice": 295000,
-      "addressId": 17,
-      "voucherId": "",
-      "noteForChef": "",
-      "methodPayment": "CASH",
-      "status": "CANCEL",
-      "createdAt": "2026-01-10T15:56:47.406Z",
-      "id": 10
-    }
+  
   ],
   "orderItems": [
-    {
-      "productId": "193",
-      "orderId": 1,
-      "quantity": 1,
-      "id": 1
-    },
-    {
-      "productId": "194",
-      "orderId": 2,
-      "quantity": 1,
-      "id": 2
-    },
-    {
-      "productId": "179",
-      "orderId": 2,
-      "quantity": 1,
-      "id": 3
-    },
-    {
-      "productId": "164",
-      "orderId": 2,
-      "quantity": 1,
-      "id": 4
-    },
-    {
-      "productId": "146",
-      "orderId": 3,
-      "quantity": 1,
-      "id": 5
-    },
-    {
-      "productId": "194",
-      "orderId": 4,
-      "quantity": 1,
-      "id": 6
-    },
-    {
-      "productId": "179",
-      "orderId": 4,
-      "quantity": 1,
-      "id": 7
-    },
-    {
-      "productId": "2",
-      "orderId": 5,
-      "quantity": 1,
-      "id": 8
-    },
-    {
-      "productId": "179",
-      "orderId": 5,
-      "quantity": 1,
-      "id": 9
-    },
-    {
-      "productId": "194",
-      "orderId": 6,
-      "quantity": 1,
-      "id": 10
-    },
-    {
-      "productId": "196",
-      "orderId": 7,
-      "quantity": 1,
-      "id": 11
-    },
-    {
-      "productId": "197",
-      "orderId": 8,
-      "quantity": 1,
-      "id": 12
-    },
-    {
-      "productId": "196",
-      "orderId": 9,
-      "quantity": 1,
-      "id": 13
-    },
-    {
-      "productId": "200",
-      "orderId": 10,
-      "quantity": 2,
-      "id": 14
-    },
-    {
-      "productId": "199",
-      "orderId": 10,
-      "quantity": 1,
-      "id": 15
-    },
-    {
-      "productId": "184",
-      "orderId": 10,
-      "quantity": 1,
-      "id": 16
-    }
+   
   ]
 }
