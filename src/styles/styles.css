@@ -1078,8 +1078,23 @@ hr{
     cursor: pointer;
     opacity: 0.8;
 }
-
-
+.valueDetail{
+    flex-wrap: wrap;
+    width: 60%;
+    text-align: right;
+}
+.icon-detail{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    color: saddlebrown;
+    margin: 10px;
+}
+.icon-detail:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
 /*OrderHistory*/
 .header {
     width: 100%;
