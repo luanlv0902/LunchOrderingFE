@@ -206,7 +206,6 @@ function Menu() {
             {/*/>*/}
             {products.length===0 && (
                 <div className={"none-menu"}>
-
                     <img className={"img-not-found"} src="https://cdn.dribbble.com/userupload/21994211/file/still-3af72ec9e2100142d6f4d319a0709c06.gif?resize=400x0" alt="not_found_meal"/>
                     <h3>Không có món ăn này</h3>
                 </div>
