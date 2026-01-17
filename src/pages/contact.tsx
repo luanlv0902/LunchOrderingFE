@@ -51,7 +51,6 @@ function Contact() {
                 </div>
 
                 <div className="contact-two-cols">
-
                     {/* FORM */}
                     <div className="contact-form-box">
                         <h2 className="form-title">Thông tin thắc mắc, quý khách vui lòng liên hệ tại đây:</h2>
@@ -60,7 +59,7 @@ function Contact() {
                             <label>Tên quý khách</label>
                             <input type="text" placeholder="Tên quý khách" />
 
-                            <div className="form-row">
+                            <div className="contact-form-row">
                                 <div className="form-group">
                                     <label>Số điện thoại (*)</label>
                                     <input type="text" placeholder="Số điện thoại" />
@@ -86,7 +85,7 @@ function Contact() {
                     <div className="contact-map">
                         <iframe
                             title="Google Map"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.140652262088!2d106.65265057597684!3d10.800810689344067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529292d7350fb%3A0xd459dbe6f0de12c2!2zUXXhuq1jaCBWxINuIFR14bqnbiwgUC4gMTIsIFF14bqjbSBUw6JuIELDrG5oLCBUcC4gSOG7kyBDaMOtIE1pbmggSOG7syBWw6AgVOG6oW5n!5e0!3m2!1svi!2s!4v1707123123456"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d823.690048488983!2d106.79086022248966!3d10.87602124346981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d91c2f51e58d%3A0x736284e4e7660807!2zUXXDoW4gY8ahbSBzaW5oIHZpw6pu!5e0!3m2!1svi!2s!4v1768664551824!5m2!1svi!2s"
                             width="100%"
                             height="100%"
                             style={{ border: 0, borderRadius: "15px" }}
@@ -94,7 +93,6 @@ function Contact() {
                             allowFullScreen
                         ></iframe>
                     </div>
-
                 </div>
 
             </div>

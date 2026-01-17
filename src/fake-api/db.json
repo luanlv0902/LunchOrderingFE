@@ -2214,9 +2214,27 @@
     }
   ],
   "orders": [
-  
+    {
+      "userId": "3",
+      "totalPrice": 15000,
+      "discount": 0,
+      "shippingFee": 20000,
+      "finalPrice": 35000,
+      "addressId": 17,
+      "voucherId": "",
+      "noteForChef": "",
+      "methodPayment": "CASH",
+      "status": "PENDING",
+      "createdAt": "2026-01-17T09:14:51.576Z",
+      "id": 1
+    }
   ],
   "orderItems": [
-   
+    {
+      "productId": "1",
+      "orderId": 1,
+      "quantity": 1,
+      "id": 1
+    }
   ]
 }
