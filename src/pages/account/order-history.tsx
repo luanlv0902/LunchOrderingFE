@@ -17,15 +17,18 @@ function OrderHistory() {
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [selectedOrderId, setSelectedOrderId] = useState<string>("");
     const userId = localStorage.getItem("userId");
+    const [isDetail, setIsDetail] = useState<string|null>(null);
     const query = {
         userId,
         status: searchParams.get("status") || "",
-        sortField: searchParams.get("sort") || "",
-        order: searchParams.get("order") || "",
+        sortField: searchParams.get("sort") || "createdAt",
+        order: searchParams.get("order") || "desc",
     }
     const navigate = useNavigate();
 
-
+    function toggleDetail(orderId: string) {
+        setIsDetail(prev => prev===orderId?null:orderId);
+    }
     function getOrderStatusText(status: "WAITING_PAYMENT" | "PENDING" | "COOKING" | "DELIVERING" | "COMPLETE" | "CANCEL"): string {
         switch (status) {
             case "WAITING_PAYMENT":
@@ -211,119 +214,138 @@ function OrderHistory() {
                     </select>
                 </div>
             </div>
-            {orders.map((order, index) => (
-                <div className="labeled-box" data-label={order.id} key={index}>
-                    <table className="cart-table">
-                        <thead>
-                        <tr>
-                            <th>Hình ảnh</th>
-                            <th>Tên món</th>
-                            <th>Giá</th>
-                            <th>Số lượng</th>
-                            <th>Thành tiền</th>
-
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        {order.orderItems?.map((item, index) => (
-                            <tr key={index}>
-                                <td>
-                                    <NavLink to={`/product/${item.productId}`}>
-                                        <img src={item.product?.img} alt={item.product?.img} className="cart-img"/>
-                                    </NavLink>
-
-                                </td>
-
-                                <td>{item.product?.name}</td>
-
-                                <td>{formatPrice(item.product?.price as number)}</td>
-
-                                <td>
-                                    <div className="qty-box">
-                                        <span>{item.quantity}</span>
-                                    </div>
-                                </td>
-
-                                <td>
-                                    {formatPrice((item.product?.price ?? 0) * item.quantity)}
-                                </td>
+            {orders.map((order) => {
+                const isShow=isDetail===order.id;
+                return (
+                    <div className="labeled-box" data-label={order.id} key={order.id}>
+                        <table className="cart-table">
+                            <thead>
+                            <tr>
+                                <th>Hình ảnh</th>
+                                <th>Tên món</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
 
                             </tr>
-                        ))}
+                            </thead>
 
-                        {/*))}*/}
-                        </tbody>
-                    </table>
-                    <div className="detailOrder">
-                        <div className="flex-row">
-                            <div className={"titleDetailOrder"}>Địa chỉ</div>
-                            <div
-                                className={"valueDetail"}>{order.address?.detail + ", " + order.address?.district + ", " + order.address?.province}</div>
-                        </div>
-                        <div className="flex-row">
-                            <div className={"titleDetailOrder"}>Người nhận</div>
-                            <div
-                                className={"valueDetail"}>{order.address?.receiverName + " - " + order.address?.phone} </div>
-                        </div>
-                        <div className="flex-row">
-                            <div className={"titleDetailOrder"}>Trạng thái</div>
-                            <div className={"valueDetail"}>{getOrderStatusText(order.status)}</div>
-                        </div>
-                        <div className="flex-row">
-                            <div className={"titleDetailOrder"}>Ngày đặt hàng</div>
-                            <div className={"valueDetail"}>{formatDateTimeNice(order.createdAt)}</div>
-                        </div>
-                        <div className="flex-row">
-                            <div className="titleDetailOrder">Phương thức thanh toán</div>
-                            <div className="valueDetail">
-                                {getPaymentMethodText(order.methodPayment)}
+                            <tbody>
+                            {order.orderItems?.map((item, index) => (
+                                <tr key={index}>
+                                    <td>
+                                        <NavLink to={`/product/${item.productId}`}>
+                                            <img src={item.product?.img} alt={item.product?.img} className="cart-img"/>
+                                        </NavLink>
+
+                                    </td>
+
+                                    <td>{item.product?.name}</td>
+
+                                    <td>{formatPrice(item.product?.price as number)}</td>
+
+                                    <td>
+                                        <div className="qty-box">
+                                            <span>{item.quantity}</span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        {formatPrice((item.product?.price ?? 0) * item.quantity)}
+                                    </td>
+
+                                </tr>
+                            ))}
+
+                            {/*))}*/}
+                            </tbody>
+                        </table>
+                        <div className="detailOrder">
+                            {isShow && (
+                                <>
+                                    <div className="flex-row">
+                                        <div className={"titleDetailOrder"}>Địa chỉ</div>
+                                        <div
+                                            className={"valueDetail"}>{order.address?.detail + ", " + order.address?.district + ", " + order.address?.province}</div>
+                                    </div>
+                                    <div className="flex-row">
+                                        <div className={"titleDetailOrder"}>Người nhận</div>
+                                        <div
+                                            className={"valueDetail"}>{order.address?.receiverName + " - " + order.address?.phone} </div>
+                                    </div>
+                                    <div className="flex-row">
+                                        <div className={"titleDetailOrder"}>Trạng thái</div>
+                                        <div className={"valueDetail"}>{getOrderStatusText(order.status)}</div>
+                                    </div>
+                                    <div className="flex-row">
+                                        <div className={"titleDetailOrder"}>Ngày đặt hàng</div>
+                                        <div className={"valueDetail"}>{formatDateTimeNice(order.createdAt)}</div>
+                                    </div>
+                                    <div className="flex-row">
+                                        <div className="titleDetailOrder">Phương thức thanh toán</div>
+                                        <div className="valueDetail">
+                                            {getPaymentMethodText(order.methodPayment)}
+                                        </div>
+                                    </div>
+                                    <div className="flex-row">
+                                        <div className={"titleDetailOrder"}>Ghi chú</div>
+                                        <div className={"valueDetail"}>{order.noteForChef}</div>
+                                    </div>
+                                    <div className="flex-row">
+                                        <div className={"titleDetailOrder"}>Giá gốc</div>
+                                        <div className={"valueDetail"}>{formatPrice(order.totalPrice)}</div>
+                                    </div>
+                                    <div className="flex-row">
+                                        <div className={"titleDetailOrder"}>Voucher</div>
+                                        <div className={"valueDetail"}>
+                                            {renderVoucherText(order)}
+                                        </div>
+
+                                    </div>
+                                    <div className="flex-row">
+                                        <div className={"titleDetailOrder"}>Phí vận chuyển</div>
+                                        <div className={"valueDetail"}>
+                                            {order.shippingFee === 0
+                                                ? "Miễn phí"
+                                                : formatPrice(order.shippingFee)}
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+
+
+                            <div className="flex-row total-price-row">
+                                <div className="titleDetailOrder">Tổng tiền</div>
+                                <div className="valueDetail total-price">
+                                    {formatPrice(order.finalPrice as number)}
+                                </div>
                             </div>
-                        </div>
+                            {!isShow &&(
+                                <div className={"icon-detail"} onClick={()=> toggleDetail(order.id)}>
+                                    <i className="fa-solid fa-sort-down "  ></i>
+                                </div>
 
-                        <div className="flex-row">
-                            <div className={"titleDetailOrder"}>Ghi chú</div>
-                            <div className={"valueDetail"}>{order.noteForChef}</div>
-                        </div>
-                        <div className="flex-row">
-                            <div className={"titleDetailOrder"}>Giá gốc</div>
-                            <div className={"valueDetail"}>{formatPrice(order.totalPrice)}</div>
-                        </div>
-                        <div className="flex-row">
-                            <div className={"titleDetailOrder"}>Voucher</div>
-                            <div className={"valueDetail"}>
-                                {renderVoucherText(order)}
-                            </div>
+                            )}
+                            {isShow && (
+                                <div className={"icon-detail"} onClick={()=> toggleDetail(order.id)}>
+                                <i className="fa-solid fa-caret-up "  ></i>
+                                </div>
+                            )}
+
+
+                            {order.status === "PENDING" && (
+                                <button className={"cancelOrder"} onClick={() => {
+                                    console.log("Order.id:", order.id);
+                                    console.log("Type:", typeof order.id);
+                                    handleCancelClick(order.id)
+                                }}>Hủy đơn hàng</button>
+
+                            )}
 
                         </div>
-                        <div className="flex-row">
-                            <div className={"titleDetailOrder"}>Phí vận chuyển</div>
-                            <div className={"valueDetail"}>
-                                {order.shippingFee === 0
-                                    ? "Miễn phí"
-                                    : formatPrice(order.shippingFee)}
-                            </div>
-                        </div>
-
-                        <div className="flex-row total-price-row">
-                            <div className="titleDetailOrder">Tổng tiền</div>
-                            <div className="valueDetail total-price">
-                                {formatPrice(order.finalPrice as number)}
-                            </div>
-                        </div>
-
-                        {order.status === "PENDING" && (
-                            <button className={"cancelOrder"} onClick={() => {
-                                console.log("Order.id:", order.id);
-                                console.log("Type:", typeof order.id);
-                                handleCancelClick(order.id)
-                            }}>Hủy đơn hàng</button>
-
-                        )}
-
                     </div>
-                </div>
-            ))}
+                )
+            })}
             {orders.length === 0 && (
                 <div className={"none-order"}>
                     <h3>Không có đơn hàng nào</h3>

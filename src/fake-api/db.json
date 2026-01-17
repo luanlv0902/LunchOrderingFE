@@ -2275,6 +2275,76 @@
       "status": "PENDING",
       "createdAt": "2026-01-10T15:43:56.578Z",
       "id": 5
+    },
+    {
+      "userId": "3",
+      "totalPrice": 25000,
+      "discount": 0,
+      "shippingFee": 20000,
+      "finalPrice": 45000,
+      "addressId": 17,
+      "voucherId": "",
+      "noteForChef": "Đừng bỏ hành",
+      "methodPayment": "CASH",
+      "status": "CANCEL",
+      "createdAt": "2026-01-10T15:48:37.990Z",
+      "id": 6
+    },
+    {
+      "userId": "3",
+      "totalPrice": 25000,
+      "discount": 0,
+      "shippingFee": 20000,
+      "finalPrice": 45000,
+      "addressId": 17,
+      "voucherId": "",
+      "noteForChef": "",
+      "methodPayment": "CASH",
+      "status": "PENDING",
+      "createdAt": "2026-01-10T15:50:01.725Z",
+      "id": 7
+    },
+    {
+      "userId": "3",
+      "totalPrice": 45000,
+      "discount": 0,
+      "shippingFee": 20000,
+      "finalPrice": 65000,
+      "addressId": 17,
+      "voucherId": "",
+      "noteForChef": "",
+      "methodPayment": "CASH",
+      "status": "PENDING",
+      "createdAt": "2026-01-10T15:54:07.474Z",
+      "id": 8
+    },
+    {
+      "userId": "3",
+      "totalPrice": 25000,
+      "discount": 0,
+      "shippingFee": 20000,
+      "finalPrice": 45000,
+      "addressId": 17,
+      "voucherId": "",
+      "noteForChef": "",
+      "methodPayment": "CASH",
+      "status": "PENDING",
+      "createdAt": "2026-01-10T15:56:04.524Z",
+      "id": 9
+    },
+    {
+      "userId": "3",
+      "totalPrice": 295000,
+      "discount": 0,
+      "shippingFee": 0,
+      "finalPrice": 295000,
+      "addressId": 17,
+      "voucherId": "",
+      "noteForChef": "",
+      "methodPayment": "CASH",
+      "status": "CANCEL",
+      "createdAt": "2026-01-10T15:56:47.406Z",
+      "id": 10
     }
   ],
   "orderItems": [
@@ -2331,6 +2401,48 @@
       "orderId": 5,
       "quantity": 1,
       "id": 9
+    },
+    {
+      "productId": "194",
+      "orderId": 6,
+      "quantity": 1,
+      "id": 10
+    },
+    {
+      "productId": "196",
+      "orderId": 7,
+      "quantity": 1,
+      "id": 11
+    },
+    {
+      "productId": "197",
+      "orderId": 8,
+      "quantity": 1,
+      "id": 12
+    },
+    {
+      "productId": "196",
+      "orderId": 9,
+      "quantity": 1,
+      "id": 13
+    },
+    {
+      "productId": "200",
+      "orderId": 10,
+      "quantity": 2,
+      "id": 14
+    },
+    {
+      "productId": "199",
+      "orderId": 10,
+      "quantity": 1,
+      "id": 15
+    },
+    {
+      "productId": "184",
+      "orderId": 10,
+      "quantity": 1,
+      "id": 16
     }
   ]
 }
