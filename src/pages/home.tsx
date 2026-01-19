@@ -24,17 +24,13 @@ function Home() {
     return(
         <>
             <IconScroll/>
-
-            {/* Nút Voucher cố định */}
             <div className="voucher-toggle" onClick={() => setShowVoucher(!showVoucher)}>
                 NEWS 🔔
             </div>
 
-            {/* Banner voucher */}
             <HomeVoucherNotice className={showVoucher ? "show" : ""} />
 
             <div className="container_content">
-                {/* --- Banner voucher mới --- */}
                 <div className="background_cha">
                     <div className="background_top">
                         <img

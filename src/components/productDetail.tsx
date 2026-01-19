@@ -3,7 +3,7 @@ import Home from "../pages/home";
 import Footer from "./Footer";
 import IconScroll from "./icon-scroll";
 import {DetailProduct, Product, Comment, User} from "../types/object";
-import {useNavigate, useParams, useSearchParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {api} from "../services/api";
 import {formatPrice} from "./formatPrice";
 import ReactPaginate from "react-paginate";
@@ -33,6 +33,16 @@ function ProductDetail() {
     const scrollRef = useRef<HTMLDivElement>(null);
     const [rateStar, setRateStar] = useState<number>(0);
 
+    function addToCartWithAuth(product: Product) {
+        if (userId) {
+            addToCart(product);
+            return;
+        }
+        navigate("/login", {
+        });
+    }
+
+
     async function avgRate(){
         if (idProduct != null) {
             const avg = await api.getAvgRateByProductid(idProduct)
@@ -56,8 +66,6 @@ function ProductDetail() {
         await api.postComment(userId, detailId, rateStart, content, dateComment);
         await getComments(detailId, startIndex);
 
-
-        // setComments(prev => [newComment, ...prev]);
         setContent("");
         setRating(0)
     }
@@ -94,20 +102,14 @@ function ProductDetail() {
     async function getComments(detailId: string, page: number) {
         const res = await api.getCommentByProductId(detailId, page);
         setComments(res);
-        // setUser(res.users[0]);
-        // console.log(res.users[0]);
         const totalComments = await api.getTotalCommentsByProductId(detailId);
         setPageComment(Math.ceil(totalComments.length / 4));
-        // console.log("Total ",totalComments);
     }
 
     async function fetchProductRecommend(categoryId: string, page: number) {
         const res = await api.getProductRecommend(categoryId);
         const totalPage = await api.getTotalPage(categoryId);
         setProductRecommend(res);
-        // setPageCountProducts(Math.ceil(totalPage.length / limit));
-        // console.log("Product",res);
-
     }
 
     function handlePageCommentClick(event: { selected: number }) {
@@ -116,7 +118,6 @@ function ProductDetail() {
         if (idProduct) {
             getComments(idProduct, newStartIndex);
         }
-
     }
 
     async function fetchProducts() {
@@ -124,7 +125,6 @@ function ProductDetail() {
             const res = await api.getProductAndDetailById(idProduct);
             setProduct(res);
             setDetail(res.detailProducts[0]);
-            // console.log(res.detailProducts[0]);
         }
 
     }
@@ -146,9 +146,6 @@ function ProductDetail() {
     }, [comments]);
     return (
         <>
-            {/*<Home/>*/}
-            {/*<Footer/>*/}
-            {/*<IconScroll/>*/}
             <div className="productDetail">
                 <div className={"pd1"}>
                     <img src={product?.img} alt="Food" className="productDetailImg"/>
@@ -169,10 +166,8 @@ function ProductDetail() {
                         }</div>
                         <div className="priceAndCart">
                             <div className="add-cart-detail"
-                                 onClick={() => product && addToCart(product)}
+                                 onClick={() => product && addToCartWithAuth(product)}
                             >Thêm vào giỏ</div>
-                            <div className="buy-now">Mua ngay</div>
-
                         </div>
 
                     </div>
@@ -271,25 +266,9 @@ function ProductDetail() {
                             ></i>
                         </div>
                     </div>
-
                 </div>
 
                 <h1 style={{color:"saddlebrown"}}>Gợi ý</h1>
-                {/*<div className={"pd3"}>*/}
-
-                {/*    {productRecommend?.map((item: Product, index: number) => {*/}
-                {/*        return (*/}
-                {/*            <div className={"item-recommend"} key={item.id}>*/}
-                {/*                <img src={item.img} alt="img-recommend" className="img-recommend"/>*/}
-                {/*                <div>{item.name}</div>*/}
-                {/*                <div className={"price-recommend"}>{formatPrice(item.price)}</div>*/}
-                {/*                <div className={"add-cart-recommend"}>Thêm vào giỏ</div>*/}
-                {/*            </div>*/}
-                {/*        )*/}
-                {/*    })}*/}
-
-
-                {/*</div>*/}
                 <div className={"recommend"}>
                     <button className="arrow-btn arrow-left btn-left" onClick={scrollLeft}>
                         <i className="fa-solid fa-chevron-left"></i>
@@ -309,7 +288,7 @@ function ProductDetail() {
                                     <div>{item.name}</div>
                                     <div className={"price-recommend"}>{formatPrice(item.price)}</div>
                                     <div className={"add-cart-recommend"}
-                                         onClick={() => addToCart(item)}
+                                         onClick={() => addToCartWithAuth(item)}
                                     >Thêm vào giỏ</div>
                                 </div>
                             )
@@ -319,8 +298,6 @@ function ProductDetail() {
                         <i className="fa-solid fa-chevron-right"></i>
                     </button>
                 </div>
-
-                {/*<Paginate pageCount={pageCountProducts} onPageChange={handlePageProductClick}/>*/}
             </div>
         </>
     )

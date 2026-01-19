@@ -38,7 +38,6 @@ function ChangePassword() {
 
             setSuccess("Đổi mật khẩu thành công");
 
-            // reset form
             setCurrentPassword("");
             setNewPassword("");
             setConfirmPassword("");

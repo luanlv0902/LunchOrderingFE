@@ -13,18 +13,6 @@ const Pagination: React.FC<PaginationProps> = ({pageCount, onPageChange,}) => {
     return (
         <ReactPaginate
             containerClassName="pagination"
-            // pageClassName="page-item"
-            // pageLinkClassName="page-link"
-            //
-            // previousClassName="previous page-item"
-            // previousLinkClassName="page-link"
-            //
-            // nextClassName="next page-item"
-            // nextLinkClassName="page-link"
-            //
-            // breakClassName="break page-item"
-            // breakLinkClassName="page-link"
-
             activeClassName="active"
             disabledClassName="disabled"
 

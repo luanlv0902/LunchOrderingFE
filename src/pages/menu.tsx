@@ -117,24 +117,8 @@ function Menu() {
         fetchCategories();
     }, []);
 
-    // search or load all
-    // useEffect(() => {
-    //     // if (keyword.trim()) {
-    //     //     searchProducts();
-    //     // } else {
-    //     //     getProducts();
-    //     // }
-    //     setQuery(prev => ({
-    //         ...prev,
-    //         keyword,
-    //         page: 0
-    //     }));
-    //     setIsReady(true);
-    // }, [keyword]);
-
     return (
         <>
-            {/*<IconScroll/>*/}
             <div className={"container-menu"}>
                 <div className={"header-menu"}>
                     <div className="filter-menu">

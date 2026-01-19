@@ -16,7 +16,6 @@ const Header = () => {
 
     const {totalQuantity, clearCart} = useContext(CartContext);
 
-    // logout states
     const [confirmLogoutOpen, setConfirmLogoutOpen] = useState(false);
     const [notifyLogout, setNotifyLogout] = useState(false);
 
@@ -25,7 +24,6 @@ const Header = () => {
         setUser(storedUser ? JSON.parse(storedUser) : null);
     }, [location.pathname]);
 
-    // ===== LOGOUT FLOW (GIỐNG HỦY ĐƠN HÀNG) =====
     const handleLogout = () => {
         setConfirmLogoutOpen(true);
     };
@@ -48,7 +46,6 @@ const Header = () => {
         setConfirmLogoutOpen(false);
     };
 
-    // ===== SEARCH =====
     const handleSearch = () => {
         const params = new URLSearchParams(searchParams);
         if (!keyword.trim()) {
@@ -61,7 +58,6 @@ const Header = () => {
     };
 
     useEffect(() => {
-        if (location.pathname !== "/menu") return;
         handleSearch();
     }, [keyword]);
 
@@ -70,7 +66,6 @@ const Header = () => {
         <>
             <header className="header">
                 <div className="header-container">
-                    {/* LOGO */}
                     <div className="logo">
                         <a href="/">
                             <img
@@ -81,7 +76,6 @@ const Header = () => {
 
                     </div>
 
-                    {/* SEARCH */}
                     <div className="search-box">
                         <i
                             className="fa-solid fa-magnifying-glass search-icon"
@@ -95,7 +89,6 @@ const Header = () => {
                         />
                     </div>
 
-                    {/* MENU */}
                     <nav className="nav">
                         <NavLink to="/home" className="nav-item">TRANG CHỦ</NavLink>
                         <NavLink to="/menu" className="nav-item">MENU</NavLink>
@@ -130,7 +123,6 @@ const Header = () => {
                 </div>
             </header>
 
-            {/* ===== SNACKBAR LOGOUT ===== */}
             <Snackbar
                 open={notifyLogout}
                 autoHideDuration={1000}
@@ -143,7 +135,6 @@ const Header = () => {
                 </Alert>
             </Snackbar>
 
-            {/* ===== CONFIRM LOGOUT ===== */}
             <ConfirmDialog
                 open={confirmLogoutOpen}
                 title="Xác nhận đăng xuất"

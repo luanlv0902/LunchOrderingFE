@@ -164,10 +164,8 @@ function Address() {
                     setProvinces([hcm]);
                     const provinceCode = String(hcm.code);
 
-                    // Set mặc định province
                     setFormData(prev => ({ ...prev, province: provinceCode }));
 
-                    // Load districts
                     const districtList = await api.getDistrictsByProvince(provinceCode);
                     const sortedDistricts = districtList.sort((a:any,b:any)=>a.name.localeCompare(b.name,"vi",{sensitivity:"base"}));
                     setDistricts(sortedDistricts);
@@ -175,7 +173,6 @@ function Address() {
                     if (sortedDistricts.length > 0) {
                         setFormData(prev => ({ ...prev, district: String(sortedDistricts[0].code) }));
 
-                        // Load wards
                         const wardList = await api.getWardsByDistrict(sortedDistricts[0].code);
                         const sortedWards = wardList.sort((a:any,b:any)=>a.name.localeCompare(b.name,"vi",{sensitivity:"base"}));
                         setWards(sortedWards);
@@ -378,7 +375,7 @@ function Address() {
         setEditingId(address.id);
         setShowForm(true);
 
-        // === PROVINCE ===
+        // province
         const provinceObj = provinces.find(
             p => p.name.trim() === address.province.trim()
         );
@@ -403,7 +400,7 @@ function Address() {
 
         setDistricts(districtList);
 
-        // === DISTRICT ===
+        // district
         const districtObj = districtList.find(
             (d:any) => d.name.trim() === address.district.trim()
         );
@@ -443,7 +440,6 @@ function Address() {
         const provinceCode = String(provinces[0].code);
         setFormData({ receiverName: "", phone: "", province: provinceCode, district: "", ward: "", detail: "", isDefault: false });
 
-        // Load districts
         const districtList = await api.getDistrictsByProvince(provinceCode);
         const sortedDistricts = districtList.sort((a:any,b:any)=>a.name.localeCompare(b.name,"vi",{sensitivity:"base"}));
         setDistricts(sortedDistricts);
@@ -655,4 +651,3 @@ function Address() {
 }
 
 export default Address;
-

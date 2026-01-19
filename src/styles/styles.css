@@ -4064,8 +4064,23 @@ hr{
     background: #f0fdf4;
 }
 
+/*.payment-option input {*/
+/*    display: none;*/
+/*}*/
+
+.payment-option.active {
+    border-color: #e53935;
+    background-color: #ffecec;
+}
+
 .payment-option input {
-    display: none;
+    accent-color: #e53935;
+}
+
+.payment-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
 }
 
 .payment-option.active {
