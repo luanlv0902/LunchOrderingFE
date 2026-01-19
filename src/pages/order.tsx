@@ -3,7 +3,6 @@ import "../styles/styles.css"
 import Category from "../components/item-category";
 import ItemOrder from "../components/item-order";
 import DragScroll from "../components/scroll-item";
-import GetCurrentLocation from "../components/location";
 
 function Order(){
     return (
@@ -25,23 +24,15 @@ function Order(){
 
                     <div className={"category-order"}>
                         <div className={"title-category"}>FOOD MENU</div>
-                        {/*<div className={"list-item-category"}>*/}
                           <DragScroll className="list-item-category">
                               <Category/> <Category/><Category/> <Category/><Category/><Category/> <Category/><Category/> <Category/><Category/>
                           </DragScroll>
 
-
-
-
-                        {/*</div>*/}
                         <hr/>
                         <div className={"title-category"}>MÓN CƠM</div>
                        <DragScroll className="list-item-order">
                            <ItemOrder/><ItemOrder/><ItemOrder/><ItemOrder/><ItemOrder/><ItemOrder/><ItemOrder/><ItemOrder/><ItemOrder/><ItemOrder/>
                        </DragScroll>
-
-
-
                     </div>
 
                 </div>
@@ -49,7 +40,6 @@ function Order(){
                 <div className={"container-order-2"}>
                     <div className={"title-detail-order"}>Chi tiết đơn hàng</div>
                     <div className={"title-address"}>
-                        {/*<GetCurrentLocation/>*/}
                     </div>
                     <div className={"list-cart"}>
                         <div className={"cart-detail"} >
@@ -76,10 +66,8 @@ function Order(){
                     </div>
                     <hr/>
                     <div className={"flex-row"}>
-
                         <div className={"title-infor"}>Tổng đơn hàng</div>
                         <div className={"price-infor"}>25000đ</div>
-
                     </div>
                     <button className={"select-food"}>Thanh toán</button>
                 </div>

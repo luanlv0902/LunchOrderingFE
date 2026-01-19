@@ -28,13 +28,11 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
         return stored ? JSON.parse(stored) : [];
     });
 
-    // Khi cart hoặc userId thay đổi → lưu lại
     useEffect(() => {
         if (!userId) return;
         localStorage.setItem(`cart_${userId}`, JSON.stringify(cart));
     }, [cart, userId]);
 
-    // Khi user login/logout → reload cart
     useEffect(() => {
         if (!userId) {
             setCart([]);

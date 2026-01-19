@@ -6,7 +6,6 @@ function Contact() {
     return (
         <>
             <IconScroll />
-
             <div className="container-contact">
                 <div className="header-contact">
                     <h1 className="title-contact">LIÊN HỆ</h1>
@@ -16,7 +15,6 @@ function Contact() {
                 </div>
 
                 <div className="contact-content">
-                    {/* Địa chỉ */}
                     <div className="contact-row">
                         <div className="contact-icon"><i className="fa-solid fa-location-dot"></i></div>
                         <div>
@@ -27,7 +25,6 @@ function Contact() {
                         </div>
                     </div>
 
-                    {/* Hotline */}
                     <div className="contact-row">
                         <div className="contact-icon"><i className="fa-solid fa-phone"></i></div>
                         <div>
@@ -38,7 +35,6 @@ function Contact() {
                         </div>
                     </div>
 
-                    {/* Email */}
                     <div className="contact-row">
                         <div className="contact-icon"><i className="fa-solid fa-envelope"></i></div>
                         <div>
@@ -51,7 +47,6 @@ function Contact() {
                 </div>
 
                 <div className="contact-two-cols">
-                    {/* FORM */}
                     <div className="contact-form-box">
                         <h2 className="form-title">Thông tin thắc mắc, quý khách vui lòng liên hệ tại đây:</h2>
 
@@ -81,7 +76,6 @@ function Contact() {
                         </form>
                     </div>
 
-                    {/* GOOGLE MAP */}
                     <div className="contact-map">
                         <iframe
                             title="Google Map"

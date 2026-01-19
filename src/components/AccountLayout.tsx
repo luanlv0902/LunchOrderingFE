@@ -14,7 +14,6 @@ function AccountLayout() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // logout states
     const [confirmLogoutOpen, setConfirmLogoutOpen] = useState(false);
     const [notifyLogout, setNotifyLogout] = useState(false);
 
@@ -56,7 +55,6 @@ function AccountLayout() {
     return (
         <>
             <div className="account-container">
-                {/* ===== MENU LEFT ===== */}
                 <div className="account_menu">
                     <div className="img_avartar">
                         <img
@@ -74,7 +72,6 @@ function AccountLayout() {
                     </div>
 
                     <div className="info_account_menu">
-                        {/* TÀI KHOẢN */}
                         <div className={`infor_user ${open ? "active" : ""}`}>
                             <div className="menu-row" onClick={() => setOpen(!open)}>
                                 <i className="fa-solid fa-user"></i>
@@ -146,13 +143,11 @@ function AccountLayout() {
                     </div>
                 </div>
 
-                {/* ===== CONTENT RIGHT ===== */}
                 <div className="account_content">
                     <Outlet />
                 </div>
             </div>
 
-            {/* ===== SNACKBAR ===== */}
             <Snackbar
                 open={notifyLogout}
                 autoHideDuration={2000}
@@ -165,7 +160,6 @@ function AccountLayout() {
                 </Alert>
             </Snackbar>
 
-            {/* ===== CONFIRM DIALOG ===== */}
             <ConfirmDialog
                 open={confirmLogoutOpen}
                 title="Xác nhận đăng xuất"

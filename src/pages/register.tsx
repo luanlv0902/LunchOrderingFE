@@ -58,7 +58,6 @@ function Register() {
                 Trang chủ
             </Link>
 
-            {/* LEFT */}
             <div className="left">
                 <img
                     src="/background_login.jpg"
@@ -67,7 +66,6 @@ function Register() {
                 />
             </div>
 
-            {/* RIGHT */}
             <div className="right">
                 <h2 className="title">Đăng ký</h2>
 

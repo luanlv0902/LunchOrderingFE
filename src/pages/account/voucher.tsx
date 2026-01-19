@@ -91,7 +91,6 @@ function Voucher() {
                 <h3>Kho Voucher</h3>
             </div>
 
-            {/* Filter */}
             <div className="voucher-filter">
                 <button className={filter === "ALL" ? "active" : ""} onClick={() => setFilter("ALL")}>Tất cả</button>
                 <button className={filter === "DISCOUNT" ? "active" : ""} onClick={() => setFilter("DISCOUNT")}>Giảm giá</button>
@@ -100,20 +99,18 @@ function Voucher() {
                 <button className={filter === "EXPIRED" ? "active" : ""} onClick={() => setFilter("EXPIRED")}>Hết hạn</button>
             </div>
 
-            {/* Input */}
             <div className="voucher-input-box">
                 <span className="voucher-label">Mã Voucher</span>
                 <input type="text" placeholder="Nhập mã voucher tại đây" value={inputCode} onChange={(e) => setInputCode(e.target.value)} />
                 <button className="btn-save" onClick={handleApplyVoucher} disabled={!inputCode.trim()}>Lưu</button>
             </div>
 
-            {/* Voucher list */}
             <div className="voucher-list">
                 {filteredVouchers.length === 0 && (
                     <div className="voucher-empty">
                         <img src="/Discount-amico.png" alt="No voucher" />
                         <p>Bạn chưa có voucher nào</p>
-                        <span>Hãy nhập mã voucher để nhận ưu đãi 🎁</span>
+                        <span>Hãy nhập mã voucher để nhận ưu đãi</span>
                     </div>
                 )}
 

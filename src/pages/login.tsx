@@ -1,16 +1,10 @@
-import React, {useContext, useState} from "react";
+import React, { useState } from "react";
 import "../styles/styles.css";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { api } from "../services/api";
-import {CartContext} from "../components/CartContext";
 
 function Login() {
     const navigate = useNavigate();
-    const location = useLocation();
-    const {addToCart} = useContext(CartContext);
-
-    const from = location.state?.from || "/home";
-    const pendingProduct = location.state?.pendingProduct;
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -24,11 +18,7 @@ function Login() {
             const user = await api.login(username, password);
             localStorage.setItem("user", JSON.stringify(user));
             localStorage.setItem("userId", String(user.id));
-            // localStorage.setItem("userId", user.id);
-            if(pendingProduct) {
-                addToCart(pendingProduct);
-            }
-            navigate(from, { replace: true });
+            navigate("/home", { replace: true });
             window.location.reload();
         } catch (err) {
             setError("Sai tài khoản hoặc mật khẩu");

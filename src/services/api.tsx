@@ -118,7 +118,6 @@ export const api = {
         return Number((total/data.length).toFixed(1));
     },
 
-    // api search
     searchProducts: async (keyword: string) => {
         const res = await fetch(
             `${baseUrl}/products?name_like=${encodeURIComponent(keyword)}`
@@ -174,7 +173,6 @@ export const api = {
         return userWithoutPassword;
     },
 
-    // ===== PROFILE =====
     getUserById: async (id: string) => {
         const res = await fetch(`${baseUrl}/users/${id}`);
         return res.json();
@@ -189,7 +187,6 @@ export const api = {
         return res.json();
     },
 
-    // Change Password
     changePassword: async (
         userId: string,
         currentPassword: string,
@@ -220,14 +217,13 @@ export const api = {
         return true;
     },
 
-    //Address:
     getAddressesByUser: async (userId: string): Promise<Address[]> => {
         const res = await fetch(
             `http://localhost:3001/addresses?userId=${userId}`
         );
         return res.json();
     },
-    //Them dia chi
+
     addAddress: async (
         address: Omit<Address, "id">
     ): Promise<Address> => {
@@ -238,13 +234,13 @@ export const api = {
         });
         return res.json();
     },
-    //Xoa dia chỉ
+
     deleteAddress: async (id: number): Promise<void> => {
         await fetch(`http://localhost:3001/addresses/${id}`, {
             method: "DELETE",
         });
     },
-    //Cap nhat dia chi
+
     updateAddress: async (id: number, data: any) => {
         const res = await fetch(`http://localhost:3001/addresses/${id}`, {
             method: "PATCH",
@@ -253,7 +249,7 @@ export const api = {
         });
         return res.json();
     },
-    // ===== Địa chỉ GHN =====
+
     getProvinces: async () => {
         const res = await fetch(`${GHN_BASE}/province`, {
             headers: {Token: GHN_TOKEN}
@@ -287,8 +283,6 @@ export const api = {
         }));
     },
 
-    // ===== VOUCHER =====
-    // tìm voucher theo mã
     getVoucherByCode: async (code: string) => {
         const res = await fetch(
             `${baseUrl}/vouchers?code=${code}`
@@ -296,7 +290,6 @@ export const api = {
         return res.json();
     },
 
-    // lấy voucher của user
     getUserVouchers: async (userId: string) => {
         const res = await fetch(
             `${baseUrl}/userVouchers?userId=${userId}`
@@ -304,7 +297,6 @@ export const api = {
         return res.json();
     },
 
-    // lưu voucher cho user
     addUserVoucher: async (data: any) => {
         const res = await fetch(`${baseUrl}/userVouchers`, {
             method: "POST",
@@ -314,7 +306,6 @@ export const api = {
         return res.json();
     },
 
-    // đánh dấu voucher đã dùng
     useVoucher: async (id: number) => {
         const res = await fetch(`${baseUrl}/userVouchers/${id}`, {
             method: "PATCH",
@@ -345,7 +336,6 @@ export const api = {
         return res.json();
     },
 
-    // Lấy voucher mới / đang quảng cáo
     getNewVouchers: async () => {
         const res = await fetch(`${baseUrl}/vouchers?active=true&_sort=createdAt&_order=desc`);
         return res.json();
