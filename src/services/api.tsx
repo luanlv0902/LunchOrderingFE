@@ -1,6 +1,8 @@
 
 import {useSearchParams} from "react-router-dom";
-import {Comment, User, Address, Order, OrderItem} from "../types/object";
+import {Comment, User, Address, Order, OrderItem,Contact} from "../types/object";
+
+
 
 
 const GHN_TOKEN = "28cdfced-3b05-11f0-baf0-164baeb3f2fd";
@@ -123,6 +125,16 @@ export const api = {
             `${baseUrl}/products?name_like=${encodeURIComponent(keyword)}`
         );
         return res.json();
+    },
+    submitContact: async(contact: Omit<Contact, "id">): Promise<any> => {
+        const res=await fetch(`${baseUrl}/contacts`, {
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(contact),
+        })
+        return res.ok;
     },
 
     login: async (

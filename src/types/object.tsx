@@ -106,3 +106,10 @@ export interface Order {
     voucher?: Voucher;
     address?: Address;
 }
+export interface Contact{
+    id: string;
+    nameClient: string;
+    phone: string;
+    email: string;
+    content: string;
+}

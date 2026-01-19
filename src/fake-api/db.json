@@ -2225,5 +2225,14 @@
     }
   ],
   "orders": [],
-  "orderItems": []
+  "orderItems": [],
+  "contacts": [
+    {
+      "nameClient": "Nguyễn Thiện",
+      "phone": "12345678",
+      "email": "thien@gmail.com",
+      "content": "Cơm vào ngày 12/1/2026 có mùi hơi lạ",
+      "id": 1
+    }
+  ]
 }

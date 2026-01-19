@@ -1,8 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
 import "../styles/styles.css";
 import IconScroll from "../components/icon-scroll";
+import {api} from "../services/api";
+import Alert from "@mui/material/Alert";
+import {Snackbar} from "@mui/material";
 
 function Contact() {
+    const [formData, setFormData] = useState({
+        nameClient: "",
+        phone: "",
+        email: "",
+        content:""
+    });
+    const [submitted, setSubmitted] = useState<boolean>(false);
+
+    async function handleSubmit(e: React.FormEvent) {
+        e.preventDefault();
+        const res= await api.submitContact(formData);
+        if (res) {
+            setSubmitted(true);
+        }
+        setFormData({
+            nameClient: "",
+            phone: "",
+            email: "",
+            content:""
+        })
+    }
     return (
         <>
             <IconScroll />
@@ -50,27 +74,25 @@ function Contact() {
                     <div className="contact-form-box">
                         <h2 className="form-title">Thông tin thắc mắc, quý khách vui lòng liên hệ tại đây:</h2>
 
-                        <form className="contact-form">
+                        <form className="contact-form" onSubmit={handleSubmit}>
                             <label>Tên quý khách</label>
-                            <input type="text" placeholder="Tên quý khách" />
+                            <input type="text" placeholder="Tên quý khách" value={formData.nameClient} required onChange={(e) => setFormData({...formData, nameClient: e.target.value})} />
 
                             <div className="contact-form-row">
                                 <div className="form-group">
                                     <label>Số điện thoại (*)</label>
-                                    <input type="text" placeholder="Số điện thoại" />
+                                    <input type="number" placeholder="Số điện thoại" value={formData.phone} required onChange={(e) => setFormData({...formData, phone: e.target.value})} />
                                 </div>
 
                                 <div className="form-group">
                                     <label>Email</label>
-                                    <input type="text" placeholder="Email" />
+                                    <input type="email" placeholder="Email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
                                 </div>
                             </div>
 
-                            <label>Hệ thống chi nhánh</label>
-                            <input type="text" placeholder="Hệ thống chi nhánh" />
 
                             <label>Nội dung thắc mắc của quý khách</label>
-                            <textarea placeholder="Nội dung thắc mắc của quý khách"></textarea>
+                            <textarea placeholder="Nội dung thắc mắc của quý khách" value={formData.content} required onChange={(e) => setFormData({...formData,content: e.target.value})}></textarea>
 
                             <button type="submit" className="btn-submit">Gửi thông tin</button>
                         </form>
@@ -90,6 +112,25 @@ function Contact() {
                 </div>
 
             </div>
+            <Snackbar
+                open={submitted}
+                autoHideDuration={2000}
+                onClose={() => setSubmitted(false)}
+                anchorOrigin={{vertical: 'top', horizontal: 'right'}}
+                sx={{
+                    paddingTop: '80px',
+                    zIndex: 9999,
+                }}
+
+            >
+                <Alert
+                    severity="success"
+                    variant="filled"
+                    sx={{width: '100%', minWidth: 300}}
+                >
+                    Cảm ơn bạn đã phản hồi.
+                </Alert>
+            </Snackbar>
         </>
     );
 }
